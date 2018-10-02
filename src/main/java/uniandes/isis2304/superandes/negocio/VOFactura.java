@@ -14,32 +14,38 @@
 
 package uniandes.isis2304.superandes.negocio;
 
+import java.util.Date;
+
 /**
- * Interfaz para los métodos get de CLIENTE.
+ * Interfaz para los métodos get de FACTURA.
  * Sirve para proteger la información del negocio de posibles manipulaciones desde la interfaz 
  * 
  * @author ja.ortega - dy.quintero
  */
-public interface VOCliente 
+public interface VOFactura 
 {
 	/* ****************************************************************
 	 * 			Métodos 
 	 *****************************************************************/
-     /**
-	 * @return El id del Cliente
+	/**
+	 * @return the id
 	 */
 	public long getId();
-	
-	
+
 	/**
-	 * @return El nombre del Cliente
+	 * @return the idSucursal
 	 */
-	public String getNombre();
-	
+	public long getIdSucursal();
+
 	/**
-	 * @return El correo del Cliente
+	 * @return the idCliente
 	 */
-	public String getCorreo();
+	public long getIdCliente();
+
+	/**
+	 * @return the fecha
+	 */
+	public Date getFecha();
 	
 	
 

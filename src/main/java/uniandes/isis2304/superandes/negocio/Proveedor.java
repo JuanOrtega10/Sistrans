@@ -29,7 +29,7 @@ public class Proveedor implements VOProveedor
 	/**
 	 * El identificador ÚNICO del Proveedor.
 	 */
-	private long nit;
+	private long id;
 	
 	
 	/**
@@ -57,7 +57,7 @@ public class Proveedor implements VOProveedor
 	 */
 	public Proveedor()
 	{
-		this.nit = 0;
+		this.id = 0;
 		this.nombre = "";
 		this.calificacion = 0;
 		this.numCalificaciones = 0;
@@ -72,7 +72,7 @@ public class Proveedor implements VOProveedor
 	 */
 	public Proveedor ( long pNit, String pNombre, double pCalificacion, int pNumCalificaciones )
 	{
-		this.nit = pNit;
+		this.id = pNit;
 		this.nombre = pNombre;
 		this.calificacion = pCalificacion;
 		this.numCalificaciones = pNumCalificaciones;
@@ -82,14 +82,14 @@ public class Proveedor implements VOProveedor
 	 * @return the nit
 	 */
 	public long getNit() {
-		return nit;
+		return id;
 	}
 
 	/**
 	 * @param nit the nit to set
 	 */
 	public void setNit(long nit) {
-		this.nit = nit;
+		this.id = nit;
 	}
 
 	/**
@@ -139,7 +139,7 @@ public class Proveedor implements VOProveedor
 	 */
 	@Override
 	public String toString() {
-		return "Proveedor [nit=" + nit + ", nombre=" + nombre + ", calificacion=" + calificacion
+		return "Proveedor [nit=" + id + ", nombre=" + nombre + ", calificacion=" + calificacion
 				+ ", numCalificaciones=" + numCalificaciones + "]";
 	}
 	

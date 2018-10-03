@@ -11,22 +11,22 @@
  * 
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
-
 package uniandes.isis2304.superandes.persistencia;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.superandes.negocio.Sucursal;
+import uniandes.isis2304.superandes.negocio.Producto;
 
 /**
- * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto SUCURSAL de SuperAndes
+ * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto PRODUCTO de SuperAndes
  * 
  * @author ja.ortega - dy.quintero.
  */
-class SQLSucursal 
+class SQLProducto 
 {
 	/* ****************************************************************
 	 * 			Constantes
@@ -53,18 +53,18 @@ class SQLSucursal
 	 * Constructor
 	 * @param pp - El Manejador de persistencia de la aplicación
 	 */
-	public SQLSucursal (PersistenciaSuperAndes ps)
+	public SQLProducto (PersistenciaSuperAndes ps)
 	{
 		this.ps = ps;
 	}
 	
 	/**
-	 * Crea y ejecuta la sentencia SQL para adicionar una SUCURSAL a la base de datos de SuperAndes
+	 * Crea y ejecuta la sentencia SQL para adicionar un Producto a la base de datos de SuperAndes
 	 */
-	public long adicinarSucursal (PersistenceManager pm, long idSucursal, String nombre, String direccion, String ciudad) 
+	public long adicionarProducto (PersistenceManager pm, long idProducto, String nombre, String marca, String precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, String especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria, Date fechaVencimiento) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaClienteNatural() + "(id, nombre, direccion, ciudad) values (?, ?, ?, ?)");
-        q.setParameters(idSucursal, nombre, direccion, ciudad);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaProducto() + "(id,nombre,marca,precioUnitario, presentacion, cantidad, unidadMedida,precioUnidadMedida, especificacionEmpaque, exclusivo, idTipoProducto,idCategoria, fechaVencimiento) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        q.setParameters(idProducto, nombre, marca , precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo, idTipoProducto, idCategoria, fechaVencimiento);
         return (long) q.executeUnique();
 	}
 
@@ -75,12 +75,12 @@ class SQLSucursal
 	 * @param idBar - El identificador del bar
 	 * @return El objeto BAR que tiene el identificador dado
 	 */
-	public Sucursal darSucursalPorId (PersistenceManager pm, long idSucursal) 
+	public Producto darProductoPorId (PersistenceManager pm, long idPedido) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaClienteNatural( ) + " WHERE id = ?");
-		q.setResultClass(Sucursal.class);
-		q.setParameters(idSucursal);
-		return (Sucursal) q.executeUnique();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaProducto( ) + " WHERE id = ?");
+		q.setResultClass(Producto.class);
+		q.setParameters(idPedido);
+		return (Producto) q.executeUnique();
 	}
 
 	/**
@@ -89,10 +89,10 @@ class SQLSucursal
 	 * @param pm - El manejador de persistencia
 	 * @return Una lista de objetos BAR
 	 */
-	public List<Sucursal> darSucurales (PersistenceManager pm)
+	public List<Producto> darProductos (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaClienteNatural());
-		q.setResultClass(Sucursal.class);
-		return (List<Sucursal>) q.executeList();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaProducto());
+		q.setResultClass(Producto.class);
+		return (List<Producto>) q.executeList();
 	}
 }

@@ -19,14 +19,14 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.superandes.negocio.Sucursal;
+import uniandes.isis2304.superandes.negocio.Cliente;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto SUCURSAL de SuperAndes
  * 
  * @author ja.ortega - dy.quintero.
  */
-class SQLSucursal 
+class SQLCliente 
 {
 	/* ****************************************************************
 	 * 			Constantes
@@ -53,7 +53,7 @@ class SQLSucursal
 	 * Constructor
 	 * @param pp - El Manejador de persistencia de la aplicación
 	 */
-	public SQLSucursal (PersistenciaSuperAndes ps)
+	public SQLCliente (PersistenciaSuperAndes ps)
 	{
 		this.ps = ps;
 	}
@@ -61,10 +61,10 @@ class SQLSucursal
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar una SUCURSAL a la base de datos de SuperAndes
 	 */
-	public long adicinarSucursal (PersistenceManager pm, long idSucursal, String nombre, String direccion, String ciudad) 
+	public long adicionarCliente (PersistenceManager pm, long id, String nombre, String correo) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaClienteNatural() + "(id, nombre, direccion, ciudad) values (?, ?, ?, ?)");
-        q.setParameters(idSucursal, nombre, direccion, ciudad);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaClienteNatural() + "(id, nombre, correod) values (?, ?, ?)");
+        q.setParameters(id, nombre, correo);
         return (long) q.executeUnique();
 	}
 
@@ -75,12 +75,12 @@ class SQLSucursal
 	 * @param idBar - El identificador del bar
 	 * @return El objeto BAR que tiene el identificador dado
 	 */
-	public Sucursal darSucursalPorId (PersistenceManager pm, long idSucursal) 
+	public Cliente darClientePorId (PersistenceManager pm, long idCliente) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaClienteNatural( ) + " WHERE id = ?");
-		q.setResultClass(Sucursal.class);
-		q.setParameters(idSucursal);
-		return (Sucursal) q.executeUnique();
+		q.setResultClass(Cliente.class);
+		q.setParameters(idCliente);
+		return (Cliente) q.executeUnique();
 	}
 
 	/**
@@ -89,10 +89,10 @@ class SQLSucursal
 	 * @param pm - El manejador de persistencia
 	 * @return Una lista de objetos BAR
 	 */
-	public List<Sucursal> darSucurales (PersistenceManager pm)
+	public List<Cliente> darClientes (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaClienteNatural());
-		q.setResultClass(Sucursal.class);
-		return (List<Sucursal>) q.executeList();
+		q.setResultClass(Cliente.class);
+		return (List<Cliente>) q.executeList();
 	}
 }

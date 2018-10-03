@@ -164,13 +164,6 @@ public class PersistenciaSuperAndes {
 		return tablas.get (0);
 	}
 
-	/**
-	 * @return La cadena de caracteres con el nombre de la tabla de TipoBebida de parranderos
-	 */
-	public String darTablaSucursal ()
-	{
-		return tablas.get (1);
-	}
 
 	/**
 	 * @return La cadena de caracteres con el nombre de la tabla de Bebida de parranderos
@@ -199,18 +192,11 @@ public class PersistenciaSuperAndes {
 	/**
 	 * @return La cadena de caracteres con el nombre de la tabla de Gustan de parranderos
 	 */
-	public String darTablaBodega ()
+	public String darTablaEstante ()
 	{
 		return tablas.get (5);
 	}
 
-	/**
-	 * @return La cadena de caracteres con el nombre de la tabla de Sirven de parranderos
-	 */
-	public String darTablaCliente ()
-	{
-		return tablas.get (6);
-	}
 
 	/**
 	 * @return La cadena de caracteres con el nombre de la tabla de Visitan de parranderos
@@ -228,16 +214,7 @@ public class PersistenciaSuperAndes {
 	{
 		return tablas.get (7);
 	}
-	
 
-	/**
-	 * @return La cadena de caracteres con el nombre de la tabla de Visitan de parranderos
-	 */
-	public String darTablaEstante ()
-	{
-		return tablas.get (7);
-	}
-	
 
 	/**
 	 * @return La cadena de caracteres con el nombre de la tabla de Visitan de parranderos

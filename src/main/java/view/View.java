@@ -18,6 +18,7 @@ import uniandes.isis2304.superandes.interfazApp.InterfazParranderosApp;
 import uniandes.isis2304.superandes.negocio.Proveedor;
 import uniandes.isis2304.superandes.negocio.SuperAndes;
 import uniandes.isis2304.superandes.negocio.VOProveedor;
+import uniandes.isis2304.superandes.negocio.VOSucursal;
 
 
 public class View 
@@ -96,7 +97,17 @@ public class View
 			case 3:	
 				
 			case 4:	
-
+				
+				System.out.println("Ingrese el nombre de la sucursal");
+				String nombreSucursal = sc.next();
+				System.out.println("Ingrese la direccion de la sucursal");
+				sc.nextLine();
+				String direccionSucursal = sc.nextLine();
+				System.out.println("Ingrese la ciudad de la sucursal");
+				String ciudad = sc.next();
+				VOSucursal sucursal = superAndes.adicionarSucursal(nombreSucursal, direccionSucursal, ciudad);
+				System.out.println(sucursal.toString());
+				break;
 			case 5:	
 
 			case 6:	

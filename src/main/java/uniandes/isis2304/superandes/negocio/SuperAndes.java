@@ -89,9 +89,9 @@ public class SuperAndes {
 	 */
 	public Sucursal adicionarSucursal (String nombre, String direccion, String ciudad)
 	{
-		log.info ("Adicionando Sucursal: " + nombre);
+		System.out.println("Adicionando Sucursal: " + nombre);
 		Sucursal sucursal = ps.adicionarSucursal (nombre, direccion, ciudad);
-		log.info ("Adicionando Sucursal: " + sucursal);
+		System.out.println ("Adicionando Sucursal: " + sucursal);
 		return sucursal;
 	}
 

@@ -663,7 +663,7 @@ public class PersistenciaSuperAndes {
             long tuplasInsertadas = sqlProveedor.adicionarProveedor(pm, id, nombre, calificacion, numCalificaciones);
             tx.commit();
             
-            log.trace ("Inserción de tipo de Sucursal: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
+            System.out.println("Inserción de tipo de Sucursal: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
             
             return new Proveedor (id, nombre, calificacion, numCalificaciones);
         }
@@ -900,7 +900,7 @@ public class PersistenciaSuperAndes {
 	public Long adicionarCliente(int cantidadMax, double pesoMax, double volumenMax, long idSucursal, long idTipoProducto, long idVolumenProducto ) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx=pm.currentTransaction();
+        Transaction tx = pm.currentTransaction();
         try
         {
         	long id = nextval ();

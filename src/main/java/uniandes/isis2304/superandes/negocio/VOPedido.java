@@ -53,9 +53,14 @@ public interface VOPedido
 
 
 	/**
-	 * @return the estado
+	 * @return the estadoPedido
 	 */
-	public String getEstado();
+	public String getEstadoPedido();
+	
+	/**
+	 * @return the estadoProducto
+	 */
+	public String getEstadoProducto();
 
 	/**
 	 * @return the idSucursal

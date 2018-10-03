@@ -59,7 +59,13 @@ public class Pedido implements VOPedido
 	 * El estado actual del pedido, puede ser EN_CAMINO o ENTREGADO
 	 */
 	
-	private String estado;
+	private String estadoPedido;
+	
+	/**
+	 * El estado actual del pedido, puede ser BUENO REGULAR o MALO
+	 */
+	
+	private String estadoProducto;
 	
 	/**
 	 * El identificador de la sucursal que realiza el pedido
@@ -84,7 +90,8 @@ public class Pedido implements VOPedido
 		this.fechaEsperadaEntrega = new Date();
 		this.fechaEntrega = new Date();
 		this.precioAcordado = 0;
-		this.estado = "";
+		this.estadoPedido = "";
+		this.estadoProducto = "";
 		this.idSucursal = 0;
 		this.idProveedor = 0;
 	}
@@ -103,11 +110,13 @@ public class Pedido implements VOPedido
 		this.id = id;
 		this.fechaEsperadaEntrega = fechaEsperadaEntrega;
 		this.precioAcordado = precioAcordado;
-		this.estado = EN_CAMINO;
+		this.estadoPedido = EN_CAMINO;
 		this.idSucursal = idSucursal;
 		this.idProveedor = idProveedor;
 		//A esta instancia, el pedido todavia no tiene fecha de entrega
 		this.fechaEntrega = new Date();
+		//A esta instancia, no se sabe el estado de los productos
+		this.estadoProducto = null;
 	}
 
 
@@ -173,22 +182,6 @@ public class Pedido implements VOPedido
 	public void setPrecioAcordado(double precioAcordado) {
 		this.precioAcordado = precioAcordado;
 	}
-
-
-	/**
-	 * @return the estado
-	 */
-	public String getEstado() {
-		return estado;
-	}
-
-
-	/**
-	 * @param estado the estado to set
-	 */
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
 	
 	/**
 	 * @return the idSucursal
@@ -220,6 +213,38 @@ public class Pedido implements VOPedido
 	public void setIdProveedor(long idProveedor) {
 		this.idProveedor = idProveedor;
 	}
+	
+
+	/**
+	 * @return the estadoPedido
+	 */
+	public String getEstadoPedido() {
+		return estadoPedido;
+	}
+
+
+	/**
+	 * @param estadoPedido the estadoPedido to set
+	 */
+	public void setEstadoPedido(String estadoPedido) {
+		this.estadoPedido = estadoPedido;
+	}
+
+
+	/**
+	 * @return the estadoProducto
+	 */
+	public String getEstadoProducto() {
+		return estadoProducto;
+	}
+
+
+	/**
+	 * @param estadoProducto the estadoProducto to set
+	 */
+	public void setEstadoProducto(String estadoProducto) {
+		this.estadoProducto = estadoProducto;
+	}
 
 
 	@Override
@@ -229,7 +254,7 @@ public class Pedido implements VOPedido
 				+ ", Fecha esperada entrega =" + this.fechaEsperadaEntrega 
 				+ ", Fecha entrega=" + this.fechaEntrega 
 				+ ", Precio Acordado =" + this.precioAcordado
-				+ ", Estado =" + this.estado
+				+ ", Estado =" + this.estadoPedido
 				+ "]";
 	}
 	

@@ -63,10 +63,10 @@ class SQLPedido
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar un ALMACENAMIENTO a la base de datos de SuperAndes
 	 */
-	public long adicionarPedido (PersistenceManager pm, long id, Date fechaEsperadaEntrega, Date fechaEntrega, double precioAcordado, String estado, long idSucursal,long idProveedor) 
+	public long adicionarPedido (PersistenceManager pm, long id, Date fechaEsperadaEntrega, Date fechaEntrega, double precioAcordado, String estadoPedido, String estadoProducto, long idSucursal,long idProveedor) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaPedido() + "(id, fechaEsperadaEntrega, fechaEntrega, precioAcordado, estado, idSucursal, idProveedor) values (?, ?, ?, ?, ?, ?, ?)");
-        q.setParameters(id, fechaEsperadaEntrega,fechaEntrega , precioAcordado,estado, idSucursal, idProveedor );
+        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaPedido() + "(id, fechaEsperadaEntrega, fechaEntrega, precioAcordado, estadoPedido,estadoProducto, idSucursal, idProveedor) values (?, ?, ?, ?, ?, ?, ?, ?)");
+        q.setParameters(id, fechaEsperadaEntrega,fechaEntrega , precioAcordado,estadoPedido,estadoProducto, idSucursal, idProveedor );
         return (long) q.executeUnique();
 	}
 

@@ -19,7 +19,7 @@ package uniandes.isis2304.superandes.negocio;
  *
  * @author ja.ortega - dy.quintero.
  */
-public class Estante extends Almacenamiento
+public class Estante extends Almacenamiento implements VOEstante
 {
 	/* ****************************************************************
 	 * 			Atributos
@@ -63,7 +63,7 @@ public class Estante extends Almacenamiento
     /**
    	 * @return La dirección de la bodega en la sucursal
    	 */
-	public int getnivelAbastecimiento() {
+	public int getNivelAbastecimiento() {
 		return nivelAbastecimiento;
 	}
 
@@ -85,7 +85,6 @@ public class Estante extends Almacenamiento
 				+ ", Cantidad Máxima =" + super.getCantidadMax()
 				+ ", Nivel Abastecimiento = " + nivelAbastecimiento + "]";
 	}
-
 
 }
 

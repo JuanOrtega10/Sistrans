@@ -63,7 +63,7 @@ class SQLBodega
 	 */
 	public long adicionarBodega (PersistenceManager pm, long id, String direccion) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaBodega + "(idAlmacenamiento, direccion) values (?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaBodega ( ) + "(idAlmacenamiento, direccion) values (?, ?)");
         q.setParameters(id, direccion);
         return (long) q.executeUnique();
 	}

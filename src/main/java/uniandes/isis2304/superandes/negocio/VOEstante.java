@@ -28,7 +28,7 @@ public interface VOEstante
      /**
 	 * @return El nivel de abastecimiento mínimo del Estante
 	 */
-	public String getNivelAbastecimiento();
+	public int getNivelAbastecimiento();
 	
 	@Override
 	/**

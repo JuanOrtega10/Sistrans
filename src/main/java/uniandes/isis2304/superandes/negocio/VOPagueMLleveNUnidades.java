@@ -16,29 +16,27 @@ package uniandes.isis2304.superandes.negocio;
 
 
 /**
- * Interfaz para los métodos get de Sucursal.
+ * Interfaz para los métodos get de Promoción Pague M lleve N unidades.
  * Sirve para proteger la información del negocio de posibles manipulaciones desde la interfaz 
  * 
  * @author ja.ortega - dy.quintero
  */
-public interface VOSucursal 
+public interface VOPagueMLleveNUnidades 
 {
-	/**
-	 * @return the id
-	 */
-	public long getId();
-	/**
-	 * @return the nombre
-	 */
-	public String getNombre();
-	/**
-	 * @return the direccion
-	 */
-	public String getDireccion();
-	/**
-	 * @return the ciudad
-	 */
-	public String getCiudad();
-		
+	/* ****************************************************************
+	 * 			Métodos 
+	 *****************************************************************/
 
+	/**
+	 * @return the n
+	 */
+	public int getN();
+
+	/**
+	 * @return the m
+	 */
+	public int getM();
+
+	
+	
 }

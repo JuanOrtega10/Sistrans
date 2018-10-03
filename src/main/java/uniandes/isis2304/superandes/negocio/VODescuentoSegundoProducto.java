@@ -16,29 +16,21 @@ package uniandes.isis2304.superandes.negocio;
 
 
 /**
- * Interfaz para los métodos get de Sucursal.
+ * Interfaz para los métodos get de Promoción Descuento Segundo Producto.
  * Sirve para proteger la información del negocio de posibles manipulaciones desde la interfaz 
  * 
  * @author ja.ortega - dy.quintero
  */
-public interface VOSucursal 
+public interface VODescuentoSegundoProducto 
 {
-	/**
-	 * @return the id
-	 */
-	public long getId();
-	/**
-	 * @return the nombre
-	 */
-	public String getNombre();
-	/**
-	 * @return the direccion
-	 */
-	public String getDireccion();
-	/**
-	 * @return the ciudad
-	 */
-	public String getCiudad();
-		
+	/* ****************************************************************
+	 * 			Métodos 
+	 *****************************************************************/
 
+	/**
+	 * @return the descuento
+	 */
+	public double getDescuento();
+	
+	
 }

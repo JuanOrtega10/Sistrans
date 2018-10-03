@@ -632,7 +632,7 @@ public class PersistenciaSuperAndes {
 	 * @param idSucursal - El identificador del la Sucursal
 	 * @return El objeto Sucursal, construido con base en las tuplas de la tabla Sucursal con el identificador dado
 	 */
-	public Sucursal darTipoBebidaPorId (long idSucursal)
+	public Sucursal darSucursalPorId (long idSucursal)
 	{
 		return sqlSucursal.darSucursalPorId(pmf.getPersistenceManager(), idSucursal);
 	}

@@ -61,6 +61,16 @@ public class Pedido implements VOPedido
 	
 	private String estado;
 	
+	/**
+	 * El identificador de la sucursal que realiza el pedido
+	 */
+	private long idSucursal;
+	
+	/**
+	 * El identificador del proveedor al que se le hace el pedido
+	 */
+	private long idProveedor;
+	
 
 	/* ****************************************************************
 	 * 			Métodos 
@@ -75,7 +85,8 @@ public class Pedido implements VOPedido
 		this.fechaEntrega = new Date();
 		this.precioAcordado = 0;
 		this.estado = "";
-
+		this.idSucursal = 0;
+		this.idProveedor = 0;
 	}
 
 	
@@ -87,13 +98,14 @@ public class Pedido implements VOPedido
 	 * @param precioAcordado - El precio acordado entre la sucursal y el proveedor
 	 * @param estado - El estado actual del pedido
 	 */
-	public Pedido(long id, Date fechaEsperadaEntrega, double precioAcordado) 
+	public Pedido(long id, Date fechaEsperadaEntrega, double precioAcordado, long idSucursal, long idProveedor) 
 	{
 		this.id = id;
 		this.fechaEsperadaEntrega = fechaEsperadaEntrega;
 		this.precioAcordado = precioAcordado;
 		this.estado = EN_CAMINO;
-		
+		this.idSucursal = idSucursal;
+		this.idProveedor = idProveedor;
 		//A esta instancia, el pedido todavia no tiene fecha de entrega
 		this.fechaEntrega = new Date();
 	}
@@ -178,6 +190,38 @@ public class Pedido implements VOPedido
 		this.estado = estado;
 	}
 	
+	/**
+	 * @return the idSucursal
+	 */
+	public long getIdSucursal() {
+		return idSucursal;
+	}
+
+
+	/**
+	 * @param idSucursal the idSucursal to set
+	 */
+	public void setIdSucursal(long idSucursal) {
+		this.idSucursal = idSucursal;
+	}
+
+
+	/**
+	 * @return the idProveedor
+	 */
+	public long getIdProveedor() {
+		return idProveedor;
+	}
+
+
+	/**
+	 * @param idProveedor the idProveedor to set
+	 */
+	public void setIdProveedor(long idProveedor) {
+		this.idProveedor = idProveedor;
+	}
+
+
 	@Override
 	public String toString() 
 	{

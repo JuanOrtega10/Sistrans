@@ -54,9 +54,9 @@ public class Estante extends Almacenamiento
 	 * @param pesoMax - El peso máximo soportado por el almacenamiento
 	 * @param cantidadMax - La cantidad máxima de productos soportada por el almacenamiento
 	 */
-    public Estante(long id, double volumenMax, double pesoMax, int cantidadMax, int nivelAbastecimiento) 
+    public Estante(long id, double volumenMax, double pesoMax, int cantidadMax, int nivelAbastecimiento,long idSuc, long idTipoProd, long idVolProd) 
     {
-    	super(id, volumenMax, pesoMax, cantidadMax);
+    	super(id, volumenMax, pesoMax, cantidadMax,idSuc,idTipoProd,idVolProd);
 		this.nivelAbastecimiento = nivelAbastecimiento;
 	}
     

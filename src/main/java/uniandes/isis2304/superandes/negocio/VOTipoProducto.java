@@ -31,7 +31,13 @@ public interface VOTipoProducto
 	 */
 	public String getNombre();
 	
+	/**
+	 * @return the idCategoria
+	 */
+	public long getIdCategoria();
 
+
+	
 	
 	
 

@@ -134,6 +134,15 @@ public class Factura implements VOFactura
 		this.fecha = fecha;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Factura [id=" + id + ", idSucursal=" + idSucursal + ", idCliente=" + idCliente + ", fecha=" + fecha
+				+ "]";
+	}
+
 	
 }
 

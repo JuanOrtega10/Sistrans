@@ -57,7 +57,15 @@ public interface VOPedido
 	 */
 	public String getEstado();
 
-	
+	/**
+	 * @return the idSucursal
+	 */
+	public long getIdSucursal();
+
+	/**
+	 * @return the idProveedor
+	 */
+	public long getIdProveedor();
 	
 
 }

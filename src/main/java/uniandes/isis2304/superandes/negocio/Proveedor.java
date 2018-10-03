@@ -133,6 +133,15 @@ public class Proveedor implements VOProveedor
 	public void setNumCalificaciones(int numCalificaciones) {
 		this.numCalificaciones = numCalificaciones;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Proveedor [nit=" + nit + ", nombre=" + nombre + ", calificacion=" + calificacion
+				+ ", numCalificaciones=" + numCalificaciones + "]";
+	}
 	
 
 	

@@ -130,6 +130,14 @@ public class Sucursal implements VOSucursal
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Sucursal [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", ciudad=" + ciudad + "]";
+	}
 	
 	
 

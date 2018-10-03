@@ -280,6 +280,18 @@ public class VolumenProducto implements VOVolumenProducto
 	public void setTipoVolumen(String tipoVolumen) {
 		this.tipoVolumen = tipoVolumen;
 	}
+
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "VolumenProducto [id=" + id + ", idFactura=" + idFactura + ", idAlmacenamiento=" + idAlmacenamiento
+				+ ", idPedido=" + idPedido + ", idTipoProducto=" + idTipoProducto + ", cantidad=" + cantidad + ", peso="
+				+ peso + ", volumen=" + volumen + ", tipoVolumen=" + tipoVolumen + "]";
+	}
 	
 	
 

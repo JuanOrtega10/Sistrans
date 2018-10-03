@@ -92,6 +92,15 @@ public class Producto implements VOProducto
 	 */
 	private Date fechaVencimiento;
 	
+	/**
+	 * El ID del tipo del producto.
+	 */
+	private long idTipoProducto;
+	
+	/**
+	 * El ID de la categoria del producto.
+	 */
+	private long idCategoria;
 	
 	/* ****************************************************************
 	 * 			Métodos 
@@ -113,6 +122,8 @@ public class Producto implements VOProducto
     	this.especificacionEmpaque = 0;
     	this.exclusivo = false;
     	this.fechaVencimiento = new Date();
+    	this.idCategoria = 0;
+    	this.idTipoProducto = 0;
     	
 	}
 	
@@ -132,7 +143,7 @@ public class Producto implements VOProducto
 	 */
 	
 	
-    public Producto(long codigo, String nombre, String marca, double precioUnitario, String presentacion, double precioUnidadMedida, double cantidad, String unidadMedida, double especificacionEmpaque, boolean exclusivo, Date fechaVencimiento) 
+    public Producto(long codigo, String nombre, String marca, double precioUnitario, String presentacion, double precioUnidadMedida, double cantidad, String unidadMedida, double especificacionEmpaque, boolean exclusivo, Date fechaVencimiento, long idCategoria, long idTipoProducto) 
     {
     	this.codigo = codigo;
     	this.nombre = nombre;
@@ -145,6 +156,8 @@ public class Producto implements VOProducto
     	this.especificacionEmpaque = especificacionEmpaque;
     	this.exclusivo = exclusivo;
     	this.fechaVencimiento = fechaVencimiento;
+    	this.idCategoria = idCategoria;
+    	this.idTipoProducto = idTipoProducto;
 	}
 
 	/**
@@ -300,7 +313,48 @@ public class Producto implements VOProducto
 	public void setFechaVencimiento(Date fechaVencimiento) {
 		this.fechaVencimiento = fechaVencimiento;
 	}
+
+	/**
+	 * @return the idTipoProducto
+	 */
+	public long getIdTipoProducto() {
+		return idTipoProducto;
+	}
+
+	/**
+	 * @param idTipoProducto the idTipoProducto to set
+	 */
+	public void setIdTipoProducto(long idTipoProducto) {
+		this.idTipoProducto = idTipoProducto;
+	}
+
+	/**
+	 * @return the idCategoria
+	 */
+	public long getIdCategoria() {
+		return idCategoria;
+	}
+
+	/**
+	 * @param idCategoria the idCategoria to set
+	 */
+	public void setIdCategoria(long idCategoria) {
+		this.idCategoria = idCategoria;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Producto [codigo=" + codigo + ", nombre=" + nombre + ", marca=" + marca + ", precioUnitario="
+				+ precioUnitario + ", presentacion=" + presentacion + ", precioUnidadMedida=" + precioUnidadMedida
+				+ ", cantidad=" + cantidad + ", unidadMedida=" + unidadMedida + ", especificacionEmpaque="
+				+ especificacionEmpaque + ", exclusivo=" + exclusivo + ", fechaVencimiento=" + fechaVencimiento
+				+ ", idTipoProducto=" + idTipoProducto + ", idCategoria=" + idCategoria + "]";
+	}
     
+	
     
 }
 

@@ -46,6 +46,18 @@ public interface VOAlmacenamiento
 	 */
 	public int getCantidadMax();
 
+	/**
+	 * @return the idSucursal
+	 */
+	public long getIdSucursal();
 
+	/**
+	 * @return the idTipoProducto
+	 */
+	public long getIdTipoProducto();
+	/**
+	 * @return the idVolumenProducto
+	 */
+	public long getIdVolumenProducto();
 
 }

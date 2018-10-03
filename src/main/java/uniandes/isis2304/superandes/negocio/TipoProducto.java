@@ -35,6 +35,10 @@ public class TipoProducto implements VOTipoProducto
 	 */
 	private String nombre;
 	
+	/**
+	 * El identificador de la categoria a la que pertenece el tipoProducto.
+	 */
+	private long idCategoria;
 	
 	/* ****************************************************************
 	 * 			Métodos 
@@ -46,6 +50,7 @@ public class TipoProducto implements VOTipoProducto
 	{
 		this.id = 0;
 		this.nombre = "";
+		this.idCategoria = 0;
 	}
 
 
@@ -54,9 +59,11 @@ public class TipoProducto implements VOTipoProducto
 	 * @param id
 	 * @param nombre
 	 */
-	public TipoProducto(long id, String nombre) {
+	public TipoProducto(long id, String nombre, long idCategoria) {
 		this.id = id;
 		this.nombre = nombre;
+		this.idCategoria = idCategoria;
+		
 	}
 
 
@@ -90,9 +97,34 @@ public class TipoProducto implements VOTipoProducto
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	
 
+
+	/**
+	 * @return the idCategoria
+	 */
+	public long getIdCategoria() {
+		return idCategoria;
+	}
+
+
+	/**
+	 * @param idCategoria the idCategoria to set
+	 */
+	public void setIdCategoria(long idCategoria) {
+		this.idCategoria = idCategoria;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "TipoProducto [id=" + id + ", nombre=" + nombre + ", idCategoria=" + idCategoria + "]";
+	}
+	
+	
+	
 	
 }
 

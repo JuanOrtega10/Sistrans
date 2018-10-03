@@ -81,5 +81,14 @@ public interface VOProducto
 	 */
 	public Date getFechaVencimiento();
 	
+	/**
+	 * @return the idTipoProducto
+	 */
+	public long getIdTipoProducto();
+	/**
+	 * @return the idCategoria
+	 */
+	public long getIdCategoria();
+	
 
 }

@@ -48,6 +48,23 @@ public abstract class Almacenamiento implements VOAlmacenamiento
 	 */
 	private int cantidadMax;
 	
+	/**
+	 * El identificador de la sucursal a la que pertenece el almacenamiento.
+	 */
+	private long idSucursal;
+	
+	/**
+	 * El identificador del tipoProducto que se almacena.
+	 */
+	private long idTipoProducto;
+	
+	/**
+	 * El identificador del volumen que se almacena.
+	 */
+	private long idVolumenProducto;
+
+	
+	
 	
 	/* ****************************************************************
 	 * 			Métodos 
@@ -62,6 +79,9 @@ public abstract class Almacenamiento implements VOAlmacenamiento
 		this.volumenMax = 0;
 		this.pesoMax = 0;
 		this.cantidadMax = 0;
+		this.idSucursal = 0;
+		this.idTipoProducto = 0;
+		this.idVolumenProducto = 0;
 		
 	}
 
@@ -72,12 +92,15 @@ public abstract class Almacenamiento implements VOAlmacenamiento
 	 * @param pesoMax - El peso máximo soportado por el almacenamiento
 	 * @param cantidadMax - La cantidad máxima de productos soportada por el almacenamiento
 	 */
-    public Almacenamiento(long id, double volumenMax, double pesoMax, int cantidadMax) 
+    public Almacenamiento(long id, double volumenMax, double pesoMax, int cantidadMax,long idSucursal,long idTipoProd,long idVolProd) 
     {
     	this.id = id;
 		this.volumenMax = volumenMax;
 		this.pesoMax = pesoMax;
 		this.cantidadMax = cantidadMax;
+		this.idSucursal = idSucursal;
+		this.idTipoProducto = idTipoProd;
+		this.idVolumenProducto = idVolProd;
 	}
     
     /**
@@ -134,6 +157,48 @@ public abstract class Almacenamiento implements VOAlmacenamiento
 	 */
 	public void setCantidadMax(int cantidadMax) {
 		this.cantidadMax = cantidadMax;
+	}
+
+	/**
+	 * @return the idSucursal
+	 */
+	public long getIdSucursal() {
+		return idSucursal;
+	}
+
+	/**
+	 * @param idSucursal the idSucursal to set
+	 */
+	public void setIdSucursal(long idSucursal) {
+		this.idSucursal = idSucursal;
+	}
+
+	/**
+	 * @return the idTipoProducto
+	 */
+	public long getIdTipoProducto() {
+		return idTipoProducto;
+	}
+
+	/**
+	 * @param idTipoProducto the idTipoProducto to set
+	 */
+	public void setIdTipoProducto(long idTipoProducto) {
+		this.idTipoProducto = idTipoProducto;
+	}
+
+	/**
+	 * @return the idVolumenProducto
+	 */
+	public long getIdVolumenProducto() {
+		return idVolumenProducto;
+	}
+
+	/**
+	 * @param idVolumenProducto the idVolumenProducto to set
+	 */
+	public void setIdVolumenProducto(long idVolumenProducto) {
+		this.idVolumenProducto = idVolumenProducto;
 	}
 	
 

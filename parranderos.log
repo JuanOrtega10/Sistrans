@@ -170,3 +170,59 @@ java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 19:50:52,014 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Eliminando bebida por nombre: 1 tuplas eliminadas
 19:50:52,014 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Eliminando Tipo de bebida por id: 4
 19:50:52,085 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Eliminando Tipo de bebida por id: 1 tuplas eliminadas
+22:27:25,642 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Probando el acceso a la base de datos con datos de usuario correctos, pero sin crear el esquema
+22:27:25,766 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Se encontró un archivo de configuración de tablas válido
+22:27:31,234 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Prueba de tabla inexistente correcta. La excepción generada es: javax.jdo.JDODataStoreException
+22:27:31,235 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - La causa es: java.sql.SQLSyntaxErrorException: ORA-00942: la tabla o vista no existe
+
+22:27:33,166 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Probando el acceso a la base de datos con una base de datos que no existe
+22:27:33,182 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Se encontró un archivo de configuración de tablas válido
+22:27:33,897 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Prueba realizada exitosamente. La excepción generada es: javax.jdo.JDOFatalUserException
+22:27:33,898 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - La causa es: javax.jdo.JDOFatalDataStoreException: Listener refused the connection with the following error:
+ORA-12505, TNS:listener does not currently know of SID given in connect descriptor
+ 
+NestedThrowables:
+java.sql.SQLException: Listener refused the connection with the following error:
+ORA-12505, TNS:listener does not currently know of SID given in connect descriptor
+ 
+22:27:33,898 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Probando el acceso a la base de datos con datos de usuario incorrectos
+22:27:33,912 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Se encontró un archivo de configuración de tablas válido
+22:27:36,136 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Prueba realizada exitosamente. La excepción generada es: javax.jdo.JDOFatalUserException
+22:27:36,137 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - La causa es: javax.jdo.JDOFatalDataStoreException: ORA-01017: invalid username/password; logon denied
+
+NestedThrowables:
+java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+22:27:36,138 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Probando el acceso a la base de datos con datos válidos (BD, credenciales, esquema
+22:27:36,154 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Se encontró un archivo de configuración de tablas válido
+22:27:38,042 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Conexión realizada correstamente
+22:27:38,042 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Cerrando la conexión
+22:27:38,153 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Conexión cerrada
+22:36:43,365 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Probando el acceso a la base de datos con datos de usuario correctos, pero sin crear el esquema
+22:36:43,470 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Se encontró un archivo de configuración de tablas válido
+22:36:49,874 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Prueba de tabla inexistente correcta. La excepción generada es: javax.jdo.JDODataStoreException
+22:36:49,875 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - La causa es: java.sql.SQLSyntaxErrorException: ORA-00942: la tabla o vista no existe
+
+22:36:51,917 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Probando el acceso a la base de datos con una base de datos que no existe
+22:36:51,918 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Se encontró un archivo de configuración de tablas válido
+22:36:52,678 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Prueba realizada exitosamente. La excepción generada es: javax.jdo.JDOFatalUserException
+22:36:52,679 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - La causa es: javax.jdo.JDOFatalDataStoreException: Listener refused the connection with the following error:
+ORA-12505, TNS:listener does not currently know of SID given in connect descriptor
+ 
+NestedThrowables:
+java.sql.SQLException: Listener refused the connection with the following error:
+ORA-12505, TNS:listener does not currently know of SID given in connect descriptor
+ 
+22:36:52,680 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Probando el acceso a la base de datos con datos de usuario incorrectos
+22:36:52,683 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Se encontró un archivo de configuración de tablas válido
+22:36:55,010 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Prueba realizada exitosamente. La excepción generada es: javax.jdo.JDOFatalUserException
+22:36:55,011 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - La causa es: javax.jdo.JDOFatalDataStoreException: ORA-01017: invalid username/password; logon denied
+
+NestedThrowables:
+java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+22:36:55,012 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Probando el acceso a la base de datos con datos válidos (BD, credenciales, esquema
+22:36:55,014 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Se encontró un archivo de configuración de tablas válido
+22:36:56,786 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Conexión realizada correstamente
+22:36:56,786 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Cerrando la conexión
+22:36:56,889 (main) INFO  [uniandes.isis2304.parranderos.test.ConexionTest] - Conexión cerrada

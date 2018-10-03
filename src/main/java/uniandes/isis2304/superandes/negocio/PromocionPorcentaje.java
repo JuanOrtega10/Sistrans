@@ -80,9 +80,7 @@ public class PromocionPorcentaje extends Promocion implements VOPromocionPorcent
 		return "PromocionPorcentaje [descuento=" + descuento + super.toString() + "]";
 	}
 	
-	
-	
-	
+
 
 }
 

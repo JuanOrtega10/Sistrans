@@ -556,7 +556,7 @@ public class PersistenciaSuperAndes {
 	private long nextval ()
 	{
         long resp = sqlUtil2.nextval (pmf.getPersistenceManager());
-        log.trace ("Generando secuencia: " + resp);
+        System.out.println ("Generando secuencia: " + resp);
         return resp;
     }
 
@@ -597,17 +597,17 @@ public class PersistenciaSuperAndes {
         try
         {
             tx.begin();
-            long id = nextval ();
+            long id = nextval();
             long tuplasInsertadas = sqlSucursal.adicionarSucursal(pm, id, nombre, direccion, ciudad );
             tx.commit();
             
-            log.trace ("Inserción de tipo de Sucursal: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
+            System.out.println("Inserción de tipo de Sucursal: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
             
             return new Sucursal (id, nombre, direccion, ciudad);
         }
         catch (Exception e)
         {
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
         	return null;
         }
         finally
@@ -662,10 +662,16 @@ public class PersistenciaSuperAndes {
             tx.begin();
             long tuplasInsertadas = sqlProveedor.adicionarProveedor(pm, id, nombre, calificacion, numCalificaciones);
             tx.commit();
+
+            System.out.println("Llega acá");
+            log.trace ("Inserción proveedor: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
+           
+
             
             System.out.println("Inserción de tipo de Sucursal: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
             
             return new Proveedor (id, nombre, calificacion, numCalificaciones);
+
         }
         catch (Exception e)
         {

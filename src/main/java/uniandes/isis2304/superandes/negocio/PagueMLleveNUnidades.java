@@ -60,7 +60,7 @@ public class PagueMLleveNUnidades extends Promocion implements VOPagueMLleveNUni
 	 * @param idProducto
 	 * @param fechaExpiracion
 	 */
-	public PagueMLleveNUnidades(long id, long idSucursal, long idProducto, Date fechaExpiracion, Double descuento, int m, int n) {
+	public PagueMLleveNUnidades(long id, long idSucursal, long idProducto, Date fechaExpiracion, int m, int n) {
 		
 		super(id, idSucursal, idProducto, fechaExpiracion);
 		this.n = n;

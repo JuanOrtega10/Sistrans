@@ -36,7 +36,4 @@ public interface VOPagueMLleveNUnidades
 	 * @return the m
 	 */
 	public int getM();
-
-	
-	
 }

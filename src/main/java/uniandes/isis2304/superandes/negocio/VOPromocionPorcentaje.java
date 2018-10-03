@@ -1,4 +1,3 @@
-
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Universidad	de	los	Andes	(Bogotá	- Colombia)
  * Departamento	de	Ingeniería	de	Sistemas	y	Computación
@@ -13,49 +12,25 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
-/**
- * Clase para modelar el concepto de la promoción "Menor a la suma" del negocio de superandes.
- *
- * @author ja.ortega - dy.quintero.
- */
 package uniandes.isis2304.superandes.negocio;
 
-import java.util.Date;
 
-public class MenorALaSuma extends Promocion
+/**
+ * Interfaz para los métodos get de Promoción Porcentaje.
+ * Sirve para proteger la información del negocio de posibles manipulaciones desde la interfaz 
+ * 
+ * @author ja.ortega - dy.quintero
+ */
+public interface VOPromocionPorcentaje 
 {
-	
 	/* ****************************************************************
 	 * 			Métodos 
 	 *****************************************************************/
-    
+
 	/**
-     * Constructor por defecto
-     */
-	public MenorALaSuma() 
-    {
-    	super();
-    	
-	}
-	
-	/**
-	 * @param id
-	 * @param idSucursal
-	 * @param idProducto
-	 * @param fechaExpiracion
+	 * @return the descuento
 	 */
-	public MenorALaSuma(long id, long idSucursal, long idProducto, Date fechaExpiracion, Double descuento) {
-		
-		super(id, idSucursal, idProducto, fechaExpiracion);
-
-	}
-
+	public double getDescuento();
 	
-	@Override
-	public String toString() {
-		return "MenorALaSuma [" + super.toString() + "]";
-	}
-
-
+	
 }
-

@@ -58,7 +58,7 @@ public class PagueXLleveYCantidad extends Promocion implements VOPagueXLleveYCan
 	 * @param idProducto
 	 * @param fechaExpiracion
 	 */
-	public PagueXLleveYCantidad(long id, long idSucursal, long idProducto, Date fechaExpiracion, Double descuento, double x, double y) {
+	public PagueXLleveYCantidad(long id, long idSucursal, long idProducto, Date fechaExpiracion, double x, double y) {
 		
 		super(id, idSucursal, idProducto, fechaExpiracion);
 		this.x = x;

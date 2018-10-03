@@ -23,7 +23,7 @@ import javax.jdo.Query;
 import uniandes.isis2304.superandes.negocio.Sucursal;
 
 /**
- * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto SUCURSAL de SuperAndes
+ * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto Proveedor de SuperAndes
  * 
  * @author ja.ortega - dy.quintero.
  */

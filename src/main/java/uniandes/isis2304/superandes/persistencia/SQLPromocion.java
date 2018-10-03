@@ -12,22 +12,23 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
+
 package uniandes.isis2304.superandes.persistencia;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.superandes.negocio.ClienteEmpresa;
-
+import uniandes.isis2304.superandes.negocio.Promocion;
 
 /**
- * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto Cliente Empresa de SuperAndes
+ * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto PROMOCION de SuperAndes
  * 
  * @author ja.ortega - dy.quintero.
  */
-class SQLClienteEmpresa 
+class SQLPromocion 
 {
 	/* ****************************************************************
 	 * 			Constantes
@@ -54,46 +55,41 @@ class SQLClienteEmpresa
 	 * Constructor
 	 * @param pp - El Manejador de persistencia de la aplicación
 	 */
-	public SQLClienteEmpresa (PersistenciaSuperAndes ps)
+	public SQLPromocion (PersistenciaSuperAndes ps)
 	{
 		this.ps = ps;
 	}
 	
 	/**
-	 * Crea y ejecuta la sentencia SQL para adicionar una SUCURSAL a la base de datos de SuperAndes
+	 * Crea y ejecuta la sentencia SQL para adicionar un ALMACENAMIENTO a la base de datos de SuperAndes
 	 */
-	public long adicionarClienteEmpresa (PersistenceManager pm, long id, String direccion) 
+	public long adicionarPromocion (PersistenceManager pm, long id, Date fechaExpiracion, long idSucursal, long idProducto) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaClienteEmpresa() + "(idCliente, direccion) values (?,?)");
-        q.setParameters(id, direccion);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaPromocion() + "(id, fechaExpiracion, idSucursal, idProducto) values (?, ?, ?, ?)");
+        q.setParameters(id, fechaExpiracion, idSucursal, idProducto);
         return (long) q.executeUnique();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN BAR de la 
-	 * base de datos de Parranderos, por su identificador
-	 * @param pm - El manejador de persistencia
-	 * @param idBar - El identificador del bar
-	 * @return El objeto BAR que tiene el identificador dado
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN ALMACENAMIENTO de la 
+	 * base de datos de SuperAndes, por su identificador
 	 */
-	public ClienteEmpresa darClienteNaturalPorId (PersistenceManager pm, long idCliente) 
+	public Promocion darPromocionPorId (PersistenceManager pm, long idPromocion) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaClienteEmpresa( ) + " WHERE idCliente = ?");
-		q.setResultClass(ClienteEmpresa.class);
-		q.setParameters(idCliente);
-		return (ClienteEmpresa) q.executeUnique();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaPromocion( ) + " WHERE id = ?");
+		q.setResultClass(Promocion.class);
+		q.setParameters(idPromocion);
+		return (Promocion) q.executeUnique();
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS BARES de la 
-	 * base de datos de Parranderos
-	 * @param pm - El manejador de persistencia
-	 * @return Una lista de objetos BAR
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS ALMACENAMIENTO de la 
+	 * base de datos de SuperAndes
 	 */
-	public List<ClienteEmpresa> darClientes (PersistenceManager pm)
+	public List<Promocion> darPromociones (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaClienteEmpresa());
-		q.setResultClass(ClienteEmpresa.class);
-		return (List<ClienteEmpresa>) q.executeList();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaPromocion());
+		q.setResultClass(Promocion.class);
+		return (List<Promocion>) q.executeList();
 	}
 }

@@ -22,7 +22,7 @@ import javax.jdo.Query;
 import uniandes.isis2304.superandes.negocio.ClienteNatural;
 
 /**
- * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto SUCURSAL de SuperAndes
+ * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto Cliente Natural de SuperAndes
  * 
  * @author ja.ortega - dy.quintero.
  */

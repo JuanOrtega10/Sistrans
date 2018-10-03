@@ -61,9 +61,9 @@ class SQLSucursal
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar una SUCURSAL a la base de datos de SuperAndes
 	 */
-	public long adicinarSucursal (PersistenceManager pm, long idSucursal, String nombre, String direccion, String ciudad) 
+	public long adicionarSucursal (PersistenceManager pm, long idSucursal, String nombre, String direccion, String ciudad) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaClienteNatural() + "(id, nombre, direccion, ciudad) values (?, ?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaSucursal() + "(id, nombre, direccion, ciudad) values (?, ?, ?, ?)");
         q.setParameters(idSucursal, nombre, direccion, ciudad);
         return (long) q.executeUnique();
 	}
@@ -77,7 +77,7 @@ class SQLSucursal
 	 */
 	public Sucursal darSucursalPorId (PersistenceManager pm, long idSucursal) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaClienteNatural( ) + " WHERE id = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaSucursal( ) + " WHERE id = ?");
 		q.setResultClass(Sucursal.class);
 		q.setParameters(idSucursal);
 		return (Sucursal) q.executeUnique();
@@ -89,9 +89,9 @@ class SQLSucursal
 	 * @param pm - El manejador de persistencia
 	 * @return Una lista de objetos BAR
 	 */
-	public List<Sucursal> darSucurales (PersistenceManager pm)
+	public List<Sucursal> darSucursales (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaClienteNatural());
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaSucursal());
 		q.setResultClass(Sucursal.class);
 		return (List<Sucursal>) q.executeList();
 	}

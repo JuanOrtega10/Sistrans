@@ -20,7 +20,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.superandes.negocio.Sucursal;
+import uniandes.isis2304.superandes.negocio.Proveedor;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto Proveedor de SuperAndes
@@ -62,10 +62,10 @@ class SQLProveedor
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar una PROVEEDOR a la base de datos de SuperAndes
 	 */
-	public long adicinarSucursal (PersistenceManager pm, long idSucursal, String nombre, double calificacion, int numCalificaciones) 
+	public long adicionarProveedor (PersistenceManager pm, long idProveedor, String nombre, double calificacion, int numCalificaciones) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaProveedor() + "(id, nombre, calificacion, numCalificaciones) values (?, ?, ?, ?)");
-        q.setParameters(idSucursal, nombre, calificacion, numCalificaciones);
+        q.setParameters(idProveedor, nombre, calificacion, numCalificaciones);
         return (long) q.executeUnique();
 	}
 
@@ -76,12 +76,12 @@ class SQLProveedor
 	 * @param idBar - El identificador del bar
 	 * @return El objeto BAR que tiene el identificador dado
 	 */
-	public Sucursal darSucursalPorId (PersistenceManager pm, long idSucursal) 
+	public Proveedor darProveedorPorId (PersistenceManager pm, long idSucursal) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaProveedor( ) + " WHERE id = ?");
-		q.setResultClass(Sucursal.class);
+		q.setResultClass(Proveedor.class);
 		q.setParameters(idSucursal);
-		return (Sucursal) q.executeUnique();
+		return (Proveedor) q.executeUnique();
 	}
 
 	/**
@@ -90,10 +90,10 @@ class SQLProveedor
 	 * @param pm - El manejador de persistencia
 	 * @return Una lista de objetos BAR
 	 */
-	public List<Sucursal> darSucurales (PersistenceManager pm)
+	public List<Proveedor> darProveedores (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaProveedor());
-		q.setResultClass(Sucursal.class);
-		return (List<Sucursal>) q.executeList();
+		q.setResultClass(Proveedor.class);
+		return (List<Proveedor>) q.executeList();
 	}
 }

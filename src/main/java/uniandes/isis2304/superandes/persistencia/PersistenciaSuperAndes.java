@@ -3,8 +3,11 @@ package uniandes.isis2304.superandes.persistencia;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.jdo.JDODataStoreException;
 import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Transaction;
 
 import org.apache.log4j.Logger;
 
@@ -12,6 +15,21 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import uniandes.isis2304.superandes.negocio.Bebida;
+import uniandes.isis2304.superandes.negocio.Proveedor;
+import uniandes.isis2304.superandes.negocio.Sucursal;
+import uniandes.isis2304.superandes.negocio.TipoBebida;
+
+
+/**
+ * Clase para el manejador de persistencia del proyecto Parranderos
+ * Traduce la información entre objetos Java y tuplas de la base de datos, en ambos sentidos
+ * Sigue un patrón SINGLETON (Sólo puede haber UN objeto de esta clase) para comunicarse de manera correcta
+ * con la base de datos
+ * Se apoya en las clases SQL
+ * 
+ * @author Germán Bravo
+ */
 public class PersistenciaSuperAndes {
 
 	/* ****************************************************************
@@ -51,8 +69,119 @@ public class PersistenciaSuperAndes {
 	/**
 	 * Atributo para el acceso a las sentencias SQL propias a PersistenciaParranderos
 	 */
-	private SQLUtil sqlUtil;
+	private SQLUtil2 sqlUtil2;
 	
+	/**
+	 * Atributo para el acceso a la tabla ALMACENAMIENTO de la base de datos
+	 */
+	private SQLAlmacenamiento sqlAlmacenmiento;
+	
+	/**
+	 * Atributo para el acceso a la tabla BODEGA de la base de datos
+	 */
+	private SQLBodega sqlBodega;
+	
+	/**
+	 * Atributo para el acceso a la tabla CATEGORIA de la base de datos
+	 */
+	private SQLCategoria sqlCategoria;
+	
+	/**
+	 * Atributo para el acceso a la tabla CLIENTE de la base de datos
+	 */
+	private SQLCliente sqlCliente;
+	
+	/**
+	 * Atributo para el acceso a la tabla CLIENTEEMPRESA de la base de datos
+	 */
+	private SQLClienteEmpresa sqlClienteEmpresa;
+	
+	/**
+	 * Atributo para el acceso a la tabla CLIENTENATURAL de la base de datos
+	 */
+	private SQLClienteNatural sqlClienteNatural;
+	
+	/**
+	 * Atributo para el acceso a la tabla DESCUENTOSGDOPRODUCTO de la base de datos
+	 */
+	private SQLDescuentoSegundoProducto sqlDescuentoSegundoProducto;
+	
+	/**
+	 * Atributo para el acceso a la tabla ESTANTE de la base de datos
+	 */
+	private SQLEstante sqlEstante;
+	
+	/**
+	 * Atributo para el acceso a la tabla FACTURA de la base de datos
+	 */
+	private SQLFactura sqlFactura;
+	
+	/**
+	 * Atributo para el acceso a la tabla MENORALASUMA de la base de datos
+	 */
+	private SQLPromocionMenorALaSuma sqlMenorALaSuma;
+	
+	/**
+	 * Atributo para el acceso a la tabla PAGEMLLEVENUNIDADES de la base de datos
+	 */
+	private SQLPagueMLleveNUnidades sqlPagueMLleveNUnidades;
+	
+	/**
+	 * Atributo para el acceso a la tabla PAGUEXLLEVEYCANTIDAD de la base de datos
+	 */
+	private SQLPagueXLleveYCantidad sqlPagueXLleveYCantidad;
+
+	/**
+	 * Atributo para el acceso a la tabla PEDIDO de la base de datos
+	 */
+	private SQLPedido sqlPedido;
+	
+	/**
+	 * Atributo para el acceso a la tabla PRODUCTO de la base de datos
+	 */
+	private SQLProducto sqlProducto;
+	
+	/**
+	 * Atributo para el acceso a la tabla PROMOCION de la base de datos
+	 */
+	private SQLPromocion sqlPromocion;
+	
+	/**
+	 * Atributo para el acceso a la tabla PROMOCIONPORCENTAJE de la base de datos
+	 */
+	private SQLPromocionPorcentaje sqlPromocionPorcentaje;
+
+	/**
+	 * Atributo para el acceso a la tabla PROVEE de la base de datos
+	 */
+	private SQLProvee sqlProvee;
+
+	/**
+	 * Atributo para el acceso a la tabla PROVEEDOR de la base de datos
+	 */
+	private SQLProveedor sqlProveedor;
+
+	/**
+	 * Atributo para el acceso a la tabla REORDEN de la base de datos
+	 */
+	private SQLReorden sqlReorden;
+	
+	/**
+	 * Atributo para el acceso a la tabla SUCURSAL de la base de datos
+	 */
+	private SQLSucursal sqlSucursal;
+	
+	/**
+	 * Atributo para el acceso a la tabla TIPOPRODUCTO de la base de datos
+	 */
+	private SQLTipoProducto sqlTipoProducto;
+	
+	/**
+	 * Atributo para el acceso a la tabla VOLUMENPRODUCTO de la base de datos
+	 */
+	private SQLVolumenProdcuto sqlVolumenProdcuto;
+	
+
 	
 	
 	/* ****************************************************************
@@ -69,14 +198,30 @@ public class PersistenciaSuperAndes {
 		
 		// Define los nombres por defecto de las tablas de la base de datos
 		tablas = new LinkedList<String> ();
-		tablas.add ("Parranderos_sequence");
-		tablas.add ("TIPOBEBIDA");
-		tablas.add ("BEBIDA");
-		tablas.add ("BAR");
-		tablas.add ("BEBEDOR");
-		tablas.add ("GUSTAN");
-		tablas.add ("SIRVEN");
-		tablas.add ("VISITAN");
+		tablas.add ("SUPERANDES_SEQUENCE");
+		tablas.add ("ALMACENAMIENTO");
+		tablas.add ("BODEGA");
+		tablas.add ("CATEGORIA");
+		tablas.add ("CLIENTE");
+		tablas.add ("CLIENTEEMPRESA");
+		tablas.add ("CLIENTENATURAL");
+		tablas.add ("DESCUENTOSGDOPRODUCTO");
+		tablas.add ("ESTANTE");
+		tablas.add ("FACTURA");
+		tablas.add ("MENORALASUMA");
+		tablas.add ("PAGEMLLEVENUNIDADES");
+		tablas.add ("PAGUEXLLEVEYCANTIDAD");
+		tablas.add ("PEDIDO");
+		tablas.add ("PRODUCTO");
+		tablas.add ("PROMOCION");
+		tablas.add ("PROMOCIONPORCENTAJE");
+		tablas.add ("PROVEE");
+		tablas.add ("PROVEEDOR");
+		tablas.add ("REORDEN");
+		tablas.add ("SUCURSAL");
+		tablas.add ("TIPOPRODUCTO");
+		tablas.add ("VOLUMENPRODUCTO");
+		
 }
 
 	/**
@@ -151,15 +296,59 @@ public class PersistenciaSuperAndes {
 	 */
 	private void crearClasesSQL ()
 	{
-			
-//		sqlUtil = new SQLUtil(this);
+		
+		sqlUtil2 = new SQLUtil2(this);
+		
+		sqlAlmacenmiento = new SQLAlmacenamiento(this);
+		
+		sqlBodega = new SQLBodega(this);
+		
+		sqlCategoria = new SQLCategoria(this);
+		
+		sqlCliente = new SQLCliente(this);
+		
+		sqlClienteEmpresa = new SQLClienteEmpresa(this);
+		
+		sqlClienteNatural = new SQLClienteNatural(this);
+		
+		sqlDescuentoSegundoProducto = new SQLDescuentoSegundoProducto(this);
+		
+		sqlEstante = new SQLEstante(this);
+		
+		sqlFactura = new SQLFactura(this);
+		
+		sqlMenorALaSuma = new SQLPromocionMenorALaSuma(this);
+		
+		sqlPagueMLleveNUnidades = new SQLPagueMLleveNUnidades(this);
+		
+		sqlPagueXLleveYCantidad = new SQLPagueXLleveYCantidad(this);
+
+		sqlPedido = new SQLPedido(this);
+		
+		sqlProducto = new SQLProducto(this);
+		
+		sqlPromocion = new SQLPromocion(this);
+		
+		sqlPromocionPorcentaje = new SQLPromocionPorcentaje(this);
+
+		sqlProvee = new SQLProvee(this);
+
+		sqlProveedor = new SQLProveedor(this);
+
+		sqlReorden = new SQLReorden(this);
+		
+		sqlSucursal = new SQLSucursal(this);
+		
+		sqlTipoProducto = new SQLTipoProducto(this);
+		
+		sqlVolumenProdcuto = new SQLVolumenProdcuto(this);
 	}
 	
 	
 	/**
 	 * @return La cadena de caracteres con el nombre del secuenciador de parranderos
 	 */
-	public String darSeqSuperAndes ()
+	public String darSeqSuperAndes()
 	{
 		return tablas.get (0);
 	}
@@ -170,7 +359,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaProveedor ()
 	{
-		return tablas.get (2);
+		return tablas.get (18);
 	}
 
 	/**
@@ -186,7 +375,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaAlmacenamiento ()
 	{
-		return tablas.get (4);
+		return tablas.get (1);
 	}
 
 	/**
@@ -194,7 +383,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaEstante ()
 	{
-		return tablas.get (5);
+		return tablas.get (9);
 	}
 
 
@@ -203,7 +392,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaClienteEmpresa ()
 	{
-		return tablas.get (7);
+		return tablas.get (6);
 	}
 	
 
@@ -221,7 +410,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaFactura ()
 	{
-		return tablas.get (7);
+		return tablas.get (10);
 	}
 	
 
@@ -230,7 +419,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaPedido ()
 	{
-		return tablas.get (7);
+		return tablas.get (13);
 	}
 	
 
@@ -239,7 +428,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaProducto ()
 	{
-		return tablas.get (7);
+		return tablas.get (14);
 	}
 	
 	
@@ -249,7 +438,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaProvee()
 	{
-		return tablas.get (7);
+		return tablas.get (17);
 	}
 	
 
@@ -258,7 +447,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaReorden ()
 	{
-		return tablas.get (7);
+		return tablas.get (19);
 	}
 	
 
@@ -267,7 +456,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaTipoProducto()
 	{
-		return tablas.get (7);
+		return tablas.get (21);
 	}
 	
 
@@ -276,7 +465,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaVolumenProducto ()
 	{
-		return tablas.get (7);
+		return tablas.get (22);
 	}
 	
 
@@ -285,7 +474,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaPromocion ()
 	{
-		return tablas.get (7);
+		return tablas.get (15);
 	}
 	
 
@@ -294,7 +483,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaPromocionPorcentaje ()
 	{
-		return tablas.get (7);
+		return tablas.get (16);
 	}
 	
 	
@@ -304,7 +493,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaPagueMLleveNUnidades()
 	{
-		return tablas.get (7);
+		return tablas.get (11);
 	}
 	
 
@@ -313,7 +502,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaPagueXLleveYCantidad()
 	{
-		return tablas.get (7);
+		return tablas.get (12);
 	}
 	
 
@@ -322,7 +511,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaMenorALaSuma()
 	{
-		return tablas.get (7);
+		return tablas.get (10);
 	}
 	
 
@@ -331,22 +520,182 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaDescuentoSegundoProducto()
 	{
-		return tablas.get (7);
+		return tablas.get (8);
+	}
+
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de Bodega de parranderos
+	 */
+	public String darTablaBodega() 
+	{
+		return tablas.get(2);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de Bodega de parranderos
+	 */
+	public String darTablaCliente() {
+		return tablas.get(5);
+	}
+
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de Bodega de parranderos
+	 */
+	public String darTablaSucursal() {
+		return tablas.get(20);
+	}
+	
+	/**
+	 * Transacción para el generador de secuencia de Parranderos
+	 * Adiciona entradas al log de la aplicación
+	 * @return El siguiente número del secuenciador de Parranderos
+	 */
+	private long nextval ()
+	{
+        long resp = sqlUtil2.nextval (pmf.getPersistenceManager());
+        log.trace ("Generando secuencia: " + resp);
+        return resp;
+    }
+
+	/**
+	 * Extrae el mensaje de la exception JDODataStoreException embebido en la Exception e, que da el detalle específico del problema encontrado
+	 * @param e - La excepción que ocurrio
+	 * @return El mensaje de la excepción JDO
+	 */
+	private String darDetalleException(Exception e) 
+	{
+		String resp = "";
+		if (e.getClass().getName().equals("javax.jdo.JDODataStoreException"))
+		{
+			JDODataStoreException je = (javax.jdo.JDODataStoreException) e;
+			return je.getNestedExceptions() [0].getMessage();
+		}
+		return resp;
 	}
 	
 	
 	
+	/* ****************************************************************
+	 * 			Métodos para manejar SUCURSAL
+	 *****************************************************************/
+
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Sucursal
+	 * Adiciona entradas al log de la aplicación
+	 * @param nombre - El nombre de la sucursal
+	 * @param direcion - La dirección de la sucursal
+	 * @param ciudad - La ciudad de la sucursal.
+	 * @return El objeto Sucursal adicionado. null si ocurre alguna Excepción
+	 */
+	public Sucursal adicionarSucursal(String nombre, String direccion, String ciudad)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long id = nextval ();
+            long tuplasInsertadas = sqlSucursal.adicionarSucursal(pm, id, nombre, direccion, ciudad );
+            tx.commit();
+            
+            log.trace ("Inserción de tipo de Sucursal: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
+            
+            return new Sucursal (id, nombre, direccion, ciudad);
+        }
+        catch (Exception e)
+        {
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla Sucursal
+	 * @return La lista de objetos Sucursal, construidos con base en las tuplas de la tabla SUCURSAL
+	 */
+	public List<Sucursal> darSucursales ()
+	{
+		return sqlSucursal.darSucursales(pmf.getPersistenceManager());
+	}
 	
 	
+	/**
+	 * Método que consulta todas las tuplas en la tabla Sucursal con un identificador dado
+	 * @param idSucursal - El identificador del la Sucursal
+	 * @return El objeto Sucursal, construido con base en las tuplas de la tabla Sucursal con el identificador dado
+	 */
+	public Sucursal darTipoBebidaPorId (long idSucursal)
+	{
+		return sqlSucursal.darSucursalPorId(pmf.getPersistenceManager(), idSucursal);
+	}
 	
 	
+	/* ****************************************************************
+	 * 			Métodos para manejar los PROVEEDORES
+	 *****************************************************************/
 	
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Proveedor
+	 * Adiciona entradas al log de la aplicación
+	 * @param nombre - El nombre del proveedor.
+	 * @param calificacion - La calificación que la sucursal le da al proveedor.
+	 * @param numCalificaciones - El número de calificaciones.
+	 * @return El objeto Proveedor adicionado. null si ocurre alguna Excepción
+	 */
+	public Proveedor adicionarProveedor(long id, String nombre, double calificacion, int numCalificaciones ) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+           
+            long tuplasInsertadas = sqlProveedor.adicionarProveedor(pm, id, nombre, calificacion, numCalificaciones);
+            tx.commit();
+            
+            log.trace ("Inserción proveedor: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
+            return new Proveedor(id,nombre, calificacion, numCalificaciones);
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
 	
+	/**
+	 * Método que consulta todas las tuplas en la tabla Proveedor
+	 * @return La lista de objetos Proveedor, construidos con base en las tuplas de la tabla BEBIDA
+	 */
+	public List<Proveedor> darProveedores ()
+	{
+		return sqlProveedor.darProveedores(pmf.getPersistenceManager());
+	}
 	
-	
-	
-	
-	
+	/**
+	 * Método que consulta el proveedor con el id dado
+	 * @return Proveedor, null si existe alguna excepción.
+	 */
+	public Proveedor darProveedorPorId (long id)
+	{
+		return sqlProveedor.darProveedorPorId(pmf.getPersistenceManager(), id);
+	}
 	
 	
 	

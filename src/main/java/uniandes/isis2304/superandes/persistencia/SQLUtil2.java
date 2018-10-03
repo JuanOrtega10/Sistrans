@@ -93,6 +93,7 @@ class SQLUtil2
 //        long baresEliminados = (long) qBar.executeUnique ();
 //        return new long[] {gustanEliminados, sirvenEliminados, visitanEliminadas, bebidasEliminadas, 
 //        		tiposBebidaEliminados, bebedoresEliminados, baresEliminados};
+		return new long[1];
 	}
 
 }

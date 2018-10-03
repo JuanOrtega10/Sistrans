@@ -63,7 +63,7 @@ class SQLCliente
 	 */
 	public long adicionarCliente (PersistenceManager pm, long id, String nombre, String correo) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaClienteNatural() + "(id, nombre, correod) values (?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaCliente() + "(id, nombre, correod) values (?, ?, ?)");
         q.setParameters(id, nombre, correo);
         return (long) q.executeUnique();
 	}
@@ -77,7 +77,7 @@ class SQLCliente
 	 */
 	public Cliente darClientePorId (PersistenceManager pm, long idCliente) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaClienteNatural( ) + " WHERE id = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaCliente( ) + " WHERE id = ?");
 		q.setResultClass(Cliente.class);
 		q.setParameters(idCliente);
 		return (Cliente) q.executeUnique();
@@ -91,7 +91,7 @@ class SQLCliente
 	 */
 	public List<Cliente> darClientes (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaClienteNatural());
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaCliente());
 		q.setResultClass(Cliente.class);
 		return (List<Cliente>) q.executeList();
 	}

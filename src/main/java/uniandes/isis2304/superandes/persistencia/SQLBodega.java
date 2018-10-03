@@ -63,7 +63,7 @@ class SQLBodega
 	 */
 	public long adicionarBodega (PersistenceManager pm, long id, String direccion) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaEstante() + "(idAlmacenamiento, direccion) values (?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaBodega + "(idAlmacenamiento, direccion) values (?, ?)");
         q.setParameters(id, direccion);
         return (long) q.executeUnique();
 	}
@@ -77,7 +77,7 @@ class SQLBodega
 	 */
 	public Bodega darBodegaPorId (PersistenceManager pm, long id) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaEstante( ) + " WHERE idAlmacenamiento = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaBodega( ) + " WHERE idAlmacenamiento = ?");
 		q.setResultClass(Bodega.class);
 		q.setParameters(id);
 		return (Bodega) q.executeUnique();
@@ -91,7 +91,7 @@ class SQLBodega
 	 */
 	public List<Bodega> darBodegas (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaEstante());
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaBodega());
 		q.setResultClass(Bodega.class);
 		return (List<Bodega>) q.executeList();
 	}

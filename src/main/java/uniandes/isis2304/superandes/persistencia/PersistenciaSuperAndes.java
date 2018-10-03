@@ -15,7 +15,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import uniandes.isis2304.superandes.negocio.Almacenamiento;
 import uniandes.isis2304.superandes.negocio.Bebida;
+import uniandes.isis2304.superandes.negocio.Bodega;
+import uniandes.isis2304.superandes.negocio.Estante;
 import uniandes.isis2304.superandes.negocio.Proveedor;
 import uniandes.isis2304.superandes.negocio.Sucursal;
 import uniandes.isis2304.superandes.negocio.TipoBebida;
@@ -698,6 +701,185 @@ public class PersistenciaSuperAndes {
 	}
 	
 	
+	/* ****************************************************************
+	 * 			Métodos para manejar los ALMACENAMIENTOS
+	 *****************************************************************/
+	
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Proveedor
+	 * Adiciona entradas al log de la aplicación
+	 * @param cantidadMax
+	 * @param pesoMax
+	 * @param volumenMax
+	 * @param idSucursal
+	 * @param idTipoProducto
+	 * @param idVolumenProducto
+	 * @return El id del almacenamiento. null si ocurre alguna Excepción
+	 */
+	public Long adicionarAlmacenamiento(int cantidadMax, double pesoMax, double volumenMax, long idSucursal, long idTipoProducto, long idVolumenProducto ) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+        	long id = nextval ();
+            long tuplasInsertadas = sqlAlmacenmiento.adicionarAlmacenamiento(pm, id, cantidadMax, pesoMax, volumenMax, idSucursal, idTipoProducto, idVolumenProducto);
+            tx.commit();
+            
+            log.trace ("Inserción Almacenamiento: " + cantidadMax + ": " + tuplasInsertadas + " tuplas insertadas");
+            return id;
+        }
+        catch (Exception e)
+        {
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla Proveedor
+	 * @return La lista de objetos Proveedor, construidos con base en las tuplas de la tabla BEBIDA
+	 */
+	public List<Almacenamiento> darAlmacenamientos()
+	{
+		return sqlAlmacenmiento.darAlmacenamientos(pmf.getPersistenceManager());
+	}
+	
+	/**
+	 * Método que consulta el proveedor con el id dado
+	 * @return Almacenamiento, null si existe alguna excepción.
+	 */
+	public Almacenamiento darAlmacenamientoPorId (long id)
+	{
+		return sqlAlmacenmiento.darAlmacenamientoPorId(pmf.getPersistenceManager(), id);
+	}
 	
 	
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los BODEGA
+	 *****************************************************************/
+	
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Proveedor
+	 * Adiciona entradas al log de la aplicación
+	 * @param idAlmacenamiento
+	 * @param direccion
+	 * @return El objeto Bodega adicionado. null si ocurre alguna Excepción
+	 */
+	public Bodega adicionarBodega(long idAlmacenamiento, String direccion, int cantidadMax, double pesoMax, double volumenMax, long idSucursal, long idTipoProducto, long idVolumenProducto) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+        
+            long tuplasInsertadas = sqlBodega.adicionarBodega(pm, idAlmacenamiento, direccion);
+            tx.commit();
+            
+            log.trace ("Inserción Bodega: " + idAlmacenamiento + ": " + tuplasInsertadas + " tuplas insertadas");
+            return new Bodega(idAlmacenamiento, volumenMax, pesoMax, cantidadMax, direccion, idSucursal, idTipoProducto, idVolumenProducto);
+        }
+        catch (Exception e)
+        {
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla Proveedor
+	 * @return La lista de objetos Proveedor, construidos con base en las tuplas de la tabla BEBIDA
+	 */
+	public List<Bodega> darBodegas()
+	{
+		return sqlBodega.darBodegas(pmf.getPersistenceManager());
+	}
+	
+	/**
+	 * Método que consulta el proveedor con el id dado
+	 * @return Almacenamiento, null si existe alguna excepción.
+	 */
+	public Bodega darBodegaPorId (long id)
+	{
+		return sqlBodega.darBodegaPorId(pmf.getPersistenceManager(), id);
+	}
+	
+	
+	
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los ESTANTES
+	 *****************************************************************/
+	
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Proveedor
+	 * Adiciona entradas al log de la aplicación
+	 * @param idAlmacenamiento
+	 * @param direccion
+	 * @return El objeto Bodega adicionado. null si ocurre alguna Excepción
+	 */
+	public Estante adicionarEstante(long idAlmacenamiento, int nivelAbastecimiento, int cantidadMax, double pesoMax, double volumenMax, long idSucursal, long idTipoProducto, long idVolumenProducto) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+        
+            long tuplasInsertadas = sqlEstante.adicionarEstante(pm, idAlmacenamiento, nivelAbastecimiento);
+            tx.commit();
+            
+            log.trace ("Inserción Estante: " + idAlmacenamiento + ": " + tuplasInsertadas + " tuplas insertadas");
+            return new Estante(idAlmacenamiento, volumenMax, pesoMax, cantidadMax, nivelAbastecimiento, idSucursal, idTipoProducto, idVolumenProducto);
+        }
+        catch (Exception e)
+        {
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla Proveedor
+	 * @return La lista de objetos Estante, construidos con base en las tuplas de la tabla Estante
+	 */
+	public List<Estante> darEstantes()
+	{
+		return sqlEstante.darEstantes(pmf.getPersistenceManager());
+	}
+	
+	/**
+	 * Método que consulta el proveedor con el id dado
+	 * @return Estante, null si existe alguna excepción.
+	 */
+	public Estante darEstantesPorId (long id)
+	{
+		return sqlEstante.darEstantePorId(pmf.getPersistenceManager(), id);
+	}
+	
+
 }

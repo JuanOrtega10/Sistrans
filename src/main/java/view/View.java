@@ -1,10 +1,12 @@
 package view;
 
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
-import javax.swing.text.html.HTMLDocument.Iterator;
+
 
 import org.apache.log4j.Logger;
 
@@ -13,6 +15,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.superandes.interfazApp.InterfazParranderosApp;
+import uniandes.isis2304.superandes.negocio.Proveedor;
 import uniandes.isis2304.superandes.negocio.SuperAndes;
 import uniandes.isis2304.superandes.negocio.VOProveedor;
 
@@ -77,10 +80,18 @@ public class View
 				}
 				
 				VOProveedor proveedor = superAndes.adicionarProveedor(nit, nombreProveedor, calificacion, numCalificaciones);
+				
 				System.out.println(proveedor.toString());
 				
+				break;
 
 			case 2:
+				List<Proveedor> prov = superAndes.darProveedores();
+				for (Proveedor proveedor2 : prov) {
+					System.out.println(proveedor2.toString());
+				}
+				break;
+				
 			
 			case 3:	
 				

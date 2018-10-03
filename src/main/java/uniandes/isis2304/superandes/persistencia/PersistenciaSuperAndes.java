@@ -191,41 +191,41 @@ public class PersistenciaSuperAndes {
 	 * 			Métodos del MANEJADOR DE PERSISTENCIA
 	 *****************************************************************/
 
-	/**
-	 * Constructor privado con valores por defecto - Patrón SINGLETON
-	 */
-	private PersistenciaSuperAndes()
-	{
-		pmf = JDOHelper.getPersistenceManagerFactory("SuperAndes");		
-		crearClasesSQL ();
-		
-		// Define los nombres por defecto de las tablas de la base de datos
-		tablas = new LinkedList<String> ();
-		tablas.add ("SUPERANDES_SEQUENCE");
-		tablas.add ("ALMACENAMIENTO");
-		tablas.add ("BODEGA");
-		tablas.add ("CATEGORIA");
-		tablas.add ("CLIENTE");
-		tablas.add ("CLIENTEEMPRESA");
-		tablas.add ("CLIENTENATURAL");
-		tablas.add ("DESCUENTOSGDOPRODUCTO");
-		tablas.add ("ESTANTE");
-		tablas.add ("FACTURA");
-		tablas.add ("MENORALASUMA");
-		tablas.add ("PAGEMLLEVENUNIDADES");
-		tablas.add ("PAGUEXLLEVEYCANTIDAD");
-		tablas.add ("PEDIDO");
-		tablas.add ("PRODUCTO");
-		tablas.add ("PROMOCION");
-		tablas.add ("PROMOCIONPORCENTAJE");
-		tablas.add ("PROVEE");
-		tablas.add ("PROVEEDOR");
-		tablas.add ("REORDEN");
-		tablas.add ("SUCURSAL");
-		tablas.add ("TIPOPRODUCTO");
-		tablas.add ("VOLUMENPRODUCTO");
-		
-}
+//	/**
+//	 * Constructor privado con valores por defecto - Patrón SINGLETON
+//	 */
+//	private PersistenciaSuperAndes()
+//	{
+//		pmf = JDOHelper.getPersistenceManagerFactory("SuperAndes");		
+//		crearClasesSQL ();
+//		
+//		// Define los nombres por defecto de las tablas de la base de datos
+//		tablas = new LinkedList<String> ();
+//		tablas.add ("SUPERANDES_SEQUENCE");
+//		tablas.add ("ALMACENAMIENTO");
+//		tablas.add ("BODEGA");
+//		tablas.add ("CATEGORIA");
+//		tablas.add ("CLIENTE");
+//		tablas.add ("CLIENTEEMPRESA");
+//		tablas.add ("CLIENTENATURAL");
+//		tablas.add ("DESCUENTOSGDOPRODUCTO");
+//		tablas.add ("ESTANTE");
+//		tablas.add ("FACTURA");
+//		tablas.add ("MENORALASUMA");
+//		tablas.add ("PAGEMLLEVENUNIDADES");
+//		tablas.add ("PAGUEXLLEVEYCANTIDAD");
+//		tablas.add ("PEDIDO");
+//		tablas.add ("PRODUCTO");
+//		tablas.add ("PROMOCION");
+//		tablas.add ("PROMOCIONPORCENTAJE");
+//		tablas.add ("PROVEE");
+//		tablas.add ("PROVEEDOR");
+//		tablas.add ("REORDEN");
+//		tablas.add ("SUCURSAL");
+//		tablas.add ("TIPOPRODUCTO");
+//		tablas.add ("VOLUMENPRODUCTO");
+//		
+//}
 
 	/**
 	 * Constructor privado, que recibe los nombres de las tablas en un objeto Json - Patrón SINGLETON
@@ -233,25 +233,25 @@ public class PersistenciaSuperAndes {
 	 */
 	private PersistenciaSuperAndes (JsonObject tableConfig)
 	{
-		crearClasesSQL ();
 		tablas = leerNombresTablas (tableConfig);
-		
+		crearClasesSQL ();
+		System.out.println(tablas.get(1));
 		String unidadPersistencia = tableConfig.get ("unidadPersistencia").getAsString ();
 		log.trace ("Accediendo unidad de persistencia: " + unidadPersistencia);
 		pmf = JDOHelper.getPersistenceManagerFactory (unidadPersistencia);
 	}
 
-	/**
-	 * @return Retorna el único objeto PersistenciaParranderos existente - Patrón SINGLETON
-	 */
-	public static PersistenciaSuperAndes getInstance ()
-	{
-		if (instance == null)
-		{
-			instance = new PersistenciaSuperAndes ();
-		}
-		return instance;
-	}
+//	/**
+//	 * @return Retorna el único objeto PersistenciaParranderos existente - Patrón SINGLETON
+//	 */
+//	public static PersistenciaSuperAndes getInstance ()
+//	{
+//		if (instance == null)
+//		{
+//			instance = new PersistenciaSuperAndes ();
+//		}
+//		return instance;
+//	}
 	
 	/**
 	 * Constructor que toma los nombres de las tablas de la base de datos del objeto tableConfig
@@ -661,15 +661,15 @@ public class PersistenciaSuperAndes {
         {
            
             long tuplasInsertadas = sqlProveedor.adicionarProveedor(pm, id, nombre, calificacion, numCalificaciones);
-            tx.commit();
-            
+//            tx.commit();
+            System.out.println("Llega acá");
             log.trace ("Inserción proveedor: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
             return new Proveedor(id,nombre, calificacion, numCalificaciones);
         }
         catch (Exception e)
         {
 //        	e.printStackTrace();
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	System.out.println(("Exception : " + e.getMessage() + "\n" + darDetalleException(e)));
         	return null;
         }
         finally

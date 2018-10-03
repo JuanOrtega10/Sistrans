@@ -51,13 +51,13 @@ public class SuperAndes {
 	/* ****************************************************************
 	 * 			Métodos
 	 *****************************************************************/
-	/**
-	 * El constructor por defecto
-	 */
-	public SuperAndes ()
-	{
-		ps = PersistenciaSuperAndes.getInstance ();
-	}
+//	/**
+//	 * El constructor por defecto
+//	 */
+//	public SuperAndes ()
+//	{
+//		ps = PersistenciaSuperAndes.getInstance ();
+//	}
 
 	/**
 	 * El constructor qye recibe los nombres de las tablas en tableConfig
@@ -180,9 +180,9 @@ public class SuperAndes {
 	 */
 	public List<Proveedor> darProveedores ()
 	{
-		log.info ("Listando Proveedores");
+		System.out.println( ("Listando Proveedores"));
 		List<Proveedor> proveedores = ps.darProveedores ();	
-		log.info ("Listando Proveedores: " + proveedores.size() + " proveedores existentes");
+		System.out.println( ("Listando Proveedores: " + proveedores.size() + " proveedores existentes"));
 		return proveedores;
 	}
 

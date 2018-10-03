@@ -15,36 +15,22 @@
 package uniandes.isis2304.superandes.negocio;
 
 /**
- * Interfaz para los métodos get de Proveedor.
+ * Interfaz para los métodos get de Tipo Producto.
  * Sirve para proteger la información del negocio de posibles manipulaciones desde la interfaz 
  * 
  * @author ja.ortega - dy.quintero
  */
-public interface VOProveedor 
+public interface VOTipoProducto 
 {
-	/* ****************************************************************
-	 * 			Métodos 
-	 *****************************************************************/
- 
 	/**
-	 * @return the nit
+	 * @return the id
 	 */
-	public long getNit();
-
+	public long getId();
 	/**
 	 * @return the nombre
 	 */
 	public String getNombre();
-
-	/**
-	 * @return the calificacion
-	 */
-	public double getCalificacion();
-
-	/**
-	 * @return the numCalificaciones
-	 */
-	public int getNumCalificaciones() ;
+	
 
 	
 	

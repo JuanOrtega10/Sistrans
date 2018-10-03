@@ -81,14 +81,14 @@ public class Proveedor implements VOProveedor
 	/**
 	 * @return the nit
 	 */
-	public long getNit() {
+	public long getId() {
 		return id;
 	}
 
 	/**
 	 * @param nit the nit to set
 	 */
-	public void setNit(long nit) {
+	public void setId(long nit) {
 		this.id = nit;
 	}
 

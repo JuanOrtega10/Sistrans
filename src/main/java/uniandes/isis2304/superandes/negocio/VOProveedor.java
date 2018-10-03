@@ -29,7 +29,7 @@ public interface VOProveedor
 	/**
 	 * @return the nit
 	 */
-	public long getNit();
+	public long getId();
 
 	/**
 	 * @return the nombre

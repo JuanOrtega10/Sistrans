@@ -15,6 +15,7 @@
 
 package uniandes.isis2304.superandes.persistencia;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -96,6 +97,8 @@ class SQLProveedor
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaProveedor());
 		q.setResultClass(Proveedor.class);
-		return (List<Proveedor>) q.executeList();
+		List<Proveedor> a =  q.executeList();
+		System.out.println(a.size());
+		return a;
 	}
 }

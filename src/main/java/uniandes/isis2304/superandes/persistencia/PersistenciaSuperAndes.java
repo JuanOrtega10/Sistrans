@@ -659,16 +659,22 @@ public class PersistenciaSuperAndes {
         Transaction tx=pm.currentTransaction();
         try
         {
-           
+            tx.begin();
             long tuplasInsertadas = sqlProveedor.adicionarProveedor(pm, id, nombre, calificacion, numCalificaciones);
             tx.commit();
+<<<<<<< HEAD
             System.out.println("Llega acá");
             log.trace ("Inserción proveedor: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
             return new Proveedor(id,nombre, calificacion, numCalificaciones);
+=======
+            
+            log.trace ("Inserción de tipo de Sucursal: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
+            
+            return new Proveedor (id, nombre, calificacion, numCalificaciones);
+>>>>>>> 67a9ae174934c04ded8a6382715d88ab137e6d91
         }
         catch (Exception e)
         {
-//        	e.printStackTrace();
         	System.out.println(("Exception : " + e.getMessage() + "\n" + darDetalleException(e)));
         	return null;
         }
@@ -879,6 +885,68 @@ public class PersistenciaSuperAndes {
 	public Estante darEstantesPorId (long id)
 	{
 		return sqlEstante.darEstantePorId(pmf.getPersistenceManager(), id);
+	}
+	
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los CLIENTES
+	 *****************************************************************/
+	
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Proveedor
+	 * Adiciona entradas al log de la aplicación
+	 * @param cantidadMax
+	 * @param pesoMax
+	 * @param volumenMax
+	 * @param idSucursal
+	 * @param idTipoProducto
+	 * @param idVolumenProducto
+	 * @return El id del almacenamiento. null si ocurre alguna Excepción
+	 */
+	public Long adicionarCliente(int cantidadMax, double pesoMax, double volumenMax, long idSucursal, long idTipoProducto, long idVolumenProducto ) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+        	long id = nextval ();
+            long tuplasInsertadas = sqlAlmacenmiento.adicionarAlmacenamiento(pm, id, cantidadMax, pesoMax, volumenMax, idSucursal, idTipoProducto, idVolumenProducto);
+            tx.commit();
+            
+            log.trace ("Inserción Almacenamiento: " + cantidadMax + ": " + tuplasInsertadas + " tuplas insertadas");
+            return id;
+        }
+        catch (Exception e)
+        {
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla Proveedor
+	 * @return La lista de objetos Proveedor, construidos con base en las tuplas de la tabla BEBIDA
+	 */
+	public List<Almacenamiento> darClientes()
+	{
+		return sqlAlmacenmiento.darAlmacenamientos(pmf.getPersistenceManager());
+	}
+	
+	/**
+	 * Método que consulta el proveedor con el id dado
+	 * @return Almacenamiento, null si existe alguna excepción.
+	 */
+	public Almacenamiento darClientePorId(long id)
+	{
+		return sqlAlmacenmiento.darAlmacenamientoPorId(pmf.getPersistenceManager(), id);
 	}
 	
 

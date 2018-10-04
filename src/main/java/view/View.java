@@ -96,11 +96,16 @@ public class View
 				break;
 
 			case 2:
-//				List<Proveedor> prov = superAndes.darProveedores();
-//				for (Proveedor proveedor2 : prov) {
-//					System.out.println(proveedor2.toString());
-//				}
-//				break;
+//				
+				System.out.println("Ingrese el id del producto");
+				String idProducto = sc.next();
+				if(idProducto.matches("-?[0-9a-fA-F]+"))
+				{
+					System.out.println("Es un hexa valido");
+				}
+				else System.out.println("no");
+				
+				break;
 				
 			
 			case 3:	
@@ -136,6 +141,7 @@ public class View
 					
 					VOClienteNatural cliente = superAndes.adicionarClienteNatural(idC, nombreCliente, correo);
 					if (cliente!= null) System.out.println(cliente.toString());
+					else System.out.println("No fue posible añadir al cliente cliente");
 					break;
 
 				case 2:
@@ -271,6 +277,8 @@ public class View
 				
 				VOEstante estante = superAndes.adicionarEstante(cantidadE, pesoE, volumenE, sucE, tipoE, idvolPE, abastecimientoE);
 				System.out.println(estante.toString());
+				
+				
 				
 			case 7:	
 

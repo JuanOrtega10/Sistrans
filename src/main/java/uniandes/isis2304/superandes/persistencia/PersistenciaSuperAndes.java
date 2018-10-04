@@ -1,5 +1,6 @@
 package uniandes.isis2304.superandes.persistencia;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import uniandes.isis2304.superandes.negocio.Cliente;
 import uniandes.isis2304.superandes.negocio.ClienteEmpresa;
 import uniandes.isis2304.superandes.negocio.ClienteNatural;
 import uniandes.isis2304.superandes.negocio.Estante;
+import uniandes.isis2304.superandes.negocio.Producto;
 import uniandes.isis2304.superandes.negocio.Proveedor;
 import uniandes.isis2304.superandes.negocio.Sucursal;
 import uniandes.isis2304.superandes.negocio.TipoBebida;
@@ -1021,6 +1023,46 @@ public class PersistenciaSuperAndes {
             
             System.out.println("Inserción Cliente Empresa: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
             return new ClienteEmpresa(id, nombre, correo, direccion);
+        }
+        catch (Exception e)
+        {
+        	System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los PRODUCTOS
+	 *****************************************************************/
+	
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Proveedor
+	 * Adiciona entradas al log de la aplicación
+	 * @param idAlmacenamiento
+	 * @param direccion
+	 * @return El objeto Bodega adicionado. null si ocurre alguna Excepción
+	 */
+	public ClienteEmpresa adicionarProducto(String id, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, String especificacionEmpaque, int exclusivo, Date fechaVencimiento, long idTipoProducto, long idCategoria)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+        	tx.begin();
+            long tuplasInsertadas = sqlProducto.adicionarProducto(pm, id, nombre, marca, precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo, idTipoProducto, idCategoria, fechaVencimiento);
+            tx.commit();
+            
+            System.out.println("Inserción Cliente Empresa: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+            return new Producto(id, nombre, marca, precioUnitario, presentacion, precioUnidadMedida, cantidad, unidadMedida, especificacionEmpaque, exclusivo, fechaVencimiento, idCategoria, idTipoProducto);
         }
         catch (Exception e)
         {

@@ -2,6 +2,7 @@ package view;
 
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -96,14 +97,63 @@ public class View
 				break;
 
 			case 2:
-//				
 				System.out.println("Ingrese el id del producto");
 				String idProducto = sc.next();
 				if(idProducto.matches("-?[0-9a-fA-F]+"))
 				{
 					System.out.println("Es un hexa valido");
 				}
-				else System.out.println("no");
+				else System.out.println("El codigo del producto no es valido");
+				System.out.println("ingrese el nombre del producto");
+				sc.nextLine();
+				String nombreProd = sc.nextLine(); 
+				System.out.println("ingrese el nombre del producto");
+				sc.nextLine();
+				String marcaProd = sc.nextLine();
+				System.out.println("ingrese el precio unitario del producto");
+				String precioUnitProd = sc.next();
+				double precio = 0;
+				System.out.println("ingrese la presentacion del producto");
+				sc.nextLine();
+				String presentacionProd = sc.nextLine();
+				System.out.println("ingrese la cantidad del producto");
+				String cantidadProd = sc.next();
+				double cantidadP = 0;
+				System.out.println("ingrese la unidad de medida del producto");
+				sc.nextLine();
+				String unidadMedProd = sc.nextLine();
+				System.out.println("ingrese el precio por unidad de medida del producto");
+				String precioUnMProd = sc.next();
+				double precioUnM = 0;
+				System.out.println("ingrese la especificacion del empaque del producto");
+				String espProd = sc.next();
+				double esp = 0;
+				System.out.println("El producto es exclusivo? 1 si lo es, de lo contrario 0");
+				String exclusivo = sc.next();
+				int excl = 0;
+				System.out.println("ingrese el id del tipo del producto");
+				String idtipoProd = sc.next();
+				long tipoProd = 0;
+				System.out.println("ingrese el id de la categoria del producto");
+				String categoria = sc.next();
+				long cat = 0;
+				System.out.println("ingrese la Fecha de vencimiento del producto si la tiene");
+				String fecha = sc.next();
+				Date vence = new Date();
+				vence.parse(fecha);
+				
+				try {
+					
+					precio = Double.parseDouble(precioUnitProd);
+					cantidadP = Double.parseDouble(cantidadProd);
+					
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				
+				
+				
 				
 				break;
 				

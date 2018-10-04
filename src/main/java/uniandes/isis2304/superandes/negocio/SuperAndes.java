@@ -14,6 +14,7 @@
 
 package uniandes.isis2304.superandes.negocio;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -544,6 +545,68 @@ public class SuperAndes {
 	//			log.info ("Generando los VO de Categorias: " + voCategorias.size () + " Categorias existentes");
 	//			return voCategorias;
 	//		}
+	
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar lOS PRODUCTOS
+	 *****************************************************************/
+	/**
+	 * Adiciona de manera persistente un producto 
+	 * Adiciona entradas al log de la aplicación
+	 * @param nombre
+	 * @return El objeto Producto adicionado. null si ocurre alguna Excepción
+	 */
+	public Producto adicionarProducto (String id, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria, Date fechaVencimiento)
+	{
+		log.info ("Adicionando Producto: ");
+		Producto producto = ps.adicionarProducto(id, nombre, marca, precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo, fechaVencimiento, idTipoProducto, idCategoria);
+		log.info ("Adicionando Producto: ");
+		return producto;
+	}
+
+//	/**
+//	 * Encuentra un Producto y su información básica, según su identificador
+//	 * @param idProducto - El identificador de Producto buscado
+//	 * @return Un objeto Producto que corresponde con el identificador buscado y lleno con su información básica
+//	 * 			null, si un Producto con dicho identificador no existe
+//	 */
+//	public Producto darProductoPorId (long idProducto)
+//	{
+//		log.info ("Dar información de un producto por id: " + idProducto);
+//		Producto producto = ps.darProductoPorId (idProducto);
+//		log.info ("Buscando producto por Id: " + producto != null ? producto : "NO EXISTE");
+//		return producto;
+//	}
+//
+//	/**
+//	 * Encuentra todos los productos en SuperAndes
+//	 * Adiciona entradas al log de la aplicación
+//	 * @return Una lista de objetos Alamcenamiento con todos las Productos que conoce la aplicación, llenos con su información básica
+//	 */
+//	public List<Producto> darProductos ()
+//	{
+//		log.info ("Listando Productos");
+//		List<Producto> productos = ps.darProductos ();	
+//		log.info ("Listando Productos: " + productos.size() + " productos existentes");
+//		return productos;
+//	}
+//
+//	/**
+//	 * Encuentra todos los productos en Parranderos y los devuelce como VO
+//	 * Adiciona entradas al log de la aplicación
+//	 * @return Una lista de objetos Bar con todos las bares que conoce la aplicación, llenos con su información básica
+//	 */
+//	public List<VOProducto> darVOProductos ()
+//	{
+//		log.info ("Generando los VO de Productos");
+//		List<VOProducto> voProductos = new LinkedList<VOProducto> ();
+//		for (Producto producto: ps.darProductos())
+//	{
+//			voProductos.add (producto);
+//	}
+//		log.info ("Generando los VO de Productos: " + voProductos.size () + " Productos existentes");
+//		return voProductos;
+//	}
 	
 	
 	

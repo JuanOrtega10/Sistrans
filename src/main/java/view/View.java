@@ -19,12 +19,12 @@ import jdk.nashorn.internal.ir.CatchNode;
 import uniandes.isis2304.superandes.interfazApp.InterfazParranderosApp;
 import uniandes.isis2304.superandes.negocio.Proveedor;
 import uniandes.isis2304.superandes.negocio.SuperAndes;
-<<<<<<< HEAD
+
 import uniandes.isis2304.superandes.negocio.VOClienteNatural;
-=======
+
 import uniandes.isis2304.superandes.negocio.VOBodega;
 import uniandes.isis2304.superandes.negocio.VOEstante;
->>>>>>> a1739c4e366d67dfca43fc58e94714fd9d80fb6b
+
 import uniandes.isis2304.superandes.negocio.VOProveedor;
 import uniandes.isis2304.superandes.negocio.VOSucursal;
 

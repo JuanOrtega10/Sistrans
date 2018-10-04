@@ -975,7 +975,7 @@ public class PersistenciaSuperAndes {
         Transaction tx=pm.currentTransaction();
         try
         {
-        
+        	tx.begin();
             long tuplasInsertadas = sqlClienteNatural.adicionarClienteNatural(pm, id);
             tx.commit();
             

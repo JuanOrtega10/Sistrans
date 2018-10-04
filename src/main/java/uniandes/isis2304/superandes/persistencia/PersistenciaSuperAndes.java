@@ -1015,7 +1015,7 @@ public class PersistenciaSuperAndes {
         Transaction tx=pm.currentTransaction();
         try
         {
-        
+        	tx.begin();
             long tuplasInsertadas = sqlClienteEmpresa.adicionarClienteEmpresa(pm, id, direccion);
             tx.commit();
             
@@ -1024,7 +1024,7 @@ public class PersistenciaSuperAndes {
         }
         catch (Exception e)
         {
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
         	return null;
         }
         finally

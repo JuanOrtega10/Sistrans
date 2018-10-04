@@ -23,6 +23,7 @@ import uniandes.isis2304.superandes.negocio.SuperAndes;
 import uniandes.isis2304.superandes.negocio.VOClienteNatural;
 
 import uniandes.isis2304.superandes.negocio.VOBodega;
+import uniandes.isis2304.superandes.negocio.VOClienteEmpresa;
 import uniandes.isis2304.superandes.negocio.VOEstante;
 
 import uniandes.isis2304.superandes.negocio.VOProveedor;
@@ -139,9 +140,35 @@ public class View
 
 				case 2:
 					
+					System.out.println("Ingrese el nit del cliente");
+					String id2 = sc.next();
+					long idC2 = 0;
+					System.out.println("Ingrese el nombre del cliente");
+					String nombreCliente2 = sc.next();
+					System.out.println("Ingrese el correo del cliente");
+					String correo2 = sc.next();
+					System.out.println("Ingrese la dirección del cliente");
+					String direccion2 = sc.next();
 					
-					break;
 				
+				
+				
+					try {
+						idC2 = Long.parseLong(id2);
+						
+					}
+					catch (Exception e) {
+						System.err.println("Información errónea");
+						break;
+					}
+					
+					
+					VOClienteEmpresa cliente2 = superAndes.adicionarClienteEmpresa(idC2, nombreCliente2, correo2, direccion2);
+					if (cliente2!= null) System.out.println(cliente2.toString());
+					else System.out.println("No fue posible añadir al cliente empresa");
+					break;
+					
+					
 				}
 				
 				break;
@@ -222,7 +249,7 @@ public class View
 				System.out.println("Ingrese id  del volumenProducto");
 				String idvolE = sc.next();
 				long idvolPE = 0;
-				System.out.println("Ingrese el ivel de abastecimiento");
+				System.out.println("Ingrese el nivel de abastecimiento");
 				String abastecimiento = sc.next();
 				int abastecimientoE = 0;
 				

@@ -365,6 +365,7 @@ public class SuperAndes {
 		}
 		
 		else return null;
+	}
 //	}
 //	/**
 //	 * Encuentra un ClienteNaturaly su información básica, según su identificador
@@ -421,21 +422,23 @@ public class SuperAndes {
 //	 * @param direccion
 //	 * @return El objeto ClienteEmpresaadicionado. null si ocurre alguna Excepción
 //	 */
-//	public ClienteEmpresa adicionarClienteEmpresa( long id ,String nombre, String correo,String direccion)  
-//	{
-//
-//		log.info ("Adicionando Cliente: ");
-//		boolean cliente = ps.adicionarCliente( id ,nombre, correo);
-//		log.info ("Adicionando Cliente: ");
-//		if(cliente == true)
-//		{
-//			{
-//				log.info ("Adicionando ClienteEmpresa : ");
-//				ClienteEmpresa clienteEmpresa= ps.adicionarClienteEmpresa( id , direccion)  ;
-//				log.info ("Adicionando ClienteEmpresa: ");
-//				return clienteEmpresa;
-//			}
-//		}
+	public ClienteEmpresa adicionarClienteEmpresa( long id ,String nombre, String correo,String direccion)  
+	{
+
+		log.info ("Adicionando Cliente: " + id);
+		Long cliente = ps.adicionarCliente( id ,nombre, correo);
+		log.info ("Adicionando Cliente: " + id);
+		if(cliente != null)
+		{
+			{
+				System.out.println("Adicionando ClienteEmpresa : ");
+				ClienteEmpresa clienteEmpresa= ps.adicionarClienteEmpresa( id , nombre, correo, direccion)  ;
+				System.out.println("Adicionando ClienteEmpresa: ");
+				return clienteEmpresa;
+			}
+		}
+		
+		else return null;
 //
 //		/**
 //		 * Encuentra un ClienteEmpresay su información básica, según su identificador

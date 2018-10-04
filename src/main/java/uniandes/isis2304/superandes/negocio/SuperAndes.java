@@ -37,7 +37,7 @@ public class SuperAndes {
 	/**
 	 * Logger para escribir la traza de la ejecución
 	 */
-	private static Logger log = Logger.getLogger(Parranderos.class.getName());
+	private static Logger log = Logger.getLogger(SuperAndes.class.getName());
 
 	/* ****************************************************************
 	 * 			Atributos
@@ -558,9 +558,9 @@ public class SuperAndes {
 	 */
 	public Producto adicionarProducto (String id, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria, Date fechaVencimiento)
 	{
-		log.info ("Adicionando Producto: ");
+		System.out.println("Adicionando Producto: ");
 		Producto producto = ps.adicionarProducto(id, nombre, marca, precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo, fechaVencimiento, idTipoProducto, idCategoria);
-		log.info ("Adicionando Producto: ");
+		System.out.println ("Adicionando Producto: ");
 		return producto;
 	}
 

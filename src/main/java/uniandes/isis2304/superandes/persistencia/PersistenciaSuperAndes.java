@@ -17,7 +17,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import uniandes.isis2304.superandes.negocio.Almacenamiento;
-import uniandes.isis2304.superandes.negocio.Bebida;
 import uniandes.isis2304.superandes.negocio.Bodega;
 import uniandes.isis2304.superandes.negocio.Cliente;
 import uniandes.isis2304.superandes.negocio.ClienteEmpresa;
@@ -1061,7 +1060,7 @@ public class PersistenciaSuperAndes {
             long tuplasInsertadas = sqlProducto.adicionarProducto(pm, id, nombre, marca, precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo, idTipoProducto, idCategoria, fechaVencimiento);
             tx.commit();
             
-            System.out.println("Inserción Cliente Empresa: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+            System.out.println("Inserción Producto: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
             return new Producto(id, nombre, marca, precioUnitario, presentacion, precioUnidadMedida, cantidad, unidadMedida, especificacionEmpaque, exclusivo, fechaVencimiento, idCategoria, idTipoProducto);
        }
         catch (Exception e)

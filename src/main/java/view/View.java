@@ -26,9 +26,10 @@ import uniandes.isis2304.superandes.negocio.VOClienteNatural;
 import uniandes.isis2304.superandes.negocio.VOBodega;
 import uniandes.isis2304.superandes.negocio.VOClienteEmpresa;
 import uniandes.isis2304.superandes.negocio.VOEstante;
-
+import uniandes.isis2304.superandes.negocio.VOProducto;
 import uniandes.isis2304.superandes.negocio.VOProveedor;
 import uniandes.isis2304.superandes.negocio.VOSucursal;
+import uniandes.isis2304.superandes.negocio.VolumenProducto;
 
 
 public class View 
@@ -103,25 +104,23 @@ public class View
 				{
 					System.out.println("Es un hexa valido");
 				}
-				else System.out.println("El codigo del producto no es valido");
+				else {
+				System.out.println("El codigo del producto no es valido");
+				break;}
 				System.out.println("ingrese el nombre del producto");
-				sc.nextLine();
-				String nombreProd = sc.nextLine(); 
-				System.out.println("ingrese el nombre del producto");
-				sc.nextLine();
-				String marcaProd = sc.nextLine();
+				String nombreProd = sc.next(); 
+				System.out.println("ingrese la marca del producto");
+				String marcaProd = sc.next();
 				System.out.println("ingrese el precio unitario del producto");
 				String precioUnitProd = sc.next();
 				double precio = 0;
 				System.out.println("ingrese la presentacion del producto");
-				sc.nextLine();
-				String presentacionProd = sc.nextLine();
+				String presentacionProd = sc.next();
 				System.out.println("ingrese la cantidad del producto");
 				String cantidadProd = sc.next();
 				double cantidadP = 0;
 				System.out.println("ingrese la unidad de medida del producto");
-				sc.nextLine();
-				String unidadMedProd = sc.nextLine();
+				String unidadMedProd = sc.next();
 				System.out.println("ingrese el precio por unidad de medida del producto");
 				String precioUnMProd = sc.next();
 				double precioUnM = 0;
@@ -140,20 +139,23 @@ public class View
 				System.out.println("ingrese la Fecha de vencimiento del producto si la tiene");
 				String fecha = sc.next();
 				Date vence = new Date();
-				vence.parse(fecha);
-				
 				try {
 					
 					precio = Double.parseDouble(precioUnitProd);
 					cantidadP = Double.parseDouble(cantidadProd);
+					precioUnM = Double.parseDouble(precioUnMProd);
+					esp = Double.parseDouble(espProd);
+					excl = Integer.parseInt(exclusivo);
+					tipoProd = Long.parseLong(idtipoProd);
+					cat = Long.parseLong(categoria);
 					
 					
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
 				
-				
-				
+				VOProducto producto = superAndes.adicionarProducto(idProducto, nombreProd, marcaProd, precio, presentacionProd, cantidadP, unidadMedProd, precioUnM, esp, excl, tipoProd, cat, vence);
+				System.out.println(producto.toString());
 				
 				break;
 				
@@ -349,10 +351,6 @@ public class View
 			case 15:
 			
 			case 16:
-			
-			case 17:
-				
-			case 18:
 				fin=true;
 				sc.close();
 				break;
@@ -364,7 +362,21 @@ public class View
 		System.out.println("---------ISIS SISTEMAS TRANSACCIONALES----------");
 		System.out.println("--------------------- ITERACION 1--------------------");
 		System.out.println("1. Registrar proveedores");
-		System.out.println("18. Salir");
+		System.out.println("2. Registrar productos");
+		System.out.println("3. Registrar clientes");
+		System.out.println("4. Registrar sucursales");
+		System.out.println("5. Registrar bodega");
+		System.out.println("6. Registrar estante");
+		System.out.println("7. Registrar promocion");
+		System.out.println("8. eliminar promocion");
+		System.out.println("9. Registrar pedido");
+		System.out.println("10. Registrar llegada de pedido");
+		System.out.println("11. Registrar venta");
+		System.out.println("12. dinero recolectado");
+		System.out.println("13. 20 promociones mas populares ");
+		System.out.println("14. indice ocupacion bodegas y estantes");
+		System.out.println("15. productos que cumplen cierta caracteristica");
+		System.out.println("16. Salir");
 		System.out.println("Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):");
 
 	}

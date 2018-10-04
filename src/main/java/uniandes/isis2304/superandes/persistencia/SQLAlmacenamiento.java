@@ -64,7 +64,7 @@ class SQLAlmacenamiento
 	 */
 	public long adicionarAlmacenamiento (PersistenceManager pm, long id, int cantidadMax, double pesoMax, double volumenMax, long idSucursal, long idTipoProducto,long idVolumenProducto) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaAlmacenamiento() + "(id, cantidad, peso, volumen, idSucursal, idTipoProducto, idVolumenProducto) values (?, ?, ?, ?, ?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaAlmacenamiento() + "(id, cantidadMax, pesoMax, volumenMax, idSucursal, idTipoProducto, idVolumenProducto) values (?, ?, ?, ?, ?, ?, ?)");
         q.setParameters(id, cantidadMax, pesoMax, volumenMax, idSucursal, idTipoProducto, idVolumenProducto);
         return (long) q.executeUnique();
 	}

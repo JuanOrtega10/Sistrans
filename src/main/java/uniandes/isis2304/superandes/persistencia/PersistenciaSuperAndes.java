@@ -731,16 +731,17 @@ public class PersistenciaSuperAndes {
         Transaction tx=pm.currentTransaction();
         try
         {
+        	tx.begin();
         	long id = nextval ();
             long tuplasInsertadas = sqlAlmacenmiento.adicionarAlmacenamiento(pm, id, cantidadMax, pesoMax, volumenMax, idSucursal, idTipoProducto, idVolumenProducto);
             tx.commit();
             
-            log.trace ("Inserción Almacenamiento: " + cantidadMax + ": " + tuplasInsertadas + " tuplas insertadas");
+            System.out.println("Inserción Almacenamiento: " + cantidadMax + ": " + tuplasInsertadas + " tuplas insertadas");
             return id;
         }
         catch (Exception e)
         {
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	System.out.println ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
         	return null;
         }
         finally
@@ -786,20 +787,21 @@ public class PersistenciaSuperAndes {
 	 */
 	public Bodega adicionarBodega(long idAlmacenamiento, String direccion, int cantidadMax, double pesoMax, double volumenMax, long idSucursal, long idTipoProducto, long idVolumenProducto) 
 	{
+		
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try
         {
-        
+        	 tx.begin();
             long tuplasInsertadas = sqlBodega.adicionarBodega(pm, idAlmacenamiento, direccion);
             tx.commit();
             
-            log.trace ("Inserción Bodega: " + idAlmacenamiento + ": " + tuplasInsertadas + " tuplas insertadas");
+            System.out.println ("Inserción Bodega: " + idAlmacenamiento + ": " + tuplasInsertadas + " tuplas insertadas");
             return new Bodega(idAlmacenamiento, volumenMax, pesoMax, cantidadMax, direccion, idSucursal, idTipoProducto, idVolumenProducto);
         }
         catch (Exception e)
         {
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	System.out.println ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
         	return null;
         }
         finally
@@ -850,16 +852,16 @@ public class PersistenciaSuperAndes {
         Transaction tx=pm.currentTransaction();
         try
         {
-        
+        	tx.begin();
             long tuplasInsertadas = sqlEstante.adicionarEstante(pm, idAlmacenamiento, nivelAbastecimiento);
             tx.commit();
             
-            log.trace ("Inserción Estante: " + idAlmacenamiento + ": " + tuplasInsertadas + " tuplas insertadas");
+            System.out.println("Inserción Estante: " + idAlmacenamiento + ": " + tuplasInsertadas + " tuplas insertadas");
             return new Estante(idAlmacenamiento, volumenMax, pesoMax, cantidadMax, nivelAbastecimiento, idSucursal, idTipoProducto, idVolumenProducto);
         }
         catch (Exception e)
         {
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
         	return null;
         }
         finally

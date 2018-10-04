@@ -13,11 +13,18 @@ import org.apache.log4j.Logger;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
+import com.sun.xml.internal.bind.v2.model.core.ID;
 
+import jdk.nashorn.internal.ir.CatchNode;
 import uniandes.isis2304.superandes.interfazApp.InterfazParranderosApp;
 import uniandes.isis2304.superandes.negocio.Proveedor;
 import uniandes.isis2304.superandes.negocio.SuperAndes;
+<<<<<<< HEAD
 import uniandes.isis2304.superandes.negocio.VOClienteNatural;
+=======
+import uniandes.isis2304.superandes.negocio.VOBodega;
+import uniandes.isis2304.superandes.negocio.VOEstante;
+>>>>>>> a1739c4e366d67dfca43fc58e94714fd9d80fb6b
 import uniandes.isis2304.superandes.negocio.VOProveedor;
 import uniandes.isis2304.superandes.negocio.VOSucursal;
 
@@ -88,11 +95,11 @@ public class View
 				break;
 
 			case 2:
-				List<Proveedor> prov = superAndes.darProveedores();
-				for (Proveedor proveedor2 : prov) {
-					System.out.println(proveedor2.toString());
-				}
-				break;
+//				List<Proveedor> prov = superAndes.darProveedores();
+//				for (Proveedor proveedor2 : prov) {
+//					System.out.println(proveedor2.toString());
+//				}
+//				break;
 				
 			
 			case 3:	
@@ -151,10 +158,93 @@ public class View
 				VOSucursal sucursal = superAndes.adicionarSucursal(nombreSucursal, direccionSucursal, ciudad);
 				System.out.println(sucursal.toString());
 				break;
+				
 			case 5:	
+				
+				System.out.println("Ingrese la cantidad maxima");
+				String cantidadMaxima = sc.next();
+				int cantidad = 0;
+				System.out.println("Ingrese el peso maximo");
+				String pesoMaxima = sc.next();
+				double peso = 0;
+				System.out.println("Ingrese el volumen maximo");
+				String volumenMaxima = sc.next();
+				double volumen = 0;
+				System.out.println("Ingrese id de la Sucursal");
+				String idSucursal = sc.next();
+				long suc = 0;
+				System.out.println("Ingrese id del tipo del producto que se va a almacenar");
+				String idTipo = sc.next();
+				long tipo = 0;
+				System.out.println("Ingrese id  del volumenProducto");
+				String idvol = sc.next();
+				long idvolP = 0;
+				System.out.println("Ingrese la direccion de la bodega");
+				sc.nextLine();
+				String direccion = sc.nextLine();
+				
+				try
+				{
+					cantidad = Integer.parseInt(cantidadMaxima);
+					peso = Double.parseDouble(pesoMaxima);
+					volumen = Double.parseDouble(volumenMaxima);
+					suc = Long.parseLong(idSucursal);
+					tipo= Long.parseLong(idTipo);
+					idvolP = Long.parseLong(idvol);
+				}
+				catch(Exception e)
+				{
+					System.out.println("Errores en elos datos ingresados");
+					break;
+				}
+				
+				VOBodega bodega = superAndes.adicionarBodega(cantidad, peso, volumen, suc, tipo, idvolP, direccion);
+				System.out.println(bodega.toString());
+				
 
 			case 6:	
-
+				
+				System.out.println("Ingrese la cantidad maxima");
+				String cantidadMaximaE = sc.next();
+				int cantidadE = 0;
+				System.out.println("Ingrese el peso maximo");
+				String pesoMaximaE = sc.next();
+				double pesoE = 0;
+				System.out.println("Ingrese el volumen maximo");
+				String volumenMaximaE = sc.next();
+				double volumenE = 0;
+				System.out.println("Ingrese id de la Sucursal");
+				String idSucursalE = sc.next();
+				long sucE = 0;
+				System.out.println("Ingrese id del tipo del producto que se va a almacenar");
+				String idTipoE = sc.next();
+				long tipoE = 0;
+				System.out.println("Ingrese id  del volumenProducto");
+				String idvolE = sc.next();
+				long idvolPE = 0;
+				System.out.println("Ingrese el ivel de abastecimiento");
+				String abastecimiento = sc.next();
+				int abastecimientoE = 0;
+				
+				try
+				{
+					cantidadE = Integer.parseInt(cantidadMaximaE);
+					pesoE = Double.parseDouble(pesoMaximaE);
+					volumenE = Double.parseDouble(volumenMaximaE);
+					sucE = Long.parseLong(idSucursalE);
+					tipoE= Long.parseLong(idTipoE);
+					idvolPE = Long.parseLong(idvolE);
+					abastecimientoE = Integer.parseInt(abastecimiento);
+				}
+				catch(Exception e)
+				{
+					System.out.println("Errores en los datos ingresados");
+					break;
+				}
+				
+				VOEstante estante = superAndes.adicionarEstante(cantidadE, pesoE, volumenE, sucE, tipoE, idvolPE, abastecimientoE);
+				System.out.println(estante.toString());
+				
 			case 7:	
 
 			case 8:

@@ -341,27 +341,30 @@ public class SuperAndes {
 		return voEstantes;
 	}
 
-//	/* ****************************************************************
-//	 * 			Métodos para manejar lOS CLIENTES NATURALES
-//	 *****************************************************************/
-//	/**
-//	 * Adiciona de manera persistente un clienteNatural
-//	 * Adiciona entradas al log de la aplicación
-//	 * @return El objeto ClienteNaturaladicionado. null si ocurre alguna Excepción
-//	 */
-//	public ClienteNatural adicionarClienteNatural(long id,String nombre, String correo) 
-//	{
-//		log.info ("Adicionando Cliente: ");
-//		boolean cliente = ps.adicionarCliente ( id ,nombre, correo) ;
-//		log.info ("Adicionando Cliente: ");
-//		if(cliente == true)
-//		{
-//			log.info ("Adicionando ClienteNatural : ");
-//			ClienteNatural clienteNatural= ps.adicionarClienteNatural( id) ;
-//			log.info ("Adicionando ClienteNatural: ");
-//			return clienteNatural;
-//
-//		}
+	/* ****************************************************************
+	 * 			Métodos para manejar lOS CLIENTES NATURALES
+	 *****************************************************************/
+	/**
+	 * Adiciona de manera persistente un clienteNatural
+	 * Adiciona entradas al log de la aplicación
+	 * @return El objeto ClienteNaturaladicionado. null si ocurre alguna Excepción
+	 */
+	public ClienteNatural adicionarClienteNatural(long id,String nombre, String correo) 
+	{
+		System.out.println("Adicionando Cliente: " + id);
+		Long cliente = ps.adicionarCliente( id ,nombre, correo) ;
+		System.out.println("Adicionando Cliente: " + id);
+		if(cliente != null)
+		{
+			
+			System.out.println("Adicionando ClienteNatural : ");
+			ClienteNatural clienteNatural= ps.adicionarClienteNatural(id, nombre, correo) ;
+			System.out.println("Adicionando ClienteNatural: ");
+			return clienteNatural;
+
+		}
+		
+		else return null;
 //	}
 //	/**
 //	 * Encuentra un ClienteNaturaly su información básica, según su identificador
@@ -539,7 +542,7 @@ public class SuperAndes {
 //			return voCategorias;
 //		}
 
-
+	}
 	}
 
 

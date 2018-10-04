@@ -17,6 +17,7 @@ import com.google.gson.stream.JsonReader;
 import uniandes.isis2304.superandes.interfazApp.InterfazParranderosApp;
 import uniandes.isis2304.superandes.negocio.Proveedor;
 import uniandes.isis2304.superandes.negocio.SuperAndes;
+import uniandes.isis2304.superandes.negocio.VOClienteNatural;
 import uniandes.isis2304.superandes.negocio.VOProveedor;
 import uniandes.isis2304.superandes.negocio.VOSucursal;
 
@@ -95,6 +96,48 @@ public class View
 				
 			
 			case 3:	
+				
+				System.out.println("¿Es un Cliente Natural o una Empresa?");
+				System.out.println("1. Cliente Natural");
+				System.out.println("2. Cliente Empresa");
+				int option1 = sc.nextInt();
+				
+				switch (option1) {
+				case 1:
+					
+					System.out.println("Ingrese la cédula del cliente");
+					String id = sc.next();
+					long idC = 0;
+					System.out.println("Ingrese el nombre del cliente");
+					String nombreCliente = sc.next();
+					System.out.println("Ingrese el correo del cliente");
+					String correo = sc.next();
+					
+				
+				
+				
+					try {
+						idC = Long.parseLong(id);
+						
+					}
+					catch (Exception e) {
+						System.err.println("Información errónea");
+						break;
+					}
+					
+					
+					VOClienteNatural cliente = superAndes.adicionarClienteNatural(idC, nombreCliente, correo);
+					if (cliente!= null) System.out.println(cliente.toString());
+					break;
+
+				case 2:
+					
+					
+					break;
+				
+				}
+				
+				break;
 				
 			case 4:	
 				

@@ -18,6 +18,9 @@ import com.google.gson.JsonObject;
 import uniandes.isis2304.superandes.negocio.Almacenamiento;
 import uniandes.isis2304.superandes.negocio.Bebida;
 import uniandes.isis2304.superandes.negocio.Bodega;
+import uniandes.isis2304.superandes.negocio.Cliente;
+import uniandes.isis2304.superandes.negocio.ClienteEmpresa;
+import uniandes.isis2304.superandes.negocio.ClienteNatural;
 import uniandes.isis2304.superandes.negocio.Estante;
 import uniandes.isis2304.superandes.negocio.Proveedor;
 import uniandes.isis2304.superandes.negocio.Sucursal;
@@ -386,7 +389,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaEstante ()
 	{
-		return tablas.get (9);
+		return tablas.get (8);
 	}
 
 
@@ -395,7 +398,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaClienteEmpresa ()
 	{
-		return tablas.get (6);
+		return tablas.get (5);
 	}
 	
 
@@ -404,7 +407,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaClienteNatural()
 	{
-		return tablas.get (7);
+		return tablas.get (6);
 	}
 
 
@@ -413,7 +416,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaFactura ()
 	{
-		return tablas.get (10);
+		return tablas.get (9);
 	}
 	
 
@@ -523,7 +526,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaDescuentoSegundoProducto()
 	{
-		return tablas.get (8);
+		return tablas.get (7);
 	}
 
 	/**
@@ -538,7 +541,7 @@ public class PersistenciaSuperAndes {
 	 * @return La cadena de caracteres con el nombre de la tabla de Bodega de parranderos
 	 */
 	public String darTablaCliente() {
-		return tablas.get(5);
+		return tablas.get(4);
 	}
 
 	/**
@@ -903,22 +906,24 @@ public class PersistenciaSuperAndes {
 	 * @param idVolumenProducto
 	 * @return El id del almacenamiento. null si ocurre alguna Excepción
 	 */
-	public Long adicionarCliente(int cantidadMax, double pesoMax, double volumenMax, long idSucursal, long idTipoProducto, long idVolumenProducto ) 
+	public Long adicionarCliente(long id, String nombre, String correo) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx = pm.currentTransaction();
         try
         {
-        	long id = nextval ();
-            long tuplasInsertadas = sqlAlmacenmiento.adicionarAlmacenamiento(pm, id, cantidadMax, pesoMax, volumenMax, idSucursal, idTipoProducto, idVolumenProducto);
+        	tx.begin();
+        	System.out.println("Llega");
+            long tuplasInsertadas = sqlCliente.adicionarCliente(pm, id, nombre, correo);
+            System.out.println("Llega2");
             tx.commit();
             
-            log.trace ("Inserción Almacenamiento: " + cantidadMax + ": " + tuplasInsertadas + " tuplas insertadas");
+           	System.out.println("Inserción Cliente: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
             return id;
         }
         catch (Exception e)
         {
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	System.err.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
         	return null;
         }
         finally
@@ -935,19 +940,99 @@ public class PersistenciaSuperAndes {
 	 * Método que consulta todas las tuplas en la tabla Proveedor
 	 * @return La lista de objetos Proveedor, construidos con base en las tuplas de la tabla BEBIDA
 	 */
-	public List<Almacenamiento> darClientes()
+	public List<Cliente> darClientes()
 	{
-		return sqlAlmacenmiento.darAlmacenamientos(pmf.getPersistenceManager());
+		return sqlCliente.darClientes(pmf.getPersistenceManager());
 	}
 	
 	/**
 	 * Método que consulta el proveedor con el id dado
-	 * @return Almacenamiento, null si existe alguna excepción.
+	 * @return Cliente, null si existe alguna excepción.
 	 */
-	public Almacenamiento darClientePorId(long id)
+	public Cliente darClientePorId(long id)
 	{
-		return sqlAlmacenmiento.darAlmacenamientoPorId(pmf.getPersistenceManager(), id);
+		return sqlCliente.darClientePorId(pmf.getPersistenceManager(), id);
 	}
 	
+	
+
+	/* ****************************************************************
+	 * 			Métodos para manejar los CLIENTES NATURALES
+	 *****************************************************************/
+	
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Proveedor
+	 * Adiciona entradas al log de la aplicación
+	 * @param idAlmacenamiento
+	 * @param direccion
+	 * @return El objeto Bodega adicionado. null si ocurre alguna Excepción
+	 */
+	public ClienteNatural adicionarClienteNatural(long id, String nombre, String correo) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+        
+            long tuplasInsertadas = sqlClienteNatural.adicionarClienteNatural(pm, id);
+            tx.commit();
+            
+            System.out.println("Inserción Cliente Natural: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+            return new ClienteNatural(id, nombre, correo);
+        }
+        catch (Exception e)
+        {
+        	System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+
+	/* ****************************************************************
+	 * 			Métodos para manejar los CLIENTES EMPRESAS
+	 *****************************************************************/
+	
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Proveedor
+	 * Adiciona entradas al log de la aplicación
+	 * @param idAlmacenamiento
+	 * @param direccion
+	 * @return El objeto Bodega adicionado. null si ocurre alguna Excepción
+	 */
+	public ClienteEmpresa adicionarClienteEmpresa(long id, String nombre, String correo, String direccion) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+        
+            long tuplasInsertadas = sqlClienteEmpresa.adicionarClienteEmpresa(pm, id, direccion);
+            tx.commit();
+            
+            System.out.println("Inserción Cliente Empresa: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+            return new ClienteEmpresa(id, nombre, correo, direccion);
+        }
+        catch (Exception e)
+        {
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
 
 }

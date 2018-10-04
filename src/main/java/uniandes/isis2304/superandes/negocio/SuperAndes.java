@@ -214,14 +214,14 @@ public class SuperAndes {
 	 */
 	public Bodega adicionarBodega(int cantidadMax, double pesoMax, double volumenMax, long idSucursal, long idTipoProducto,long idVolumenProducto, String direccion)
 	{
-		log.info ("Adicionando Almacenamiento: ");
+		System.out.println("Adicionando Almacenamiento: ");
 		Long almacenamiento = ps.adicionarAlmacenamiento ( cantidadMax, pesoMax, volumenMax, idSucursal, idTipoProducto, idVolumenProducto);
-		log.info ("Adicionando Almacenamiento: ");
+		System.out.println("Adicionando Almacenamiento: ");
 		if(almacenamiento != null)
 		{
-			log.info ("Adicionando Bodega: ");
+			System.out.println("Adicionando Bodega: ");
 			Bodega bodega = ps.adicionarBodega ( almacenamiento, direccion,cantidadMax, pesoMax, volumenMax, idSucursal, idTipoProducto, idVolumenProducto);
-			log.info ("Adicionando Bodega: ");
+			System.out.println("Adicionando Bodega: ");
 			return bodega;
 		}
 		else

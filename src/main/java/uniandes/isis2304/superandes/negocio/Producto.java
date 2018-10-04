@@ -84,7 +84,7 @@ public class Producto implements VOProducto
 	/**
 	 * Atributo que indica si el producto es exclusivo o no.
 	 */
-	private boolean exclusivo;
+	private int exclusivo;
 	
 	
 	/**
@@ -120,7 +120,7 @@ public class Producto implements VOProducto
     	this.cantidad = 0;
     	this.unidadMedida = "";
     	this.especificacionEmpaque = 0;
-    	this.exclusivo = false;
+    	this.exclusivo = 0;
     	this.fechaVencimiento = new Date();
     	this.idCategoria = 0;
     	this.idTipoProducto = 0;
@@ -143,7 +143,7 @@ public class Producto implements VOProducto
 	 */
 	
 	
-    public Producto(String codigo, String nombre, String marca, double precioUnitario, String presentacion, double precioUnidadMedida, double cantidad, String unidadMedida, double especificacionEmpaque, boolean exclusivo, Date fechaVencimiento, long idCategoria, long idTipoProducto) 
+    public Producto(String codigo, String nombre, String marca, double precioUnitario, String presentacion, double precioUnidadMedida, double cantidad, String unidadMedida, double especificacionEmpaque, int exclusivo, Date fechaVencimiento, long idCategoria, long idTipoProducto) 
     {
     	this.id = codigo;
     	this.nombre = nombre;
@@ -159,6 +159,8 @@ public class Producto implements VOProducto
     	this.idCategoria = idCategoria;
     	this.idTipoProducto = idTipoProducto;
 	}
+
+	
 
 	/**
 	 * @return the codigo
@@ -289,14 +291,14 @@ public class Producto implements VOProducto
 	/**
 	 * @return the exclusivo
 	 */
-	public boolean isExclusivo() {
+	public int getExclusivo() {
 		return exclusivo;
 	}
 
 	/**
 	 * @param exclusivo the exclusivo to set
 	 */
-	public void setExclusivo(boolean exclusivo) {
+	public void setExclusivo(int exclusivo) {
 		this.exclusivo = exclusivo;
 	}
 

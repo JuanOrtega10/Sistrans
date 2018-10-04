@@ -61,12 +61,13 @@ class SQLProducto
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar un Producto a la base de datos de SuperAndes
 	 */
-	public long adicionarProducto (PersistenceManager pm, String idProducto, String nombre, String marca, String precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, String especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria, Date fechaVencimiento) 
+	public long adicionarProducto (PersistenceManager pm, String idProducto, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria, Date fechaVencimiento) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaProducto() + "(id,nombre,marca,precioUnitario, presentacion, cantidad, unidadMedida,precioUnidadMedida, especificacionEmpaque, exclusivo, idTipoProducto,idCategoria, fechaVencimiento) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         q.setParameters(idProducto, nombre, marca , precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo, idTipoProducto, idCategoria, fechaVencimiento);
         return (long) q.executeUnique();
 	}
+
 
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN BAR de la 
@@ -95,4 +96,5 @@ class SQLProducto
 		q.setResultClass(Producto.class);
 		return (List<Producto>) q.executeList();
 	}
+
 }

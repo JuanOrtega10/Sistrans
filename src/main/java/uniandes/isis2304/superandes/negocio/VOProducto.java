@@ -74,7 +74,7 @@ public interface VOProducto
 	/**
 	 * @return the exclusivo
 	 */
-	public boolean isExclusivo();
+	public int getExclusivo();
 
 	/**
 	 * @return the fechaVencimiento

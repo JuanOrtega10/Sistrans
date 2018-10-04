@@ -1051,7 +1051,7 @@ public class PersistenciaSuperAndes {
 	 * @param direccion
 	 * @return El objeto Bodega adicionado. null si ocurre alguna Excepción
 	 */
-	public ClienteEmpresa adicionarProducto(String id, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, String especificacionEmpaque, int exclusivo, Date fechaVencimiento, long idTipoProducto, long idCategoria)
+	public Producto adicionarProducto(String id, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, Date fechaVencimiento, long idTipoProducto, long idCategoria)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -1063,7 +1063,7 @@ public class PersistenciaSuperAndes {
             
             System.out.println("Inserción Cliente Empresa: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
             return new Producto(id, nombre, marca, precioUnitario, presentacion, precioUnidadMedida, cantidad, unidadMedida, especificacionEmpaque, exclusivo, fechaVencimiento, idCategoria, idTipoProducto);
-        }
+       }
         catch (Exception e)
         {
         	System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));

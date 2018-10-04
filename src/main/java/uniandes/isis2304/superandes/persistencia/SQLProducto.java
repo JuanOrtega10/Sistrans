@@ -61,7 +61,7 @@ class SQLProducto
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar un Producto a la base de datos de SuperAndes
 	 */
-	public long adicionarProducto (PersistenceManager pm, long idProducto, String nombre, String marca, String precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, String especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria, Date fechaVencimiento) 
+	public long adicionarProducto (PersistenceManager pm, String idProducto, String nombre, String marca, String precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, String especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria, Date fechaVencimiento) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaProducto() + "(id,nombre,marca,precioUnitario, presentacion, cantidad, unidadMedida,precioUnidadMedida, especificacionEmpaque, exclusivo, idTipoProducto,idCategoria, fechaVencimiento) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         q.setParameters(idProducto, nombre, marca , precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo, idTipoProducto, idCategoria, fechaVencimiento);
@@ -75,11 +75,11 @@ class SQLProducto
 	 * @param idBar - El identificador del bar
 	 * @return El objeto BAR que tiene el identificador dado
 	 */
-	public Producto darProductoPorId (PersistenceManager pm, long idPedido) 
+	public Producto darProductoPorId (PersistenceManager pm, String id) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaProducto( ) + " WHERE id = ?");
 		q.setResultClass(Producto.class);
-		q.setParameters(idPedido);
+		q.setParameters(id);
 		return (Producto) q.executeUnique();
 	}
 

@@ -31,7 +31,7 @@ public class Producto implements VOProducto
 	/**
 	 * El ID UNICO del producto.
 	 */
-	private long codigo;
+	private String id;
 	
 
 	/**
@@ -111,7 +111,7 @@ public class Producto implements VOProducto
      */
 	public Producto() 
     {
-    	this.codigo = 0;
+    	this.id = "";
     	this.nombre = "";
     	this.marca = "";
     	this.precioUnitario = 0;
@@ -143,9 +143,9 @@ public class Producto implements VOProducto
 	 */
 	
 	
-    public Producto(long codigo, String nombre, String marca, double precioUnitario, String presentacion, double precioUnidadMedida, double cantidad, String unidadMedida, double especificacionEmpaque, boolean exclusivo, Date fechaVencimiento, long idCategoria, long idTipoProducto) 
+    public Producto(String codigo, String nombre, String marca, double precioUnitario, String presentacion, double precioUnidadMedida, double cantidad, String unidadMedida, double especificacionEmpaque, boolean exclusivo, Date fechaVencimiento, long idCategoria, long idTipoProducto) 
     {
-    	this.codigo = codigo;
+    	this.id = codigo;
     	this.nombre = nombre;
     	this.marca = marca;
     	this.precioUnitario = precioUnitario;
@@ -163,15 +163,15 @@ public class Producto implements VOProducto
 	/**
 	 * @return the codigo
 	 */
-	public long getCodigo() {
-		return codigo;
+	public String getId() {
+		return id;
 	}
 
 	/**
 	 * @param codigo the codigo to set
 	 */
-	public void setCodigo(long codigo) {
-		this.codigo = codigo;
+	public void setId(String codigo) {
+		this.id = codigo;
 	}
 
 	/**
@@ -347,7 +347,7 @@ public class Producto implements VOProducto
 	 */
 	@Override
 	public String toString() {
-		return "Producto [codigo=" + codigo + ", nombre=" + nombre + ", marca=" + marca + ", precioUnitario="
+		return "Producto [codigo=" + id + ", nombre=" + nombre + ", marca=" + marca + ", precioUnitario="
 				+ precioUnitario + ", presentacion=" + presentacion + ", precioUnidadMedida=" + precioUnidadMedida
 				+ ", cantidad=" + cantidad + ", unidadMedida=" + unidadMedida + ", especificacionEmpaque="
 				+ especificacionEmpaque + ", exclusivo=" + exclusivo + ", fechaVencimiento=" + fechaVencimiento

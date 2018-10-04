@@ -14,14 +14,12 @@
 
 package uniandes.isis2304.superandes.negocio;
 
-import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import com.google.gson.JsonObject;
 
-import uniandes.isis2304.superandes.persistencia.PersistenciaParranderos;
 import uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes;
 
 /**
@@ -51,13 +49,13 @@ public class SuperAndes {
 	/* ****************************************************************
 	 * 			Métodos
 	 *****************************************************************/
-//	/**
-//	 * El constructor por defecto
-//	 */
-//	public SuperAndes ()
-//	{
-//		ps = PersistenciaSuperAndes.getInstance ();
-//	}
+	//	/**
+	//	 * El constructor por defecto
+	//	 */
+	//	public SuperAndes ()
+	//	{
+	//		ps = PersistenciaSuperAndes.getInstance ();
+	//	}
 
 	/**
 	 * El constructor qye recibe los nombres de las tablas en tableConfig
@@ -356,72 +354,72 @@ public class SuperAndes {
 		System.out.println("Adicionando Cliente: " + id);
 		if(cliente != null)
 		{
-			
+
 			System.out.println("Adicionando ClienteNatural : ");
 			ClienteNatural clienteNatural= ps.adicionarClienteNatural(id, nombre, correo) ;
 			System.out.println("Adicionando ClienteNatural: ");
 			return clienteNatural;
 
 		}
-		
+
 		else return null;
 	}
-//	}
-//	/**
-//	 * Encuentra un ClienteNaturaly su información básica, según su identificador
-//	 * @param idCliente- El identificador de ClienteNaturalbuscado
-//	 * @return Un objeto ClienteNaturalque corresponde con el identificador buscado y lleno con su información básica
-//	 * 			null, si un ClienteNaturalcon dicho identificador no existe
-//	 */
-//	public ClienteNatural darClienteNaturalPorId (long idCliente)
-//	{
-//		log.info ("Dar información de un ClienteNatural por id: " + idCliente);
-//		ClienteNatural clienteNatural= ps.darClienteNaturalPorId (idCliente);
-//		log.info ("Buscando clienteNatural por Id: " + clienteNatural!= null ? clienteNatural: "NO EXISTE");
-//		return clienteNatural;
-//	}
-//
-//	/**
-//	 * Encuentra todos los clientesNaturales en SuperAndes
-//	 * Adiciona entradas al log de la aplicación
-//	 * @return Una lista de objetos ClienteNaturalcon todos las clientesNaturales que conoce la aplicación, llenos con su información básica
-//	 */
-//	public List<ClienteNatural> darClientesNaturales ()
-//	{
-//		log.info ("Listando ClientesNaturales");
-//		List<ClienteNatural> clientesNaturales = ps.darClientesNaturales ();	
-//		log.info ("Listando ClientesNaturales: " + clientesNaturales.size() + " clientesNaturales existentes");
-//		return clientesNaturales;
-//	}
-//
-//	/**
-//	 * Encuentra todos los clientesNaturales en Parranderos y los devuelce como VO
-//	 * Adiciona entradas al log de la aplicación
-//	 * @return Una lista de objetos ClienteNaturalcon todos las ClientesNaturales que conoce la aplicación, llenos con su información básica
-//	 */
-//	public List<VOCliente> darVOClientesNaturales ()
-//	{
-//		log.info ("Generando los VO de ClientesNaturales");
-//		List<VOCliente> voClientesNaturales = new LinkedList<VOCliente> ();
-//		for (ClienteNatural cliente: ps.darClientesNaturales())
-//		{
-//			voClientesNaturales.add (cliente);
-//		}
-//		log.info ("Generando los VO de ClientesNaturales: " + voClientesNaturales.size () + " ClientesNaturales existentes");
-//		return voClientesNaturales;
-//	}
-//
-//
-//	/* ****************************************************************
-//	 * 			Métodos para manejar lAS CATEGORIAS
-//	 *****************************************************************/
-//	/**
-//	 * Adiciona de manera persistente un clienteEmpresa
-//	 * Adiciona entradas al log de la aplicación
-//	 * @param id
-//	 * @param direccion
-//	 * @return El objeto ClienteEmpresaadicionado. null si ocurre alguna Excepción
-//	 */
+	//	}
+	//	/**
+	//	 * Encuentra un ClienteNaturaly su información básica, según su identificador
+	//	 * @param idCliente- El identificador de ClienteNaturalbuscado
+	//	 * @return Un objeto ClienteNaturalque corresponde con el identificador buscado y lleno con su información básica
+	//	 * 			null, si un ClienteNaturalcon dicho identificador no existe
+	//	 */
+	//	public ClienteNatural darClienteNaturalPorId (long idCliente)
+	//	{
+	//		log.info ("Dar información de un ClienteNatural por id: " + idCliente);
+	//		ClienteNatural clienteNatural= ps.darClienteNaturalPorId (idCliente);
+	//		log.info ("Buscando clienteNatural por Id: " + clienteNatural!= null ? clienteNatural: "NO EXISTE");
+	//		return clienteNatural;
+	//	}
+	//
+	//	/**
+	//	 * Encuentra todos los clientesNaturales en SuperAndes
+	//	 * Adiciona entradas al log de la aplicación
+	//	 * @return Una lista de objetos ClienteNaturalcon todos las clientesNaturales que conoce la aplicación, llenos con su información básica
+	//	 */
+	//	public List<ClienteNatural> darClientesNaturales ()
+	//	{
+	//		log.info ("Listando ClientesNaturales");
+	//		List<ClienteNatural> clientesNaturales = ps.darClientesNaturales ();	
+	//		log.info ("Listando ClientesNaturales: " + clientesNaturales.size() + " clientesNaturales existentes");
+	//		return clientesNaturales;
+	//	}
+	//
+	//	/**
+	//	 * Encuentra todos los clientesNaturales en Parranderos y los devuelce como VO
+	//	 * Adiciona entradas al log de la aplicación
+	//	 * @return Una lista de objetos ClienteNaturalcon todos las ClientesNaturales que conoce la aplicación, llenos con su información básica
+	//	 */
+	//	public List<VOCliente> darVOClientesNaturales ()
+	//	{
+	//		log.info ("Generando los VO de ClientesNaturales");
+	//		List<VOCliente> voClientesNaturales = new LinkedList<VOCliente> ();
+	//		for (ClienteNatural cliente: ps.darClientesNaturales())
+	//		{
+	//			voClientesNaturales.add (cliente);
+	//		}
+	//		log.info ("Generando los VO de ClientesNaturales: " + voClientesNaturales.size () + " ClientesNaturales existentes");
+	//		return voClientesNaturales;
+	//	}
+	//
+	//
+	//	/* ****************************************************************
+	//	 * 			Métodos para manejar lAS CATEGORIAS
+	//	 *****************************************************************/
+	//	/**
+	//	 * Adiciona de manera persistente un clienteEmpresa
+	//	 * Adiciona entradas al log de la aplicación
+	//	 * @param id
+	//	 * @param direccion
+	//	 * @return El objeto ClienteEmpresaadicionado. null si ocurre alguna Excepción
+	//	 */
 	public ClienteEmpresa adicionarClienteEmpresa( long id ,String nombre, String correo,String direccion)  
 	{
 
@@ -437,116 +435,119 @@ public class SuperAndes {
 				return clienteEmpresa;
 			}
 		}
-		
-		else return null;
-//
-//		/**
-//		 * Encuentra un ClienteEmpresay su información básica, según su identificador
-//		 * @param idCliente- El identificador de ClienteEmpresabuscado
-//		 * @return Un objeto ClienteEmpresa que corresponde con el identificador buscado y lleno con su información básica
-//		 * 			null, si un ClienteEmpresa con dicho identificador no existe
-//		 */
-//		public ClienteEmpresa darClienteEmpresaPorId (long idCliente)
-//		{
-//			log.info ("Dar información de un ClienteEmpresa por id: " + idCliente);
-//			ClienteEmpresa clienteEmpresa= ps.darClienteEmpresaPorId (idCliente);
-//			log.info ("Buscando clienteEmpresa por Id: " + clienteEmpresa!= null ? clienteEmpresa: "NO EXISTE");
-//			return clienteEmpresa;
-//		}
-//
-//		/**
-//		 * Encuentra todos los clientesEmpresa en SuperAndes
-//		 * Adiciona entradas al log de la aplicación
-//		 * @return Una lista de objetos ClienteEmpresacon todos las clientesEmpresa que conoce la aplicación, llenos con su información básica
-//		 */
-//		public List<ClienteEmpresa> darClientesEmpresa ()
-//		{
-//			log.info ("Listando ClientesEmpresa");
-//			List<ClienteEmpresa> clientesEmpresa = ps.darClientesEmpresa ( );	
-//			log.info ("Listando ClientesEmpresa: " + clientesEmpresa.size( ) + " clientesEmpresa existentes");
-//			return clientesEmpresa;
-//		}
-//
-//		/**
-//		 * Encuentra todos los clientesEmpresa en Parranderos y los devuelce como VO
-//		 * Adiciona entradas al log de la aplicación
-//		 * @return Una lista de objetos ClienteEmpresacon todos las ClientesEmpresa que conoce la aplicación, llenos con su información básica
-//		 */
-//		public List<VOCliente> darVOClientesEmpresa ()
-//		{
-//			log.info ("Generando los VO de ClientesEmpresa");
-//			List<VOCliente> voClientesEmpresa = new LinkedList<VOCliente> ();
-//			for (ClienteEmpresa cliente: ps.darClientesEmpresa())
-//			{
-//				voClientesEmpresa.add (cliente);
-//			}
-//			log.info ("Generando los VO de ClientesEmpresa: " + voClientesEmpresa.size () + " ClientesEmpresa existentes");
-//			return voClientesEmpresa;
-//		}
-//
-//		/* ****************************************************************
-//		 * 			Métodos para manejar lAS CATEGORIAS
-//		 *****************************************************************/
-//		/**
-//		 * Adiciona de manera persistente un categoria 
-//		 * Adiciona entradas al log de la aplicación
-//		 * @param nombre
-//		 * @return El objeto Categoria adicionado. null si ocurre alguna Excepción
-//		 */
-//		public Categoria adicionarCategoria ( String nombre) 
-//		{
-//			log.info ("Adicionando Categoria: ");
-//			Categoria categoria = ps.adicionarCategoria ( nombre);
-//			log.info ("Adicionando Categoria: ");
-//			return categoria;
-//		}
-//
-//		/**
-//		 * Encuentra un Categoria y su información básica, según su identificador
-//		 * @param idCategoria - El identificador de Categoria buscado
-//		 * @return Un objeto Categoria que corresponde con el identificador buscado y lleno con su información básica
-//		 * 			null, si un Categoria con dicho identificador no existe
-//		 */
-//		public Categoria darCategoriaPorId (long idCategoria)
-//		{
-//			log.info ("Dar información de un categoria por id: " + idCategoria);
-//			Categoria categoria = ps.darCategoriaPorId (idCategoria);
-//			log.info ("Buscando categoria por Id: " + categoria != null ? categoria : "NO EXISTE");
-//			return categoria;
-//		}
-//
-//		/**
-//		 * Encuentra todos los categorias en SuperAndes
-//		 * Adiciona entradas al log de la aplicación
-//		 * @return Una lista de objetos Alamcenamiento con todos las Categorias que conoce la aplicación, llenos con su información básica
-//		 */
-//		public List<Categoria> darCategorias ()
-//		{
-//			log.info ("Listando Categorias");
-//			List<Categoria> categorias = ps.darCategorias ();	
-//			log.info ("Listando Categorias: " + categorias.size() + " categorias existentes");
-//			return categorias;
-//		}
-//
-//		/**
-//		 * Encuentra todos los categorias en Parranderos y los devuelce como VO
-//		 * Adiciona entradas al log de la aplicación
-//		 * @return Una lista de objetos Bar con todos las bares que conoce la aplicación, llenos con su información básica
-//		 */
-//		public List<VOCategoria> darVOCategorias ()
-//		{
-//			log.info ("Generando los VO de Categorias");
-//			List<VOCategoria> voCategorias = new LinkedList<VOCategoria> ();
-//			for (Categoria categoria: ps.darCategorias())
-//			{
-//				voCategorias.add (categoria);
-//			}
-//			log.info ("Generando los VO de Categorias: " + voCategorias.size () + " Categorias existentes");
-//			return voCategorias;
-//		}
 
+		else return null;
 	}
-	}
+	
+	//
+	//		/**
+	//		 * Encuentra un ClienteEmpresay su información básica, según su identificador
+	//		 * @param idCliente- El identificador de ClienteEmpresabuscado
+	//		 * @return Un objeto ClienteEmpresa que corresponde con el identificador buscado y lleno con su información básica
+	//		 * 			null, si un ClienteEmpresa con dicho identificador no existe
+	//		 */
+	//		public ClienteEmpresa darClienteEmpresaPorId (long idCliente)
+	//		{
+	//			log.info ("Dar información de un ClienteEmpresa por id: " + idCliente);
+	//			ClienteEmpresa clienteEmpresa= ps.darClienteEmpresaPorId (idCliente);
+	//			log.info ("Buscando clienteEmpresa por Id: " + clienteEmpresa!= null ? clienteEmpresa: "NO EXISTE");
+	//			return clienteEmpresa;
+	//		}
+	//
+	//		/**
+	//		 * Encuentra todos los clientesEmpresa en SuperAndes
+	//		 * Adiciona entradas al log de la aplicación
+	//		 * @return Una lista de objetos ClienteEmpresacon todos las clientesEmpresa que conoce la aplicación, llenos con su información básica
+	//		 */
+	//		public List<ClienteEmpresa> darClientesEmpresa ()
+	//		{
+	//			log.info ("Listando ClientesEmpresa");
+	//			List<ClienteEmpresa> clientesEmpresa = ps.darClientesEmpresa ( );	
+	//			log.info ("Listando ClientesEmpresa: " + clientesEmpresa.size( ) + " clientesEmpresa existentes");
+	//			return clientesEmpresa;
+	//		}
+	//
+	//		/**
+	//		 * Encuentra todos los clientesEmpresa en Parranderos y los devuelce como VO
+	//		 * Adiciona entradas al log de la aplicación
+	//		 * @return Una lista de objetos ClienteEmpresacon todos las ClientesEmpresa que conoce la aplicación, llenos con su información básica
+	//		 */
+	//		public List<VOCliente> darVOClientesEmpresa ()
+	//		{
+	//			log.info ("Generando los VO de ClientesEmpresa");
+	//			List<VOCliente> voClientesEmpresa = new LinkedList<VOCliente> ();
+	//			for (ClienteEmpresa cliente: ps.darClientesEmpresa())
+	//			{
+	//				voClientesEmpresa.add (cliente);
+	//			}
+	//			log.info ("Generando los VO de ClientesEmpresa: " + voClientesEmpresa.size () + " ClientesEmpresa existentes");
+	//			return voClientesEmpresa;
+	//		}
+	//
+	//		/* ****************************************************************
+	//		 * 			Métodos para manejar lAS CATEGORIAS
+	//		 *****************************************************************/
+	//		/**
+	//		 * Adiciona de manera persistente un categoria 
+	//		 * Adiciona entradas al log de la aplicación
+	//		 * @param nombre
+	//		 * @return El objeto Categoria adicionado. null si ocurre alguna Excepción
+	//		 */
+	//		public Categoria adicionarCategoria ( String nombre) 
+	//		{
+	//			log.info ("Adicionando Categoria: ");
+	//			Categoria categoria = ps.adicionarCategoria ( nombre);
+	//			log.info ("Adicionando Categoria: ");
+	//			return categoria;
+	//		}
+	//
+	//		/**
+	//		 * Encuentra un Categoria y su información básica, según su identificador
+	//		 * @param idCategoria - El identificador de Categoria buscado
+	//		 * @return Un objeto Categoria que corresponde con el identificador buscado y lleno con su información básica
+	//		 * 			null, si un Categoria con dicho identificador no existe
+	//		 */
+	//		public Categoria darCategoriaPorId (long idCategoria)
+	//		{
+	//			log.info ("Dar información de un categoria por id: " + idCategoria);
+	//			Categoria categoria = ps.darCategoriaPorId (idCategoria);
+	//			log.info ("Buscando categoria por Id: " + categoria != null ? categoria : "NO EXISTE");
+	//			return categoria;
+	//		}
+	//
+	//		/**
+	//		 * Encuentra todos los categorias en SuperAndes
+	//		 * Adiciona entradas al log de la aplicación
+	//		 * @return Una lista de objetos Alamcenamiento con todos las Categorias que conoce la aplicación, llenos con su información básica
+	//		 */
+	//		public List<Categoria> darCategorias ()
+	//		{
+	//			log.info ("Listando Categorias");
+	//			List<Categoria> categorias = ps.darCategorias ();	
+	//			log.info ("Listando Categorias: " + categorias.size() + " categorias existentes");
+	//			return categorias;
+	//		}
+	//
+	//		/**
+	//		 * Encuentra todos los categorias en Parranderos y los devuelce como VO
+	//		 * Adiciona entradas al log de la aplicación
+	//		 * @return Una lista de objetos Bar con todos las bares que conoce la aplicación, llenos con su información básica
+	//		 */
+	//		public List<VOCategoria> darVOCategorias ()
+	//		{
+	//			log.info ("Generando los VO de Categorias");
+	//			List<VOCategoria> voCategorias = new LinkedList<VOCategoria> ();
+	//			for (Categoria categoria: ps.darCategorias())
+	//			{
+	//				voCategorias.add (categoria);
+	//			}
+	//			log.info ("Generando los VO de Categorias: " + voCategorias.size () + " Categorias existentes");
+	//			return voCategorias;
+	//		}
+	
+	
+	
+}
 
 
 

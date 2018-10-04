@@ -30,7 +30,7 @@ public interface VOProducto
 	/**
 	 * @return the codigo
 	 */
-	public long getCodigo();
+	public String getId();
 
 	/**
 	 * @return the nombre

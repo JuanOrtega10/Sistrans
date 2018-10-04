@@ -64,7 +64,7 @@ class SQLDescuentoSegundoProducto
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar un ALMACENAMIENTO a la base de datos de SuperAndes
 	 */
-	public long adicionarPromocionPagueMLleveNUnidades (PersistenceManager pm, long id, double descuento) 
+	public long adicionarDescuentoSegundoProducto (PersistenceManager pm, long id, double descuento) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaDescuentoSegundoProducto() + "(idPromocion, descuento) values (?,?)");
         q.setParameters(id, descuento);
@@ -75,7 +75,7 @@ class SQLDescuentoSegundoProducto
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN ALMACENAMIENTO de la 
 	 * base de datos de SuperAndes, por su identificador
 	 */
-	public DescuentoSegundoProducto darPromocionPagueMLleveNUnidades (PersistenceManager pm, long idPromocion) 
+	public DescuentoSegundoProducto darPromocionDescuentoSegundoProducto (PersistenceManager pm, long idPromocion) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaDescuentoSegundoProducto( ) + " WHERE idPromocion = ?");
 		q.setResultClass(DescuentoSegundoProducto.class);
@@ -87,7 +87,7 @@ class SQLDescuentoSegundoProducto
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS ALMACENAMIENTO de la 
 	 * base de datos de SuperAndes
 	 */
-	public List<DescuentoSegundoProducto> darPromocionesPagueMLleveNUnidades (PersistenceManager pm)
+	public List<DescuentoSegundoProducto> darPromocionesDescuentoSegundoProducto (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaDescuentoSegundoProducto());
 		q.setResultClass(DescuentoSegundoProducto.class);

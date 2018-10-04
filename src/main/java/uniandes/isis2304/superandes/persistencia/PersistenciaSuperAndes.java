@@ -22,8 +22,13 @@ import uniandes.isis2304.superandes.negocio.Bodega;
 import uniandes.isis2304.superandes.negocio.Cliente;
 import uniandes.isis2304.superandes.negocio.ClienteEmpresa;
 import uniandes.isis2304.superandes.negocio.ClienteNatural;
+import uniandes.isis2304.superandes.negocio.DescuentoSegundoProducto;
 import uniandes.isis2304.superandes.negocio.Estante;
+import uniandes.isis2304.superandes.negocio.MenorALaSuma;
+import uniandes.isis2304.superandes.negocio.PagueMLleveNUnidades;
+import uniandes.isis2304.superandes.negocio.PagueXLleveYCantidad;
 import uniandes.isis2304.superandes.negocio.Producto;
+import uniandes.isis2304.superandes.negocio.PromocionPorcentaje;
 import uniandes.isis2304.superandes.negocio.Proveedor;
 import uniandes.isis2304.superandes.negocio.Sucursal;
 import uniandes.isis2304.superandes.negocio.TipoBebida;
@@ -1078,5 +1083,203 @@ public class PersistenciaSuperAndes {
             pm.close();
         }
 	}
+	
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar las Promociones
+	 *****************************************************************/
+	
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Proveedor
+	 * Adiciona entradas al log de la aplicación
+	 * @param cantidadMax
+	 * @param pesoMax
+	 * @param volumenMax
+	 * @param idSucursal
+	 * @param idTipoProducto
+	 * @param idVolumenProducto
+	 * @return El id del almacenamiento. null si ocurre alguna Excepción
+	 */
+	public Long adicionarPromocion(Date fechaExpiracion, long idSucursal, long idProducto) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+        try
+        {
+        	tx.begin();
+        	long id = nextval ();
+            long tuplasInsertadas = sqlPromocion.adicionarPromocion(pm, id, fechaExpiracion, idSucursal, idProducto);
+          
+            tx.commit();
+            
+           	System.out.println("Inserción Promocion: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+            return id;
+        }
+        catch (Exception e)
+        {
+        	System.err.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Proveedor
+	 * Adiciona entradas al log de la aplicación
+	 * @param idAlmacenamiento
+	 * @param direccion
+	 * @return El objeto Bodega adicionado. null si ocurre alguna Excepción
+	 */
+	public DescuentoSegundoProducto adicionarDescuentoSegundoProducto(long id, double descuento, Date fechaExpiracion, long idSucursal, long idProducto) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+        	tx.begin();
+            long tuplasInsertadas = sqlDescuentoSegundoProducto.adicionarDescuentoSegundoProducto(pm, id, descuento);
+            tx.commit();
+            
+            System.out.println("Inserción DescuentoSegundoProducto: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+            return new DescuentoSegundoProducto(id, idSucursal, idProducto, fechaExpiracion, descuento);
+        }
+        catch (Exception e)
+        {
+        	System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	
+	public PromocionPorcentaje adicionarPromocionPorcentaje(long id, double descuento, Date fechaExpiracion, long idSucursal, long idProducto) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+        	tx.begin();
+            long tuplasInsertadas = sqlPromocionPorcentaje.adicionarPromocionPorcentaje(pm, id, descuento);
+            tx.commit();
+            
+            System.out.println("Inserción PromocionPorcentaje: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+            return new PromocionPorcentaje(id, idSucursal, idProducto, fechaExpiracion, descuento);
+        }
+        catch (Exception e)
+        {
+        	System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	public PagueMLleveNUnidades adicionarPromocionPagueMLleveNUnidades(long id, int m, int n, Date fechaExpiracion, long idSucursal, long idProducto) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+        	tx.begin();
+            long tuplasInsertadas = sqlPagueMLleveNUnidades.adicionarPromocionPagueMLleveNUnidades(pm, idProducto, m, n);
+            tx.commit();
+            
+            System.out.println("Inserción PagueMLleveNUnidades: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+            return new PagueMLleveNUnidades(id, idSucursal, idProducto, fechaExpiracion, m, n);
+        }
+        catch (Exception e)
+        {
+        	System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	
+	public PagueXLleveYCantidad adicionarPromocionPagueXLleveYCantidad(long id, double x, double y, Date fechaExpiracion, long idSucursal, long idProducto) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+        	tx.begin();
+            long tuplasInsertadas = sqlPagueXLleveYCantidad.adicionarPromocionPagueXLleveYCantidad(pm, idProducto, x, y);
+            tx.commit();
+            
+            System.out.println("Inserción PagueXLleveYCantidad: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+            return new PagueXLleveYCantidad(id, idSucursal, idProducto, fechaExpiracion, x, y);
+        }
+        catch (Exception e)
+        {
+        	System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	
+	public MenorALaSuma adicionarPromocionMenorALaSuma(long id, Date fechaExpiracion, long idSucursal, long idProducto) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+        	tx.begin();
+            long tuplasInsertadas = sqlMenorALaSuma.adicionarPromocionMenorALaSuma(pm, idProducto);
+            tx.commit();
+            
+            System.out.println("Inserción MenorALaSuma: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+            return new MenorALaSuma(id, idSucursal, idProducto, fechaExpiracion);
+        }
+        catch (Exception e)
+        {
+        	System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+
 
 }

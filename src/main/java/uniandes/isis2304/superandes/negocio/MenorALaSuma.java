@@ -44,7 +44,7 @@ public class MenorALaSuma extends Promocion
 	 * @param idProducto
 	 * @param fechaExpiracion
 	 */
-	public MenorALaSuma(long id, long idSucursal, long idProducto, Date fechaExpiracion, Double descuento) {
+	public MenorALaSuma(long id, long idSucursal, long idProducto, Date fechaExpiracion) {
 		
 		super(id, idSucursal, idProducto, fechaExpiracion);
 

@@ -1,6 +1,7 @@
 package view;
 
 import java.io.FileReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +23,7 @@ import uniandes.isis2304.superandes.negocio.Proveedor;
 import uniandes.isis2304.superandes.negocio.SuperAndes;
 
 import uniandes.isis2304.superandes.negocio.VOClienteNatural;
-
+import uniandes.isis2304.superandes.negocio.VODescuentoSegundoProducto;
 import uniandes.isis2304.superandes.negocio.VOBodega;
 import uniandes.isis2304.superandes.negocio.VOClienteEmpresa;
 import uniandes.isis2304.superandes.negocio.VOEstante;
@@ -331,6 +332,75 @@ public class View
 				
 				
 			case 7:	
+				
+				System.out.println("¿Qué tipo de promoción es?");
+				System.out.println("1. Promocion Descuento segundo producto");
+				System.out.println("2. Promoción Porcentaje");
+				System.out.println("3. Pague M lleve N unidades");
+				System.out.println("3. Pague X lleve Y cantidad");
+				System.out.println("4. Menor a la suma");
+				int promo = sc.nextInt();
+				
+				
+				System.out.println("Ingrese el id de la sucursal");
+				String idSucursalPromo = sc.next();
+				long idSucursalL  = 0;
+				
+				System.out.println("Ingrese el id del producto");
+				String idProductoPromo = sc.next();
+				long idProductoL  = 0;
+				
+				
+				System.out.println("Ingrese la fecha de vencimiento de la promoción en (YYYY/MM/DD)");
+				fecha = sc.next();
+				String pattern = "yyyy-MM-dd";
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+				Date date = new Date();
+				try {
+					idSucursalL = Long.parseLong(idSucursalPromo);
+					idProductoL = Long.parseLong(idProductoPromo);
+					date = simpleDateFormat.parse(fecha);
+					
+				}
+				catch (Exception e) {
+					System.err.println("Información errónea");
+					break;
+				}
+				
+				switch (promo) {
+				case 1:
+					
+					System.out.println("Ingrese el porcentaje de descuento en el segundo producto. Ej: 0.23 = 23%");
+					String descuento = sc.next();
+					double desc = 0;
+					
+					try {
+						desc = Double.parseDouble(descuento);
+						
+					}
+					catch (Exception e) {
+						System.err.println("Información errónea");
+						break;
+					}
+					
+					VODescuentoSegundoProducto dsp = superAndes.adicionarDescuentoSegundoProducto(desc, date, idSucursalL, idProductoL);
+					
+					if (dsp != null) System.out.println(dsp.toString());
+					else System.out.println("No se pudo crear la promoción");
+					
+				
+					break;
+
+				case 2:
+					
+					
+					break;
+					
+
+					
+				}
+				
+				break;
 
 			case 8:
 				

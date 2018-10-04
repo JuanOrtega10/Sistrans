@@ -66,7 +66,7 @@ class SQLPromocion
 	public long adicionarPromocion (PersistenceManager pm, long id, Date fechaExpiracion, long idSucursal, long idProducto) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaPromocion() + "(id, fechaExpiracion, idSucursal, idProducto) values (?, ?, ?, ?)");
-        q.setParameters(id, fechaExpiracion, idSucursal, idProducto);
+        q.setParameters(id,  fechaExpiracion, idProducto);
         return (long) q.executeUnique();
 	}
 

@@ -609,6 +609,96 @@ public class SuperAndes {
 //	}
 	
 	
+	/* ****************************************************************
+	 * 			Métodos para manejar LAS PROMOCIONES
+	 *****************************************************************/
+	/**
+	 * Adiciona de manera persistente un clienteNatural
+	 * Adiciona entradas al log de la aplicación
+	 * @return El objeto ClienteNaturaladicionado. null si ocurre alguna Excepción
+	 */
+	public DescuentoSegundoProducto adicionarDescuentoSegundoProducto(double descuento, Date fechaExpiracion, long idSucursal, long idProducto) 
+	{
+	
+		Long promocion = ps.adicionarPromocion(fechaExpiracion, idSucursal, idProducto);
+	
+		if(promocion != null)
+		{
+			DescuentoSegundoProducto dsp = ps.adicionarDescuentoSegundoProducto(promocion, descuento, fechaExpiracion, idSucursal, idProducto);
+		
+			return dsp;
+
+		}
+
+		else return null;
+	}
+	
+	
+	public PromocionPorcentaje adicionarPromocionPorcentaje(double descuento, Date fechaExpiracion, long idSucursal, long idProducto) 
+	{
+	
+		Long promocion = ps.adicionarPromocion(fechaExpiracion, idSucursal, idProducto);
+	
+		if(promocion != null)
+		{
+			PromocionPorcentaje pp = ps.adicionarPromocionPorcentaje(promocion, descuento, fechaExpiracion, idSucursal, idProducto);
+		
+			return pp;
+
+		}
+
+		else return null;
+	}
+	
+	public PagueMLleveNUnidades adicionarPagueMLleveNUnidades(int m, int n, Date fechaExpiracion, long idSucursal, long idProducto) 
+	{
+	
+		Long promocion = ps.adicionarPromocion(fechaExpiracion, idSucursal, idProducto);
+	
+		if(promocion != null)
+		{
+			PagueMLleveNUnidades pmn = ps.adicionarPromocionPagueMLleveNUnidades(promocion, m, n, fechaExpiracion, idSucursal, idProducto);
+		
+			return pmn;
+
+		}
+
+		else return null;
+	}
+	
+	
+	public PagueXLleveYCantidad adicionarPagueXLleveYCantidad(double x, double y, Date fechaExpiracion, long idSucursal, long idProducto) 
+	{
+	
+		Long promocion = ps.adicionarPromocion(fechaExpiracion, idSucursal, idProducto);
+	
+		if(promocion != null)
+		{
+			PagueXLleveYCantidad pmn = ps.adicionarPromocionPagueXLleveYCantidad(promocion, x, y, fechaExpiracion, idSucursal, idProducto);
+		
+			return pmn;
+
+		}
+
+		else return null;
+	}
+	
+	
+	public MenorALaSuma adicionarMenorALaSuma( Date fechaExpiracion, long idSucursal, long idProducto) 
+	{
+	
+		Long promocion = ps.adicionarPromocion(fechaExpiracion, idSucursal, idProducto);
+	
+		if(promocion != null)
+		{
+			MenorALaSuma pmn = ps.adicionarPromocionMenorALaSuma(promocion, fechaExpiracion, idSucursal, idProducto);
+		
+			return pmn;
+
+		}
+
+		else return null;
+	}
 	
 }
 

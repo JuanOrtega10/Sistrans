@@ -18,7 +18,6 @@ import com.google.gson.stream.JsonReader;
 import com.sun.xml.internal.bind.v2.model.core.ID;
 
 import jdk.nashorn.internal.ir.CatchNode;
-import uniandes.isis2304.superandes.interfazApp.InterfazParranderosApp;
 import uniandes.isis2304.superandes.negocio.Proveedor;
 import uniandes.isis2304.superandes.negocio.SuperAndes;
 
@@ -138,10 +137,15 @@ public class View
 				String categoria = sc.next();
 				long cat = 0;
 				System.out.println("ingrese la Fecha de vencimiento del producto si la tiene");
-				String fecha = sc.next();
-				Date vence = new Date();
+				String fechap = sc.next();
+				String pattern = "yyyy-MM-dd";
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+				Date datep = new Date();
+				
 				try {
 					
+					
+					datep = simpleDateFormat.parse(fechap);
 					precio = Double.parseDouble(precioUnitProd);
 					cantidadP = Double.parseDouble(cantidadProd);
 					precioUnM = Double.parseDouble(precioUnMProd);
@@ -155,7 +159,7 @@ public class View
 					// TODO: handle exception
 				}
 				
-				VOProducto producto = superAndes.adicionarProducto(idProducto, nombreProd, marcaProd, precio, presentacionProd, cantidadP, unidadMedProd, precioUnM, esp, excl, tipoProd, cat, vence);
+				VOProducto producto = superAndes.adicionarProducto(idProducto, nombreProd, marcaProd, precio, presentacionProd, cantidadP, unidadMedProd, precioUnM, esp, excl, tipoProd, cat, datep);
 				System.out.println(producto.toString());
 				
 				break;
@@ -354,14 +358,14 @@ public class View
 				
 				
 				System.out.println("Ingrese la fecha de vencimiento de la promoción en (YYYY/MM/DD)");
-				fecha = sc.next();
-				String pattern = "yyyy-MM-dd";
-				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+				String fecha = sc.next();
+				String pattern2 = "yyyy-MM-dd";
+				SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(pattern2);
 				Date date = new Date();
 				try {
 					idSucursalL = Long.parseLong(idSucursalPromo);
 					idProductoL = Long.parseLong(idProductoPromo);
-					date = simpleDateFormat.parse(fecha);
+					date = simpleDateFormat2.parse(fecha);
 					
 				}
 				catch (Exception e) {

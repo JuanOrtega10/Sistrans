@@ -138,14 +138,25 @@ public class View
 				System.out.println("Ingrese el id de la categoria del producto");
 				String categoria = sc.next();
 				long cat = 0;
+<<<<<<< HEAD
 				System.out.println("Ingrese la Fecha de vencimiento del producto si la tiene");
+=======
+				System.out.println("ingrese la Fecha de vencimiento del producto si la tiene");
+>>>>>>> aeed640d133980881c5d24e899a87d7d9814b30e
 				String fechap = sc.next();
 				String pattern = "yyyy-MM-dd";
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 				Date datep = new Date();
+<<<<<<< HEAD
 
 				try {
 					
+=======
+				
+				try {
+					
+					
+>>>>>>> aeed640d133980881c5d24e899a87d7d9814b30e
 					datep = simpleDateFormat.parse(fechap);
 					precio = Double.parseDouble(precioUnitProd);
 					cantidadP = Double.parseDouble(cantidadProd);
@@ -157,7 +168,12 @@ public class View
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
+<<<<<<< HEAD
 				VOProducto producto = superAndes.adicionarProducto(idProducto, nombreProd, marcaProd, precio, presentacionProd, cantidadP, unidadMedProd, precioUnM, esp, excl, tipoProd, cat, new Timestamp(datep.getTime()));
+=======
+				
+				VOProducto producto = superAndes.adicionarProducto(idProducto, nombreProd, marcaProd, precio, presentacionProd, cantidadP, unidadMedProd, precioUnM, esp, excl, tipoProd, cat, datep);
+>>>>>>> aeed640d133980881c5d24e899a87d7d9814b30e
 				System.out.println(producto.toString());
 				break;
 
@@ -350,8 +366,14 @@ public class View
 				Date date = new Date();
 				try {
 					idSucursalL = Long.parseLong(idSucursalPromo);
+<<<<<<< HEAD
 					date = simpleDateFormat2.parse(fecha);
 
+=======
+					idProductoL = Long.parseLong(idProductoPromo);
+					date = simpleDateFormat2.parse(fecha);
+					
+>>>>>>> aeed640d133980881c5d24e899a87d7d9814b30e
 				}
 				catch (Exception e) {
 					System.err.println("Información errónea");

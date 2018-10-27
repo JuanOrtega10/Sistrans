@@ -14,7 +14,8 @@
  */
 package uniandes.isis2304.superandes.negocio;
 
-import java.util.Date;
+import java.sql.Timestamp;
+
 
 /**
  * Clase para modelar el concepto de la promoción "Pague X lleve Y Cantidad" del negocio de superandes.
@@ -58,7 +59,7 @@ public class PagueXLleveYCantidad extends Promocion implements VOPagueXLleveYCan
 	 * @param idProducto
 	 * @param fechaExpiracion
 	 */
-	public PagueXLleveYCantidad(long id, long idSucursal, long idProducto, Date fechaExpiracion, double x, double y) {
+	public PagueXLleveYCantidad(long id, long idSucursal, String idProducto, Timestamp fechaExpiracion, double x, double y) {
 		
 		super(id, idSucursal, idProducto, fechaExpiracion);
 		this.x = x;

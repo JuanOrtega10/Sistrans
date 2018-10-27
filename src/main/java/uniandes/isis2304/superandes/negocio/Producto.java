@@ -14,7 +14,7 @@
 
 package uniandes.isis2304.superandes.negocio;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * Clase para modelar el concepto Producto del negocio de superandes.
@@ -90,7 +90,7 @@ public class Producto implements VOProducto
 	/**
 	 * La fecha de vencimiento del producto (si es perecedero).
 	 */
-	private Date fechaVencimiento;
+	private Timestamp fechaVencimiento;
 	
 	/**
 	 * El ID del tipo del producto.
@@ -121,7 +121,7 @@ public class Producto implements VOProducto
     	this.unidadMedida = "";
     	this.especificacionEmpaque = 0;
     	this.exclusivo = 0;
-    	this.fechaVencimiento = new Date();
+    	this.fechaVencimiento = new Timestamp(0);
     	this.idCategoria = 0;
     	this.idTipoProducto = 0;
     	
@@ -143,7 +143,7 @@ public class Producto implements VOProducto
 	 */
 	
 	
-    public Producto(String codigo, String nombre, String marca, double precioUnitario, String presentacion, double precioUnidadMedida, double cantidad, String unidadMedida, double especificacionEmpaque, int exclusivo, Date fechaVencimiento, long idCategoria, long idTipoProducto) 
+    public Producto(String codigo, String nombre, String marca, double precioUnitario, String presentacion, double precioUnidadMedida, double cantidad, String unidadMedida, double especificacionEmpaque, int exclusivo, Timestamp fechaVencimiento, long idCategoria, long idTipoProducto) 
     {
     	this.id = codigo;
     	this.nombre = nombre;
@@ -305,14 +305,14 @@ public class Producto implements VOProducto
 	/**
 	 * @return the fechaVencimiento
 	 */
-	public Date getFechaVencimiento() {
+	public Timestamp getFechaVencimiento() {
 		return fechaVencimiento;
 	}
 
 	/**
 	 * @param fechaVencimiento the fechaVencimiento to set
 	 */
-	public void setFechaVencimiento(Date fechaVencimiento) {
+	public void setFechaVencimiento(Timestamp fechaVencimiento) {
 		this.fechaVencimiento = fechaVencimiento;
 	}
 

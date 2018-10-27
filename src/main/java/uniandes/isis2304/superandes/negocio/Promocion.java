@@ -14,7 +14,7 @@
  */
 package uniandes.isis2304.superandes.negocio;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * Clase para modelar el concepto Promocion del negocio de superandes.
@@ -45,13 +45,13 @@ public abstract class Promocion implements VOPromocion
 	/**
 	 * El identificador ÚNICO del producto al cual aplica la promoción.
 	 */
-	private long idProducto;
+	private String idProducto;
 	
 	
 	/**
 	 * La fecha de expiración de la promoción.
 	 */
-	private Date fechaExpiracion;
+	private Timestamp fechaExpiracion;
 	
 	
 	/* ****************************************************************
@@ -65,8 +65,8 @@ public abstract class Promocion implements VOPromocion
     {
     	this.id = 0;
 		this.idSucursal = 0;
-		this.idProducto = 0;
-		this.fechaExpiracion = new Date();
+		this.idProducto = "";
+		this.fechaExpiracion = new Timestamp(0);
 		
 	}
 
@@ -77,7 +77,7 @@ public abstract class Promocion implements VOPromocion
 	 * @param idProducto
 	 * @param fechaExpiracion
 	 */
-	public Promocion(long id, long idSucursal, long idProducto, Date fechaExpiracion) {
+	public Promocion(long id, long idSucursal, String idProducto, Timestamp fechaExpiracion) {
 		
 		this.id = id;
 		this.idSucursal = idSucursal;
@@ -105,7 +105,7 @@ public abstract class Promocion implements VOPromocion
 	/**
 	 * @return the idProducto
 	 */
-	public long getIdProducto() {
+	public String getIdProducto() {
 		return idProducto;
 	}
 
@@ -113,7 +113,7 @@ public abstract class Promocion implements VOPromocion
 	/**
 	 * @return the fechaExpiracion
 	 */
-	public Date getFechaExpiracion() {
+	public Timestamp getFechaExpiracion() {
 		return fechaExpiracion;
 	}
 
@@ -137,7 +137,7 @@ public abstract class Promocion implements VOPromocion
 	/**
 	 * @param idProducto the idProducto to set
 	 */
-	public void setIdProducto(long idProducto) {
+	public void setIdProducto(String idProducto) {
 		this.idProducto = idProducto;
 	}
 
@@ -145,7 +145,7 @@ public abstract class Promocion implements VOPromocion
 	/**
 	 * @param fechaExpiracion the fechaExpiracion to set
 	 */
-	public void setFechaExpiracion(Date fechaExpiracion) {
+	public void setFechaExpiracion(Timestamp fechaExpiracion) {
 		this.fechaExpiracion = fechaExpiracion;
 	}
 

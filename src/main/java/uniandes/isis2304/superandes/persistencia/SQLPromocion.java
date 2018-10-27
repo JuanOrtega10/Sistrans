@@ -15,7 +15,7 @@
 
 package uniandes.isis2304.superandes.persistencia;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -63,10 +63,10 @@ class SQLPromocion
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar un ALMACENAMIENTO a la base de datos de SuperAndes
 	 */
-	public long adicionarPromocion (PersistenceManager pm, long id, Date fechaExpiracion, long idSucursal, long idProducto) 
+	public long adicionarPromocion (PersistenceManager pm, long id, Timestamp fechaExpiracion, long idSucursal, String idProducto) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaPromocion() + "(id, fechaExpiracion, idSucursal, idProducto) values (?, ?, ?, ?)");
-        q.setParameters(id,  fechaExpiracion, idProducto);
+        q.setParameters(id,  fechaExpiracion, idSucursal, idProducto);
         return (long) q.executeUnique();
 	}
 

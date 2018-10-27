@@ -37,7 +37,11 @@ public interface VOTipoProducto
 	public long getIdCategoria();
 
 
-	
+	/** 
+	 * @return Una cadena con la información básica
+	 */
+	@Override
+	public String toString();
 	
 	
 

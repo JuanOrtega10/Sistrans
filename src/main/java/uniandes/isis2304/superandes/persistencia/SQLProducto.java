@@ -13,7 +13,8 @@
  */
 package uniandes.isis2304.superandes.persistencia;
 
-import java.util.Date;
+
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -61,8 +62,9 @@ class SQLProducto
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar un Producto a la base de datos de SuperAndes
 	 */
-	public long adicionarProducto (PersistenceManager pm, String idProducto, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria, Date fechaVencimiento) 
+	public long adicionarProducto (PersistenceManager pm, String idProducto, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria, Timestamp fechaVencimiento) 
 	{
+		
         Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaProducto() + "(id,nombre,marca,precioUnitario, presentacion, cantidad, unidadMedida,precioUnidadMedida, especificacionEmpaque, exclusivo, idTipoProducto,idCategoria, fechaVencimiento) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         q.setParameters(idProducto, nombre, marca , precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo, idTipoProducto, idCategoria, fechaVencimiento);
         return (long) q.executeUnique();
@@ -78,6 +80,7 @@ class SQLProducto
 	 */
 	public Producto darProductoPorId (PersistenceManager pm, String id) 
 	{
+		
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaProducto( ) + " WHERE id = ?");
 		q.setResultClass(Producto.class);
 		q.setParameters(id);

@@ -59,5 +59,7 @@ public interface VOAlmacenamiento
 	 * @return the idVolumenProducto
 	 */
 	public long getIdVolumenProducto();
+	
+	
 
 }

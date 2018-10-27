@@ -47,4 +47,9 @@ public interface VOReorden
 	public int getNivelReorden();
 	
 
+	/** 
+	 * @return Una cadena con la información básica
+	 */
+	@Override
+	public String toString();
 }

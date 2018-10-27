@@ -14,6 +14,7 @@
 
 package uniandes.isis2304.superandes.negocio;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -556,7 +557,7 @@ public class SuperAndes {
 	 * @param nombre
 	 * @return El objeto Producto adicionado. null si ocurre alguna Excepción
 	 */
-	public Producto adicionarProducto (String id, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria, Date fechaVencimiento)
+	public Producto adicionarProducto (String id, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria, Timestamp fechaVencimiento)
 	{
 		System.out.println("Adicionando Producto: ");
 		Producto producto = ps.adicionarProducto(id, nombre, marca, precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo, fechaVencimiento, idTipoProducto, idCategoria);
@@ -617,7 +618,7 @@ public class SuperAndes {
 	 * Adiciona entradas al log de la aplicación
 	 * @return El objeto ClienteNaturaladicionado. null si ocurre alguna Excepción
 	 */
-	public DescuentoSegundoProducto adicionarDescuentoSegundoProducto(double descuento, Date fechaExpiracion, long idSucursal, long idProducto) 
+	public DescuentoSegundoProducto adicionarDescuentoSegundoProducto(double descuento, Timestamp fechaExpiracion, long idSucursal, String idProducto) 
 	{
 	
 		Long promocion = ps.adicionarPromocion(fechaExpiracion, idSucursal, idProducto);
@@ -634,7 +635,7 @@ public class SuperAndes {
 	}
 	
 	
-	public PromocionPorcentaje adicionarPromocionPorcentaje(double descuento, Date fechaExpiracion, long idSucursal, long idProducto) 
+	public PromocionPorcentaje adicionarPromocionPorcentaje(double descuento, Timestamp fechaExpiracion, long idSucursal, String idProducto) 
 	{
 	
 		Long promocion = ps.adicionarPromocion(fechaExpiracion, idSucursal, idProducto);
@@ -650,7 +651,7 @@ public class SuperAndes {
 		else return null;
 	}
 	
-	public PagueMLleveNUnidades adicionarPagueMLleveNUnidades(int m, int n, Date fechaExpiracion, long idSucursal, long idProducto) 
+	public PagueMLleveNUnidades adicionarPagueMLleveNUnidades(int m, int n, Timestamp fechaExpiracion, long idSucursal, String idProducto) 
 	{
 	
 		Long promocion = ps.adicionarPromocion(fechaExpiracion, idSucursal, idProducto);
@@ -667,7 +668,7 @@ public class SuperAndes {
 	}
 	
 	
-	public PagueXLleveYCantidad adicionarPagueXLleveYCantidad(double x, double y, Date fechaExpiracion, long idSucursal, long idProducto) 
+	public PagueXLleveYCantidad adicionarPagueXLleveYCantidad(double x, double y, Timestamp fechaExpiracion, long idSucursal, String idProducto) 
 	{
 	
 		Long promocion = ps.adicionarPromocion(fechaExpiracion, idSucursal, idProducto);
@@ -684,14 +685,14 @@ public class SuperAndes {
 	}
 	
 	
-	public MenorALaSuma adicionarMenorALaSuma( Date fechaExpiracion, long idSucursal, long idProducto) 
+	public MenorALaSuma adicionarMenorALaSuma( Timestamp fechaExpiracion, long idSucursal, String idProducto, String idProducto2) 
 	{
 	
 		Long promocion = ps.adicionarPromocion(fechaExpiracion, idSucursal, idProducto);
 	
 		if(promocion != null)
 		{
-			MenorALaSuma pmn = ps.adicionarPromocionMenorALaSuma(promocion, fechaExpiracion, idSucursal, idProducto);
+			MenorALaSuma pmn = ps.adicionarPromocionMenorALaSuma(promocion, fechaExpiracion, idSucursal, idProducto, idProducto2);
 		
 			return pmn;
 

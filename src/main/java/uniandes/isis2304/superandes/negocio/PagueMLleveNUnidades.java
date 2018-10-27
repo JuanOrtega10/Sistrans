@@ -14,7 +14,7 @@
  */
 package uniandes.isis2304.superandes.negocio;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 
 /**
@@ -60,7 +60,7 @@ public class PagueMLleveNUnidades extends Promocion implements VOPagueMLleveNUni
 	 * @param idProducto
 	 * @param fechaExpiracion
 	 */
-	public PagueMLleveNUnidades(long id, long idSucursal, long idProducto, Date fechaExpiracion, int m, int n) {
+	public PagueMLleveNUnidades(long id, long idSucursal, String idProducto, Timestamp fechaExpiracion, int m, int n) {
 		
 		super(id, idSucursal, idProducto, fechaExpiracion);
 		this.n = n;

@@ -1,6 +1,6 @@
 package uniandes.isis2304.superandes.persistencia;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,7 +30,6 @@ import uniandes.isis2304.superandes.negocio.Producto;
 import uniandes.isis2304.superandes.negocio.PromocionPorcentaje;
 import uniandes.isis2304.superandes.negocio.Proveedor;
 import uniandes.isis2304.superandes.negocio.Sucursal;
-import uniandes.isis2304.superandes.negocio.TipoBebida;
 
 
 /**
@@ -1055,7 +1054,7 @@ public class PersistenciaSuperAndes {
 	 * @param direccion
 	 * @return El objeto Bodega adicionado. null si ocurre alguna Excepción
 	 */
-	public Producto adicionarProducto(String id, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, Date fechaVencimiento, long idTipoProducto, long idCategoria)
+	public Producto adicionarProducto(String id, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, Timestamp fechaVencimiento, long idTipoProducto, long idCategoria)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -1084,6 +1083,19 @@ public class PersistenciaSuperAndes {
 	}
 	
 	
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla BEBEDOR que tienen el identificador dado
+	 * @param idBebedor - El identificador del bebedor
+	 * @return El objeto BEBEDOR, construido con base en la tuplas de la tabla BEBEDOR, que tiene el identificador dado
+	 */
+	public Producto darProductoPorId (String idProducto) 
+	{
+		return (Producto) sqlProducto.darProductoPorId(pmf.getPersistenceManager(), idProducto);
+	}
+
+	
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar las Promociones
 	 *****************************************************************/
@@ -1099,7 +1111,7 @@ public class PersistenciaSuperAndes {
 	 * @param idVolumenProducto
 	 * @return El id del almacenamiento. null si ocurre alguna Excepción
 	 */
-	public Long adicionarPromocion(Date fechaExpiracion, long idSucursal, long idProducto) 
+	public Long adicionarPromocion(Timestamp fechaExpiracion, long idSucursal, String idProducto) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx = pm.currentTransaction();
@@ -1136,7 +1148,7 @@ public class PersistenciaSuperAndes {
 	 * @param direccion
 	 * @return El objeto Bodega adicionado. null si ocurre alguna Excepción
 	 */
-	public DescuentoSegundoProducto adicionarDescuentoSegundoProducto(long id, double descuento, Date fechaExpiracion, long idSucursal, long idProducto) 
+	public DescuentoSegundoProducto adicionarDescuentoSegundoProducto(long id, double descuento, Timestamp fechaExpiracion, long idSucursal, String idProducto) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -1165,7 +1177,7 @@ public class PersistenciaSuperAndes {
 	}
 	
 	
-	public PromocionPorcentaje adicionarPromocionPorcentaje(long id, double descuento, Date fechaExpiracion, long idSucursal, long idProducto) 
+	public PromocionPorcentaje adicionarPromocionPorcentaje(long id, double descuento, Timestamp fechaExpiracion, long idSucursal, String idProducto) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -1193,14 +1205,14 @@ public class PersistenciaSuperAndes {
         }
 	}
 	
-	public PagueMLleveNUnidades adicionarPromocionPagueMLleveNUnidades(long id, int m, int n, Date fechaExpiracion, long idSucursal, long idProducto) 
+	public PagueMLleveNUnidades adicionarPromocionPagueMLleveNUnidades(long id, int m, int n, Timestamp fechaExpiracion, long idSucursal, String idProducto) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try
         {
         	tx.begin();
-            long tuplasInsertadas = sqlPagueMLleveNUnidades.adicionarPromocionPagueMLleveNUnidades(pm, idProducto, m, n);
+            long tuplasInsertadas = sqlPagueMLleveNUnidades.adicionarPromocionPagueMLleveNUnidades(pm, id, m, n);
             tx.commit();
             
             System.out.println("Inserción PagueMLleveNUnidades: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
@@ -1222,14 +1234,14 @@ public class PersistenciaSuperAndes {
 	}
 	
 	
-	public PagueXLleveYCantidad adicionarPromocionPagueXLleveYCantidad(long id, double x, double y, Date fechaExpiracion, long idSucursal, long idProducto) 
+	public PagueXLleveYCantidad adicionarPromocionPagueXLleveYCantidad(long id, double x, double y, Timestamp fechaExpiracion, long idSucursal, String idProducto) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try
         {
         	tx.begin();
-            long tuplasInsertadas = sqlPagueXLleveYCantidad.adicionarPromocionPagueXLleveYCantidad(pm, idProducto, x, y);
+            long tuplasInsertadas = sqlPagueXLleveYCantidad.adicionarPromocionPagueXLleveYCantidad(pm, id, x, y);
             tx.commit();
             
             System.out.println("Inserción PagueXLleveYCantidad: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
@@ -1251,18 +1263,26 @@ public class PersistenciaSuperAndes {
 	}
 	
 	
-	public MenorALaSuma adicionarPromocionMenorALaSuma(long id, Date fechaExpiracion, long idSucursal, long idProducto) 
+	public MenorALaSuma adicionarPromocionMenorALaSuma(long id, Timestamp fechaExpiracion, long idSucursal, String idProducto , String idProducto2) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
+        
+        
         try
         {
         	tx.begin();
-            long tuplasInsertadas = sqlMenorALaSuma.adicionarPromocionMenorALaSuma(pm, idProducto);
+        	
+            Producto p1 = darProductoPorId(idProducto);
+            Producto p2 = darProductoPorId(idProducto2);
+            
+            adicionarProducto(p1.getId()+p2.getId(), p1.getNombre()+p2.getNombre(), p1.getMarca()+p2.getMarca(), p1.getPrecioUnitario()+p2.getPrecioUnitario(), p1.getPresentacion()+p2.getPresentacion(), p1.getCantidad() + p2.getCantidad(), p1.getUnidadMedida(), p1.getPrecioUnidadMedida()+p2.getPrecioUnidadMedida(), p1.getEspecificacionEmpaque()+p2.getEspecificacionEmpaque(), p1.getExclusivo(), null, p1.getIdTipoProducto(), p1.getIdCategoria());
+            
+            long tuplasInsertadas = sqlMenorALaSuma.adicionarPromocionMenorALaSuma(pm, id);
             tx.commit();
             
             System.out.println("Inserción MenorALaSuma: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
-            return new MenorALaSuma(id, idSucursal, idProducto, fechaExpiracion);
+            return new MenorALaSuma(id, idSucursal, idProducto,idProducto2, fechaExpiracion);
         }
         catch (Exception e)
         {

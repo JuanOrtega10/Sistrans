@@ -40,5 +40,10 @@ public interface VOSucursal
 	 */
 	public String getCiudad();
 		
+	/** 
+	 * @return Una cadena con la información básica
+	 */
+	@Override
+	public String toString();
 
 }

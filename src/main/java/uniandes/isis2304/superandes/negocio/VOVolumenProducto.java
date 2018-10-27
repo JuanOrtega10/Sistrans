@@ -31,28 +31,7 @@ public interface VOVolumenProducto
 	 */
 	public long getId();
 
-
-
-	/**
-	 * @return the idFactura
-	 */
-	public long getIdFactura();
-
-
-	/**
-	 * @return the idAlmacenamiento
-	 */
-	public long getIdAlmacenamiento();
-
-
-
-	/**
-	 * @return the idPedido
-	 */
-	public long getIdPedido();
-
-
-
+	
 	/**
 	 * @return the idTipoProducto
 	 */
@@ -80,12 +59,10 @@ public interface VOVolumenProducto
 	public double getVolumen();
 
 
-
-	/**
-	 * @return the tipoVolumen
+	/** 
+	 * @return Una cadena con la información básica
 	 */
-	public String getTipoVolumen();
-
-	
+	@Override
+	public String toString();
 
 }

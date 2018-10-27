@@ -27,27 +27,9 @@ public class VolumenProducto implements VOVolumenProducto
 	 *****************************************************************/
 	
 	/**
-	 * El identificador ÚNICO del reorden.
+	 * El identificador ÚNICO del volumenProducto.
 	 */
 	private long id;
-	
-
-	/**
-	 * El identificador ÚNICO de la factura.
-	 */
-	private long idFactura;
-	
-
-	/**
-	 * El identificador ÚNICO del almacenamiento.
-	 */
-	private long idAlmacenamiento;
-	
-
-	/**
-	 * El identificador ÚNICO del pedido.
-	 */
-	private long idPedido;
 	
 
 	/**
@@ -73,50 +55,31 @@ public class VolumenProducto implements VOVolumenProducto
 	private double volumen;
 	
 	
-	/**
-	 * El tipo de Volumen.
-	 */
-	private String tipoVolumen;
-	
-	
 	
 	public VolumenProducto(){
 		this.id = 0;
-		this.idFactura = 0;
-		this.idAlmacenamiento = 0;
-		this.idPedido = 0;
 		this.idTipoProducto = 0;
 		this.cantidad = 0;
 		this.peso = 0;
 		this.volumen = 0;
-		this.tipoVolumen = "";
 	}
 
 
 
 	/**
 	 * @param id
-	 * @param idFactura
-	 * @param idAlmacenamiento
-	 * @param idPedido
 	 * @param idTipoProducto
 	 * @param cantidad
 	 * @param peso
 	 * @param volumen
-	 * @param tipoVolumen
 	 */
-	public VolumenProducto(long id, long idFactura, long idAlmacenamiento, long idPedido, long idTipoProducto,
-			int cantidad, double peso, double volumen, String tipoVolumen) {
-		super();
+	public VolumenProducto(long id,long idTipoProducto,
+			int cantidad, double peso, double volumen) {
 		this.id = id;
-		this.idFactura = idFactura;
-		this.idAlmacenamiento = idAlmacenamiento;
-		this.idPedido = idPedido;
 		this.idTipoProducto = idTipoProducto;
 		this.cantidad = cantidad;
 		this.peso = peso;
 		this.volumen = volumen;
-		this.tipoVolumen = tipoVolumen;
 	}
 
 
@@ -127,34 +90,6 @@ public class VolumenProducto implements VOVolumenProducto
 	public long getId() {
 		return id;
 	}
-
-
-
-	/**
-	 * @return the idFactura
-	 */
-	public long getIdFactura() {
-		return idFactura;
-	}
-
-
-
-	/**
-	 * @return the idAlmacenamiento
-	 */
-	public long getIdAlmacenamiento() {
-		return idAlmacenamiento;
-	}
-
-
-
-	/**
-	 * @return the idPedido
-	 */
-	public long getIdPedido() {
-		return idPedido;
-	}
-
 
 
 	/**
@@ -192,51 +127,12 @@ public class VolumenProducto implements VOVolumenProducto
 	}
 
 
-
-	/**
-	 * @return the tipoVolumen
-	 */
-	public String getTipoVolumen() {
-		return tipoVolumen;
-	}
-
-
-
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(long id) {
 		this.id = id;
 	}
-
-
-
-	/**
-	 * @param idFactura the idFactura to set
-	 */
-	public void setIdFactura(long idFactura) {
-		this.idFactura = idFactura;
-	}
-
-
-
-	/**
-	 * @param idAlmacenamiento the idAlmacenamiento to set
-	 */
-	public void setIdAlmacenamiento(long idAlmacenamiento) {
-		this.idAlmacenamiento = idAlmacenamiento;
-	}
-
-
-
-	/**
-	 * @param idPedido the idPedido to set
-	 */
-	public void setIdPedido(long idPedido) {
-		this.idPedido = idPedido;
-	}
-
-
 
 	/**
 	 * @param idTipoProducto the idTipoProducto to set
@@ -273,24 +169,13 @@ public class VolumenProducto implements VOVolumenProducto
 	}
 
 
-
-	/**
-	 * @param tipoVolumen the tipoVolumen to set
-	 */
-	public void setTipoVolumen(String tipoVolumen) {
-		this.tipoVolumen = tipoVolumen;
-	}
-
-
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "VolumenProducto [id=" + id + ", idFactura=" + idFactura + ", idAlmacenamiento=" + idAlmacenamiento
-				+ ", idPedido=" + idPedido + ", idTipoProducto=" + idTipoProducto + ", cantidad=" + cantidad + ", peso="
-				+ peso + ", volumen=" + volumen + ", tipoVolumen=" + tipoVolumen + "]";
+		return "VolumenProducto [id=" + id + ", idTipoProducto=" + idTipoProducto + ", cantidad=" + cantidad + ", peso="
+				+ peso + ", volumen=" + volumen + "]";
 	}
 	
 	

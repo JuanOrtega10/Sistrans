@@ -35,4 +35,9 @@ public interface VOProvee
 	 */
 	public long getIdProducto();
 
+	/** 
+	 * @return Una cadena con la información básica
+	 */
+	@Override
+	public String toString();
 }

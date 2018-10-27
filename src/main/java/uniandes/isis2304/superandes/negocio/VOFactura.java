@@ -47,6 +47,11 @@ public interface VOFactura
 	 */
 	public Date getFecha();
 	
+	/** 
+	 * @return Una cadena con la información básica
+	 */
+	@Override
+	public String toString();
 	
 
 }

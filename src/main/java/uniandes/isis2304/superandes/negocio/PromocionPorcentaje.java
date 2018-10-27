@@ -13,7 +13,7 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 package uniandes.isis2304.superandes.negocio;
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * Clase para modelar el concepto de la promoción "Promocion Porcentaje" del negocio de superandes.
@@ -52,7 +52,7 @@ public class PromocionPorcentaje extends Promocion implements VOPromocionPorcent
 	 * @param idProducto
 	 * @param fechaExpiracion
 	 */
-	public PromocionPorcentaje(long id, long idSucursal, long idProducto, Date fechaExpiracion, double descuento) {
+	public PromocionPorcentaje(long id, long idSucursal, String idProducto, Timestamp fechaExpiracion, double descuento) {
 		
 		super(id, idSucursal, idProducto, fechaExpiracion);
 		this.descuento = descuento;	

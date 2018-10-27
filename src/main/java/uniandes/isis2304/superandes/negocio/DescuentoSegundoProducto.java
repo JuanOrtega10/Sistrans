@@ -14,7 +14,7 @@
  */
 package uniandes.isis2304.superandes.negocio;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * Clase para modelar el concepto de la promoción "DescuentoSegundoProducto" del negocio de superandes.
@@ -25,7 +25,7 @@ import java.util.Date;
 public class DescuentoSegundoProducto extends Promocion implements VODescuentoSegundoProducto
 {
 	/* ****************************************************************
-	 * 			Atributos
+	 * 			Atributoss
 	 *****************************************************************/
 	
 	/**
@@ -54,7 +54,7 @@ public class DescuentoSegundoProducto extends Promocion implements VODescuentoSe
 	 * @param idProducto
 	 * @param fechaExpiracion
 	 */
-	public DescuentoSegundoProducto(long id, long idSucursal, long idProducto, Date fechaExpiracion, Double descuento) {
+	public DescuentoSegundoProducto(long id, long idSucursal, String idProducto, Timestamp fechaExpiracion, Double descuento) {
 		
 		super(id, idSucursal, idProducto, fechaExpiracion);
 		this.descuento = descuento;

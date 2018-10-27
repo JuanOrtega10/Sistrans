@@ -14,6 +14,7 @@
 
 package uniandes.isis2304.superandes.negocio;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -79,7 +80,7 @@ public interface VOProducto
 	/**
 	 * @return the fechaVencimiento
 	 */
-	public Date getFechaVencimiento();
+	public Timestamp getFechaVencimiento();
 	
 	/**
 	 * @return the idTipoProducto

@@ -138,16 +138,14 @@ public class View
 				System.out.println("Ingrese el id de la categoria del producto");
 				String categoria = sc.next();
 				long cat = 0;
-				System.out.println("ingrese la Fecha de vencimiento del producto si la tiene");
-				String fechap = sc.next();
+				System.out.println("Ingrese el id del itemPedido");
+				String idItemPedido = sc.next();
+				Long itemPed = null;
 				String pattern = "yyyy-MM-dd";
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 				Date datep = new Date();
 	
-				try {
-					
-					
-					datep = simpleDateFormat.parse(fechap);
+				try {				
 					precio = Double.parseDouble(precioUnitProd);
 					cantidadP = Double.parseDouble(cantidadProd);
 					precioUnM = Double.parseDouble(precioUnMProd);
@@ -155,10 +153,11 @@ public class View
 					excl = Integer.parseInt(exclusivo);
 					tipoProd = Long.parseLong(idtipoProd);
 					cat = Long.parseLong(categoria);
+					itemPed = Long.parseLong(idItemPedido);
 				} catch (Exception e) {
 
 				}
-				VOProducto producto = superAndes.adicionarProducto(idProducto, nombreProd, marcaProd, precio, presentacionProd, cantidadP, unidadMedProd, precioUnM, esp, excl, tipoProd, cat, new Timestamp(datep.getTime()));
+				VOProducto producto = superAndes.adicionarProducto(idProducto, nombreProd, marcaProd, precio, presentacionProd, cantidadP, unidadMedProd, precioUnM, esp, excl, itemPed, tipoProd, cat);
 
 				System.out.println(producto.toString());
 				break;

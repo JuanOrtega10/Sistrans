@@ -86,12 +86,6 @@ public class Producto implements VOProducto
 	 */
 	private int exclusivo;
 	
-	
-	/**
-	 * La fecha de vencimiento del producto (si es perecedero).
-	 */
-	private Timestamp fechaVencimiento;
-	
 	/**
 	 * El ID del tipo del producto.
 	 */
@@ -101,6 +95,12 @@ public class Producto implements VOProducto
 	 * El ID de la categoria del producto.
 	 */
 	private long idCategoria;
+	
+	
+	/**
+	 * El id del itemProducto
+	 */
+	private long idItemPedido;
 	
 	/* ****************************************************************
 	 * 			Métodos 
@@ -121,7 +121,7 @@ public class Producto implements VOProducto
     	this.unidadMedida = "";
     	this.especificacionEmpaque = 0;
     	this.exclusivo = 0;
-    	this.fechaVencimiento = new Timestamp(0);
+    	this.idItemPedido = 0;
     	this.idCategoria = 0;
     	this.idTipoProducto = 0;
     	
@@ -143,7 +143,7 @@ public class Producto implements VOProducto
 	 */
 	
 	
-    public Producto(String codigo, String nombre, String marca, double precioUnitario, String presentacion, double precioUnidadMedida, double cantidad, String unidadMedida, double especificacionEmpaque, int exclusivo, Timestamp fechaVencimiento, long idCategoria, long idTipoProducto) 
+    public Producto(String codigo, String nombre, String marca, double precioUnitario, String presentacion, double precioUnidadMedida, double cantidad, String unidadMedida, double especificacionEmpaque, int exclusivo, long idItemPedido, long idCategoria, long idTipoProducto) 
     {
     	this.id = codigo;
     	this.nombre = nombre;
@@ -155,7 +155,7 @@ public class Producto implements VOProducto
     	this.unidadMedida = unidadMedida;
     	this.especificacionEmpaque = especificacionEmpaque;
     	this.exclusivo = exclusivo;
-    	this.fechaVencimiento = fechaVencimiento;
+    	this.idItemPedido = idItemPedido;
     	this.idCategoria = idCategoria;
     	this.idTipoProducto = idTipoProducto;
 	}
@@ -305,15 +305,15 @@ public class Producto implements VOProducto
 	/**
 	 * @return the fechaVencimiento
 	 */
-	public Timestamp getFechaVencimiento() {
-		return fechaVencimiento;
+	public long getIdItemPedido() {
+		return idItemPedido;
 	}
 
 	/**
 	 * @param fechaVencimiento the fechaVencimiento to set
 	 */
-	public void setFechaVencimiento(Timestamp fechaVencimiento) {
-		this.fechaVencimiento = fechaVencimiento;
+	public void setIdItemPedido(long idIdItemPedido) {
+		this.idItemPedido = idIdItemPedido;
 	}
 
 	/**
@@ -347,14 +347,7 @@ public class Producto implements VOProducto
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
-	@Override
-	public String toString() {
-		return "Producto [codigo=" + id + ", nombre=" + nombre + ", marca=" + marca + ", precioUnitario="
-				+ precioUnitario + ", presentacion=" + presentacion + ", precioUnidadMedida=" + precioUnidadMedida
-				+ ", cantidad=" + cantidad + ", unidadMedida=" + unidadMedida + ", especificacionEmpaque="
-				+ especificacionEmpaque + ", exclusivo=" + exclusivo + ", fechaVencimiento=" + fechaVencimiento
-				+ ", idTipoProducto=" + idTipoProducto + ", idCategoria=" + idCategoria + "]";
-	}
+
     
 	
     

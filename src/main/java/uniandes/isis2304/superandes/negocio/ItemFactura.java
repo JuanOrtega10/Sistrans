@@ -14,14 +14,13 @@
 
 package uniandes.isis2304.superandes.negocio;
 
-import java.sql.Timestamp;
 
 /**
  * Clase para modelar el concepto Pedido de un producto del negocio de superandes.
  *
  * @author ja.ortega - dy.quintero.
  */
-public class ItemPedido implements VOItemPedido
+public class ItemFactura implements VOItemFactura
 {
 	
 	/**
@@ -35,11 +34,10 @@ public class ItemPedido implements VOItemPedido
 	 */
 	private int cantidad;
 	
-	
 	/**
-	 * La fecha de vencimiento de los items del pedido
+	 * El id de la factura
 	 */
-	private Timestamp fechaVencimiento;
+	private long idFactura;
 	
 	/**
 	 * El id del produto
@@ -52,11 +50,11 @@ public class ItemPedido implements VOItemPedido
 	/**
 	 * Constructor por defecto
 	 */
-	public ItemPedido() 
+	public ItemFactura() 
     {
     	this.id = 0;
     	this.cantidad = 0;
-    	this.fechaVencimiento = null;
+    	this.idFactura = 0;
     	this.idProducto ="";
 	}
 
@@ -64,12 +62,12 @@ public class ItemPedido implements VOItemPedido
 	/**
 	 * @param id
 	 * @param cantidad
-	 * @param fechaVencimiento
+	 * @param IdFactura
 	 */
-	public ItemPedido(long id, int cantidad, Timestamp fechaVencimiento, String idProducto) {
+	public ItemFactura(long id, int cantidad, long idFactura, String idProducto) {
 		this.id = id;
 		this.cantidad = cantidad;
-		this.fechaVencimiento = fechaVencimiento;
+		this.idFactura = idFactura;
 		this.idProducto = idProducto;
 	}
 
@@ -107,18 +105,18 @@ public class ItemPedido implements VOItemPedido
 
 
 	/**
-	 * @return the fechaVencimiento
+	 * @return the IdFactura
 	 */
-	public Timestamp getFechaVencimiento() {
-		return fechaVencimiento;
+	public long getIdFactura() {
+		return idFactura;
 	}
 
 
 	/**
-	 * @param fechaVencimiento the fechaVencimiento to set
+	 * @param IdFactura the IdFactura to set
 	 */
-	public void setFechaVencimiento(Timestamp fechaVencimiento) {
-		this.fechaVencimiento = fechaVencimiento;
+	public void setIdFactura(long IdFactura) {
+		this.idFactura = IdFactura;
 	}
 
 
@@ -143,7 +141,7 @@ public class ItemPedido implements VOItemPedido
 	 */
 	@Override
 	public String toString() {
-		return "ItemPedido [id=" + id + ", cantidad=" + cantidad + ", fechaVencimiento=" + fechaVencimiento
+		return "ItemPedido [id=" + id + ", cantidad=" + cantidad + ", IdFactura=" + idFactura
 				+ ", idProducto=" + idProducto + "]";
 	}
 

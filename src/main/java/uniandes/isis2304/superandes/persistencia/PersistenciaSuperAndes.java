@@ -192,6 +192,16 @@ public class PersistenciaSuperAndes {
 	 */
 	private SQLVolumenProdcuto sqlVolumenProdcuto;
 	
+	/**
+	 * Atributo para el acceso a la tabla VOLUMENPRODUCTO de la base de datos
+	 */
+	private SQLItemFactura sqlItemFactura;
+	
+	/**
+	 * Atributo para el acceso a la tabla VOLUMENPRODUCTO de la base de datos
+	 */
+	private SQLItemPedido sqlItemPedido;
+	
 
 	
 	
@@ -243,7 +253,6 @@ public class PersistenciaSuperAndes {
 	{
 		tablas = leerNombresTablas (tableConfig);
 		crearClasesSQL ();
-		System.out.println(tablas.get(1));
 		String unidadPersistencia = tableConfig.get ("unidadPersistencia").getAsString ();
 		log.trace ("Accediendo unidad de persistencia: " + unidadPersistencia);
 		pmf = JDOHelper.getPersistenceManagerFactory (unidadPersistencia);
@@ -567,6 +576,22 @@ public class PersistenciaSuperAndes {
 	public String darTablaItemFactura() {
 		return tablas.get(24);
 	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de Bodega de parranderos
+	 */
+	public String darTablaCarrito() {
+		return tablas.get(25);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de Bodega de parranderos
+	 */
+	public String darTablaItemCarrito() {
+		return tablas.get(26);
+	}
+	
+	
 	
 	/**
 	 * Transacción para el generador de secuencia de Parranderos

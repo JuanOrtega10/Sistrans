@@ -15,7 +15,6 @@
 
 package uniandes.isis2304.superandes.persistencia;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -24,11 +23,11 @@ import javax.jdo.Query;
 import uniandes.isis2304.superandes.negocio.Factura;
 
 /**
- * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto Facturas de SuperAndes
+ * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto Carrito de SuperAndes
  * 
  * @author ja.ortega - dy.quintero.
  */
-class SQLFactura 
+class SQLCarrito 
 {
 	/* ****************************************************************
 	 * 			Constantes
@@ -55,7 +54,7 @@ class SQLFactura
 	 * Constructor
 	 * @param pp - El Manejador de persistencia de la aplicación
 	 */
-	public SQLFactura (PersistenciaSuperAndes ps)
+	public SQLCarrito (PersistenciaSuperAndes ps)
 	{
 		this.ps = ps;
 	}
@@ -63,10 +62,10 @@ class SQLFactura
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar un ALMACENAMIENTO a la base de datos de SuperAndes
 	 */
-	public long adicionarFactura (PersistenceManager pm, long id, Date fecha, long idSucursal, long idCliente) 
+	public long adicionarCarrito (PersistenceManager pm, long id, long idSucursal, long idCliente, String estado) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaFactura() + "(id, fecha, idSucursal, idCliente) values (?, ?, ?, ?)");
-        q.setParameters(id, fecha, idSucursal, idCliente);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaFactura() + "(id, idSucursal, idCliente, estado) values (?, ?, ?, ?)");
+        q.setParameters(id,idSucursal, idCliente,estado);
         return (long) q.executeUnique();
 	}
 
@@ -74,7 +73,7 @@ class SQLFactura
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN ALMACENAMIENTO de la 
 	 * base de datos de SuperAndes, por su identificador
 	 */
-	public Factura darFacturaPorId (PersistenceManager pm, long id) 
+	public Factura darCarritoPorId (PersistenceManager pm, long id) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaFactura( ) + " WHERE id = ?");
 		q.setResultClass(Factura.class);
@@ -86,7 +85,7 @@ class SQLFactura
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS ALMACENAMIENTO de la 
 	 * base de datos de SuperAndes
 	 */
-	public List<Factura> darFacturas (PersistenceManager pm)
+	public List<Factura> darCarritos (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaFactura());
 		q.setResultClass(Factura.class);

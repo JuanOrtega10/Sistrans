@@ -76,11 +76,6 @@ public interface VOProducto
 	 * @return the exclusivo
 	 */
 	public int getExclusivo();
-
-	/**
-	 * @return the fechaVencimiento
-	 */
-	public Timestamp getFechaVencimiento();
 	
 	/**
 	 * @return the idTipoProducto
@@ -90,6 +85,9 @@ public interface VOProducto
 	 * @return the idCategoria
 	 */
 	public long getIdCategoria();
+	
+	
+	public long getIdItemPedido();
 
 	/** 
 	 * @return Una cadena con la información básica

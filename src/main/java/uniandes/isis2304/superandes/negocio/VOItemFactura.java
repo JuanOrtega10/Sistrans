@@ -14,7 +14,6 @@
 
 package uniandes.isis2304.superandes.negocio;
 
-import java.sql.Timestamp;
 
 /**
  * Interfaz para los métodos get de BODEGA.
@@ -22,12 +21,12 @@ import java.sql.Timestamp;
  * 
  * @author ja.ortega - dy.quintero
  */
-public interface VOItemPedido 
+public interface VOItemFactura 
 {
 	
 	public long getId();
 	public int getCantidad();
-	public Timestamp getFechaVencimiento();
+	public long getIdFactura();
 	public String getIdProducto();
 
 }

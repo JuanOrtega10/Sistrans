@@ -4,30 +4,30 @@
  * Licenciado	bajo	el	esquema	Academic Free License versión 2.1
  * 		
  * Curso: isis2304 - Sistemas Transaccionales
- * Proyecto: Parranderos Uniandes
+ * Proyecto: SuperAndes
  * @version 1.0
- * @author Germán Bravo
- * Julio de 2018
+ * @author Juan Ortega - Diany Quintero
+ * Octubre de 2018
  * 
- * Revisado por: Claudia Jiménez, Christian Ariza
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
-
 package uniandes.isis2304.superandes.persistencia;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.isis2304.superandes.negocio.Proveedor;
+import uniandes.isis2304.superandes.negocio.ItemPedido;
+
 
 /**
- * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto Proveedor de SuperAndes
+ * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto ItemPedido de SuperAndes
  * 
  * @author ja.ortega - dy.quintero.
  */
-class SQLProveedor 
+class SQLItemPedido 
 {
 	/* ****************************************************************
 	 * 			Constantes
@@ -54,20 +54,18 @@ class SQLProveedor
 	 * Constructor
 	 * @param pp - El Manejador de persistencia de la aplicación
 	 */
-	public SQLProveedor (PersistenciaSuperAndes ps)
+	public SQLItemPedido (PersistenciaSuperAndes ps)
 	{
 		this.ps = ps;
 	}
 	
 	/**
-	 * Crea y ejecuta la sentencia SQL para adicionar una PROVEEDOR a la base de datos de SuperAndes
+	 * Crea y ejecuta la sentencia SQL para adicionar una Bodega a la base de datos de SuperAndes
 	 */
-	public long adicionarProveedor (PersistenceManager pm, long idProveedor, String nombre, double calificacion, int numCalificaciones) 
+	public long adicionarItemPedido (PersistenceManager pm, long id, int cantidad , Timestamp fechaVencimiento, long idPedido) 
 	{
-		
-		System.out.println(idProveedor);
-        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaProveedor() + "(id, nombre, calificacion, numCalificaciones) values (?, ?, ?, ?)");
-        q.setParameters(idProveedor, nombre, calificacion, numCalificaciones);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaItemPedido() + "( id, cantidad, fechavencimiento, idpedido ) values (?, ?, ?, ?)");
+        q.setParameters(id, cantidad, fechaVencimiento, idPedido);
         return (long) q.executeUnique();
 	}
 
@@ -78,12 +76,12 @@ class SQLProveedor
 	 * @param idBar - El identificador del bar
 	 * @return El objeto BAR que tiene el identificador dado
 	 */
-	public Proveedor darProveedorPorId (PersistenceManager pm, long idSucursal) 
+	public ItemPedido darItemPedidoPorId (PersistenceManager pm, long id) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaProveedor( ) + " WHERE id = ?");
-		q.setResultClass(Proveedor.class);
-		q.setParameters(idSucursal);
-		return (Proveedor) q.executeUnique();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaItemPedido( ) + " WHERE id = ?");
+		q.setResultClass(ItemPedido.class);
+		q.setParameters(id);
+		return (ItemPedido) q.executeUnique();
 	}
 
 	/**
@@ -92,12 +90,10 @@ class SQLProveedor
 	 * @param pm - El manejador de persistencia
 	 * @return Una lista de objetos BAR
 	 */
-	public List<Proveedor> darProveedores (PersistenceManager pm)
+	public List<ItemPedido> darItemPedidos (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaProveedor());
-		q.setResultClass(Proveedor.class);
-		List<Proveedor> a =  q.executeList();
-		System.out.println(a.size());
-		return a;
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaItemPedido());
+		q.setResultClass(ItemPedido.class);
+		return (List<ItemPedido>) q.executeList();
 	}
 }

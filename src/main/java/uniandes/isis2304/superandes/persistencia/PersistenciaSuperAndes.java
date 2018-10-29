@@ -555,6 +555,18 @@ public class PersistenciaSuperAndes {
 	public String darTablaSucursal() {
 		return tablas.get(20);
 	}
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de Bodega de parranderos
+	 */
+	public String darTablaItemPedido() {
+		return tablas.get(23);
+	}
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de Bodega de parranderos
+	 */
+	public String darTablaItemFactura() {
+		return tablas.get(24);
+	}
 	
 	/**
 	 * Transacción para el generador de secuencia de Parranderos

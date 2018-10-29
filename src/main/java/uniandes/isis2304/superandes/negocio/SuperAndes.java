@@ -557,10 +557,10 @@ public class SuperAndes {
 	 * @param nombre
 	 * @return El objeto Producto adicionado. null si ocurre alguna Excepción
 	 */
-	public Producto adicionarProducto (String id, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria, Timestamp fechaVencimiento)
+	public Producto adicionarProducto (String id, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque,Long idItemPedido, int exclusivo, long idTipoProducto, long idCategoria)
 	{
 		System.out.println("Adicionando Producto: ");
-		Producto producto = ps.adicionarProducto(id, nombre, marca, precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo, fechaVencimiento, idTipoProducto, idCategoria);
+		Producto producto = ps.adicionarProducto(id, nombre, marca, precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo, idItemPedido, idTipoProducto, idCategoria);
 		System.out.println ("Adicionando Producto: ");
 		return producto;
 	}

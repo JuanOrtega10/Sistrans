@@ -1091,18 +1091,18 @@ public class PersistenciaSuperAndes {
 	 * @param direccion
 	 * @return El objeto Bodega adicionado. null si ocurre alguna Excepción
 	 */
-	public Producto adicionarProducto(String id, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, Timestamp fechaVencimiento, long idTipoProducto, long idCategoria)
+	public Producto adicionarProducto(String id, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, Long idItemPedido, long idTipoProducto, long idCategoria)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try
         {
         	tx.begin();
-            long tuplasInsertadas = sqlProducto.adicionarProducto(pm, id, nombre, marca, precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo, idTipoProducto, idCategoria, fechaVencimiento);
+            long tuplasInsertadas = sqlProducto.adicionarProducto(pm, id, nombre, marca, precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo,idItemPedido, idTipoProducto, idCategoria);
             tx.commit();
             
             System.out.println("Inserción Producto: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
-            return new Producto(id, nombre, marca, precioUnitario, presentacion, precioUnidadMedida, cantidad, unidadMedida, especificacionEmpaque, exclusivo, fechaVencimiento, idCategoria, idTipoProducto);
+            return new Producto(id, nombre, marca, precioUnitario, presentacion, precioUnidadMedida, cantidad, unidadMedida, especificacionEmpaque, exclusivo, idItemPedido, idCategoria, idTipoProducto);
        }
         catch (Exception e)
         {

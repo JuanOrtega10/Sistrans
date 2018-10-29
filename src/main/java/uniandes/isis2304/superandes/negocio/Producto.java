@@ -14,7 +14,6 @@
 
 package uniandes.isis2304.superandes.negocio;
 
-import java.sql.Timestamp;
 
 /**
  * Clase para modelar el concepto Producto del negocio de superandes.
@@ -100,7 +99,7 @@ public class Producto implements VOProducto
 	/**
 	 * El id del itemProducto
 	 */
-	private long idItemPedido;
+	private Long idItemPedido;
 	
 	/* ****************************************************************
 	 * 			Métodos 
@@ -121,7 +120,7 @@ public class Producto implements VOProducto
     	this.unidadMedida = "";
     	this.especificacionEmpaque = 0;
     	this.exclusivo = 0;
-    	this.idItemPedido = 0;
+    	this.idItemPedido = null;
     	this.idCategoria = 0;
     	this.idTipoProducto = 0;
     	
@@ -143,7 +142,7 @@ public class Producto implements VOProducto
 	 */
 	
 	
-    public Producto(String codigo, String nombre, String marca, double precioUnitario, String presentacion, double precioUnidadMedida, double cantidad, String unidadMedida, double especificacionEmpaque, int exclusivo, long idItemPedido, long idCategoria, long idTipoProducto) 
+    public Producto(String codigo, String nombre, String marca, double precioUnitario, String presentacion, double precioUnidadMedida, double cantidad, String unidadMedida, double especificacionEmpaque, int exclusivo, Long idItemPedido, long idCategoria, long idTipoProducto) 
     {
     	this.id = codigo;
     	this.nombre = nombre;
@@ -342,6 +341,18 @@ public class Producto implements VOProducto
 	 */
 	public void setIdCategoria(long idCategoria) {
 		this.idCategoria = idCategoria;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Producto [id=" + id + ", nombre=" + nombre + ", marca=" + marca + ", precioUnitario=" + precioUnitario
+				+ ", presentacion=" + presentacion + ", precioUnidadMedida=" + precioUnidadMedida + ", cantidad="
+				+ cantidad + ", unidadMedida=" + unidadMedida + ", especificacionEmpaque=" + especificacionEmpaque
+				+ ", exclusivo=" + exclusivo + ", idTipoProducto=" + idTipoProducto + ", idCategoria=" + idCategoria
+				+ ", idItemPedido=" + idItemPedido + "]";
 	}
 
 	/* (non-Javadoc)

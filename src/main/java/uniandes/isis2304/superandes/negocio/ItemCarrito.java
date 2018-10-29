@@ -14,14 +14,13 @@
 
 package uniandes.isis2304.superandes.negocio;
 
-import java.sql.Timestamp;
 
 /**
- * Clase para modelar el concepto ItemPedido de un producto del negocio de superandes.
+ * Clase para modelar el concepto ItemCarrito de un producto del negocio de superandes.
  *
  * @author ja.ortega - dy.quintero.
  */
-public class ItemPedido implements VOItemPedido
+public class ItemCarrito implements VOItemCarrito
 {
 	
 	/**
@@ -37,9 +36,14 @@ public class ItemPedido implements VOItemPedido
 	
 	
 	/**
-	 * La fecha de vencimiento de los items del pedido
+	 * La id del producto que contienen.
 	 */
-	private Timestamp fechaVencimiento;
+	private long idProducto;
+	
+	/**
+	 * La id del producto que contienen.
+	 */
+	private long idCarrito;
 	
 	
 	/* ****************************************************************
@@ -48,11 +52,12 @@ public class ItemPedido implements VOItemPedido
 	/**
 	 * Constructor por defecto
 	 */
-	public ItemPedido() 
+	public ItemCarrito() 
     {
     	this.id = 0;
     	this.cantidad = 0;
-    	this.fechaVencimiento = null;
+    	this.idProducto = 0;
+    	this.idCarrito = 0;
 	}
 
 
@@ -61,10 +66,11 @@ public class ItemPedido implements VOItemPedido
 	 * @param cantidad
 	 * @param fechaVencimiento
 	 */
-	public ItemPedido(long id, int cantidad, Timestamp fechaVencimiento) {
+	public ItemCarrito(long id, int cantidad, long idProducto, long idCarrito) {
 		this.id = id;
 		this.cantidad = cantidad;
-		this.fechaVencimiento = fechaVencimiento;
+		this.idProducto = idProducto;
+		this.idCarrito = idCarrito;
 	}
 
 
@@ -103,16 +109,34 @@ public class ItemPedido implements VOItemPedido
 	/**
 	 * @return the fechaVencimiento
 	 */
-	public Timestamp getFechaVencimiento() {
-		return fechaVencimiento;
+	public long getIdProducto() {
+		return idProducto;
 	}
 
 
 	/**
-	 * @param fechaVencimiento the fechaVencimiento to set
+	 * @param idProducto the fechaVencimiento to set
 	 */
-	public void setFechaVencimiento(Timestamp fechaVencimiento) {
-		this.fechaVencimiento = fechaVencimiento;
+	public void setIdProducto(long idProducto) {
+		this.idProducto = idProducto;
+	}
+	
+	
+
+
+	/**
+	 * @return the idCarrito
+	 */
+	public long getIdCarrito() {
+		return idCarrito;
+	}
+
+
+	/**
+	 * @param idCarrito the idCarrito to set
+	 */
+	public void setIdCarrito(long idCarrito) {
+		this.idCarrito = idCarrito;
 	}
 
 
@@ -121,7 +145,8 @@ public class ItemPedido implements VOItemPedido
 	 */
 	@Override
 	public String toString() {
-		return "ItemPedido [id=" + id + ", cantidad=" + cantidad + ", fechaVencimiento=" + fechaVencimiento + "]";
+		return "ItemCarrito [id=" + id + ", cantidad=" + cantidad + ", idProducto=" + idProducto + ", idCarrito="
+				+ idCarrito + "]";
 	}		
 	
 	

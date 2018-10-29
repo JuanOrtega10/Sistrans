@@ -13,23 +13,26 @@ SQLFactura.java * Universidad	de	los	Andes	(Bogotá	- Colombia)
  */
 package uniandes.isis2304.superandes.negocio;
 
-import java.util.Date;
 
 /**
- * Clase para modelar el concepto FACTURA del negocio de superandes.
+ * Clase para modelar el concepto Carrito del negocio de superandes.
  *
  * @author ja.ortega - dy.quintero.
  */
-public class Factura implements VOFactura
+public class Carrito implements VOCarrito
 {
 	
 	
+	
+	private final static String EN_USO = "EN_USO";
+	
+
 	/* ****************************************************************
 	 * 			Atributos
 	 *****************************************************************/
 	
 	/**
-	 * El identificador ÚNICO de la factura.
+	 * El identificador ÚNICO del carrito.
 	 */
 	private long id;
 	
@@ -46,7 +49,7 @@ public class Factura implements VOFactura
 	/**
 	 * La fecha en la cual se crea la factura.
 	 */
-	private Date fecha;
+	private String estado;
 	
 
 	/* ****************************************************************
@@ -55,12 +58,12 @@ public class Factura implements VOFactura
 	/**
 	 * Constructor por defecto
 	 */
-	public Factura() 
+	public Carrito() 
 	{
 		this.id = 0;
 		this.idSucursal = 0;
 		this.idCliente = 0;
-		this.fecha = new Date();
+		this.estado = "";
 	}
 	
 	/**
@@ -68,14 +71,14 @@ public class Factura implements VOFactura
 	 * @param id - El id unico de la facturar
 	 * @param idSucursal - El identificador de la  sucursal.
 	 * @param idCliente - El id del cliente
-	 * @param fecha - La fecha en la que se genera la factura
+	 * @param estado - El estado del Carrito. (En uso, abandonado)
 	 */
-	public Factura(long id, long idSucursal, long idCliente, Date fecha) 
+	public Carrito(long id, long idSucursal, long idCliente) 
 	{
 		this.id = id;
 		this.idSucursal = idSucursal;
 		this.idCliente = idCliente;
-		this.fecha = fecha;
+		this.estado = EN_USO;
 	}
 
 	/**
@@ -121,17 +124,17 @@ public class Factura implements VOFactura
 	}
 
 	/**
-	 * @return the fecha
+	 * @return the estado
 	 */
-	public Date getFecha() {
-		return fecha;
+	public String getEstado() {
+		return estado;
 	}
 
 	/**
 	 * @param fecha the fecha to set
 	 */
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	public void setFecha(String estado) {
+		this.estado = estado;
 	}
 
 	/* (non-Javadoc)
@@ -139,7 +142,7 @@ public class Factura implements VOFactura
 	 */
 	@Override
 	public String toString() {
-		return "Factura [id=" + id + ", idSucursal=" + idSucursal + ", idCliente=" + idCliente + ", fecha=" + fecha
+		return "Carrito [id=" + id + ", idSucursal=" + idSucursal + ", idCliente=" + idCliente + ", estado=" + estado
 				+ "]";
 	}
 

@@ -1,5 +1,6 @@
 package uniandes.isis2304.superandes.persistencia;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,11 +19,13 @@ import com.google.gson.JsonObject;
 
 import uniandes.isis2304.superandes.negocio.Almacenamiento;
 import uniandes.isis2304.superandes.negocio.Bodega;
+import uniandes.isis2304.superandes.negocio.Carrito;
 import uniandes.isis2304.superandes.negocio.Cliente;
 import uniandes.isis2304.superandes.negocio.ClienteEmpresa;
 import uniandes.isis2304.superandes.negocio.ClienteNatural;
 import uniandes.isis2304.superandes.negocio.DescuentoSegundoProducto;
 import uniandes.isis2304.superandes.negocio.Estante;
+import uniandes.isis2304.superandes.negocio.ItemCarrito;
 import uniandes.isis2304.superandes.negocio.MenorALaSuma;
 import uniandes.isis2304.superandes.negocio.PagueMLleveNUnidades;
 import uniandes.isis2304.superandes.negocio.PagueXLleveYCantidad;
@@ -202,6 +205,10 @@ public class PersistenciaSuperAndes {
 	 */
 	private SQLItemPedido sqlItemPedido;
 	
+	private SQLCarrito sqlCarrito;
+	
+	private SQLItemCarrito sqlItemCarrito;
+	
 
 	
 	
@@ -349,6 +356,7 @@ public class PersistenciaSuperAndes {
 		
 		sqlPromocion = new SQLPromocion(this);
 		
+		
 		sqlPromocionPorcentaje = new SQLPromocionPorcentaje(this);
 
 		sqlProvee = new SQLProvee(this);
@@ -362,6 +370,14 @@ public class PersistenciaSuperAndes {
 		sqlTipoProducto = new SQLTipoProducto(this);
 		
 		sqlVolumenProdcuto = new SQLVolumenProdcuto(this);
+		
+		sqlItemCarrito = new SQLItemCarrito(this);
+		
+		sqlCarrito = new SQLCarrito(this);
+		
+		sqlItemFactura = new SQLItemFactura(this);
+		
+		sqlItemPedido = new SQLItemPedido(this);
 	}
 	
 	
@@ -610,7 +626,7 @@ public class PersistenciaSuperAndes {
 	 * @param e - La excepción que ocurrio
 	 * @return El mensaje de la excepción JDO
 	 */
-	private String darDetalleException(Exception e) 
+	public static String darDetalleException(Exception e) 
 	{
 		String resp = "";
 		if (e.getClass().getName().equals("javax.jdo.JDODataStoreException"))
@@ -1091,18 +1107,18 @@ public class PersistenciaSuperAndes {
 	 * @param direccion
 	 * @return El objeto Bodega adicionado. null si ocurre alguna Excepción
 	 */
-	public Producto adicionarProducto(String id, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, Long idItemPedido, long idTipoProducto, long idCategoria)
+	public Producto adicionarProducto(String id, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try
         {
         	tx.begin();
-            long tuplasInsertadas = sqlProducto.adicionarProducto(pm, id, nombre, marca, precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo,idItemPedido, idTipoProducto, idCategoria);
+            long tuplasInsertadas = sqlProducto.adicionarProducto(pm, id, nombre, marca, precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo, idTipoProducto, idCategoria);
             tx.commit();
             
             System.out.println("Inserción Producto: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
-            return new Producto(id, nombre, marca, precioUnitario, presentacion, precioUnidadMedida, cantidad, unidadMedida, especificacionEmpaque, exclusivo, idItemPedido, idCategoria, idTipoProducto);
+            return new Producto(id, nombre, marca, precioUnitario, presentacion, precioUnidadMedida, cantidad, unidadMedida, especificacionEmpaque, exclusivo, idCategoria, idTipoProducto);
        }
         catch (Exception e)
         {
@@ -1313,7 +1329,7 @@ public class PersistenciaSuperAndes {
             Producto p1 = darProductoPorId(idProducto);
             Producto p2 = darProductoPorId(idProducto2);
             
-            adicionarProducto(p1.getId()+p2.getId(), p1.getNombre()+p2.getNombre(), p1.getMarca()+p2.getMarca(), p1.getPrecioUnitario()+p2.getPrecioUnitario(), p1.getPresentacion()+p2.getPresentacion(), p1.getCantidad() + p2.getCantidad(), p1.getUnidadMedida(), p1.getPrecioUnidadMedida()+p2.getPrecioUnidadMedida(), p1.getEspecificacionEmpaque()+p2.getEspecificacionEmpaque(), p1.getExclusivo(), null, p1.getIdTipoProducto(), p1.getIdCategoria());
+            adicionarProducto(p1.getId()+p2.getId(), p1.getNombre()+p2.getNombre(), p1.getMarca()+p2.getMarca(), p1.getPrecioUnitario()+p2.getPrecioUnitario(), p1.getPresentacion()+p2.getPresentacion(), p1.getCantidad() + p2.getCantidad(), p1.getUnidadMedida(), p1.getPrecioUnidadMedida()+p2.getPrecioUnidadMedida(), p1.getEspecificacionEmpaque()+p2.getEspecificacionEmpaque(), p1.getExclusivo(), p1.getIdTipoProducto(), p1.getIdCategoria());
             
             long tuplasInsertadas = sqlMenorALaSuma.adicionarPromocionMenorALaSuma(pm, id);
             tx.commit();
@@ -1336,6 +1352,163 @@ public class PersistenciaSuperAndes {
         }
 	}
 	
+	/* ****************************************************************
+	 * 			Métodos para manejar los Carritos
+	 *****************************************************************/
+	
+	public Carrito solicitarCarritoDeCompras(long idSucursal, long idCliente) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+        	tx.begin();
+        	long id = nextval ();
+            long tuplasInsertadas = sqlCarrito.solicitarCarrito(pm, id, idSucursal, idCliente, Carrito.EN_USO );
+            tx.commit();
+            
+            System.out.println("Adicionando carrito: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+            return new Carrito(id, idSucursal, idCliente);
+        }
+        catch (Exception e)
+        {
+        	System.out.println("Exception : "+ e + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	//Abandonar un carrito consiste en eliminar ese carrito de la tabla
+	public long abandonarCarrito ( long idCarrito ) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlCarrito.eliminarCarrito(pm, idCarrito);
+            //Se debe devolver la cantidad de productos al estante
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
 
 
+	/* ****************************************************************
+	 * 			Métodos para manejar los ItemCarrito
+	 *****************************************************************/
+
+	//Para agregar un producto a un carrito se crea un itemCarrito y se le asocia al carrito que tiene el cliente, 
+	//se debe disminuir la cantidad de productos del estante.
+	
+
+	public ItemCarrito aniadirProductoAlCarrito(long idCarrito, String idProducto, BigDecimal n) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+        	tx.begin();
+        	long id = nextval ();
+            long tuplasInsertadas = sqlItemCarrito.adicionarItemCarrito(pm, id, idCarrito, idProducto, n);
+            tx.commit();
+            
+            System.out.println("Adicionando producto al carrito: " + idCarrito + ": " + tuplasInsertadas + " tuplas insertadas");
+            
+            return new ItemCarrito(id, n, idProducto, idCarrito);
+        }
+        catch (Exception e)
+        {
+        	System.out.println("Exception : "+ e + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	public long eliminarItemCarrito ( long idCarrito , String idProducto ) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlItemCarrito.eliminarItemCarrito(pm, idCarrito, idProducto);
+            //Se debe devolver la cantidad de productos al estante
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	public long actualizarCantidadItemCarrito(long idCarrito, String idProducto, BigDecimal aDevolver)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            System.out.println(tx.getIsolationLevel());
+            long resp = sqlItemCarrito.actualizarCantidadItemCarrito(pm, idCarrito, idProducto, aDevolver);
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	System.out.println ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
 }

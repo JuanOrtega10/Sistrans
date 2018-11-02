@@ -14,6 +14,7 @@
 
 package uniandes.isis2304.superandes.negocio;
 
+import java.math.BigDecimal;
 
 /**
  * Interfaz para los métodos get de BODEGA.
@@ -25,8 +26,8 @@ public interface VOItemCarrito
 {
 	
 	public long getId();
-	public int getCantidad();
+	public BigDecimal getCantidad();
 	public long getIdCarrito();
-	public long getIdProducto();
+	public String getIdProducto();
 
 }

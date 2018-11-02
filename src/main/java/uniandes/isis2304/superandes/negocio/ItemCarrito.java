@@ -14,6 +14,7 @@
 
 package uniandes.isis2304.superandes.negocio;
 
+import java.math.BigDecimal;
 
 /**
  * Clase para modelar el concepto ItemCarrito de un producto del negocio de superandes.
@@ -32,13 +33,13 @@ public class ItemCarrito implements VOItemCarrito
 	/**
 	 * La cantidad de items en el pedido
 	 */
-	private int cantidad;
+	private BigDecimal cantidad;
 	
 	
 	/**
 	 * La id del producto que contienen.
 	 */
-	private long idProducto;
+	private String idProducto;
 	
 	/**
 	 * La id del producto que contienen.
@@ -55,8 +56,8 @@ public class ItemCarrito implements VOItemCarrito
 	public ItemCarrito() 
     {
     	this.id = 0;
-    	this.cantidad = 0;
-    	this.idProducto = 0;
+    	this.cantidad = null;
+    	this.idProducto = "";
     	this.idCarrito = 0;
 	}
 
@@ -66,7 +67,7 @@ public class ItemCarrito implements VOItemCarrito
 	 * @param cantidad
 	 * @param fechaVencimiento
 	 */
-	public ItemCarrito(long id, int cantidad, long idProducto, long idCarrito) {
+	public ItemCarrito(long id, BigDecimal cantidad, String idProducto, long idCarrito) {
 		this.id = id;
 		this.cantidad = cantidad;
 		this.idProducto = idProducto;
@@ -93,7 +94,7 @@ public class ItemCarrito implements VOItemCarrito
 	/**
 	 * @return the cantidad
 	 */
-	public int getCantidad() {
+	public BigDecimal getCantidad() {
 		return cantidad;
 	}
 
@@ -101,7 +102,7 @@ public class ItemCarrito implements VOItemCarrito
 	/**
 	 * @param cantidad the cantidad to set
 	 */
-	public void setCantidad(int cantidad) {
+	public void setCantidad(BigDecimal cantidad) {
 		this.cantidad = cantidad;
 	}
 
@@ -109,7 +110,7 @@ public class ItemCarrito implements VOItemCarrito
 	/**
 	 * @return the fechaVencimiento
 	 */
-	public long getIdProducto() {
+	public String getIdProducto() {
 		return idProducto;
 	}
 
@@ -117,7 +118,7 @@ public class ItemCarrito implements VOItemCarrito
 	/**
 	 * @param idProducto the fechaVencimiento to set
 	 */
-	public void setIdProducto(long idProducto) {
+	public void setIdProducto(String idProducto) {
 		this.idProducto = idProducto;
 	}
 	

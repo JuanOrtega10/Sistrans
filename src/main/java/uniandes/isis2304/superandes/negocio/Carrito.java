@@ -24,7 +24,7 @@ public class Carrito implements VOCarrito
 	
 	
 	
-	private final static String EN_USO = "EN_USO";
+	public final static String EN_USO = "EN_USO";
 	
 
 	/* ****************************************************************

@@ -1,6 +1,7 @@
 package view;
 
 import java.io.FileReader;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,8 +24,10 @@ import uniandes.isis2304.superandes.negocio.SuperAndes;
 import uniandes.isis2304.superandes.negocio.VOClienteNatural;
 import uniandes.isis2304.superandes.negocio.VODescuentoSegundoProducto;
 import uniandes.isis2304.superandes.negocio.VOBodega;
+import uniandes.isis2304.superandes.negocio.VOCarrito;
 import uniandes.isis2304.superandes.negocio.VOClienteEmpresa;
 import uniandes.isis2304.superandes.negocio.VOEstante;
+import uniandes.isis2304.superandes.negocio.VOItemCarrito;
 import uniandes.isis2304.superandes.negocio.VOPagueMLleveNUnidades;
 import uniandes.isis2304.superandes.negocio.VOPagueXLleveYCantidad;
 import uniandes.isis2304.superandes.negocio.VOProducto;
@@ -138,13 +141,7 @@ public class View
 				System.out.println("Ingrese el id de la categoria del producto");
 				String categoria = sc.next();
 				long cat = 0;
-				System.out.println("Ingrese el id del itemPedido");
-				String idItemPedido = sc.next();
-				Long itemPed = null;
-				String pattern = "yyyy-MM-dd";
-				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-				Date datep = new Date();
-	
+				
 				try {				
 					precio = Double.parseDouble(precioUnitProd);
 					cantidadP = Double.parseDouble(cantidadProd);
@@ -153,11 +150,10 @@ public class View
 					excl = Integer.parseInt(exclusivo);
 					tipoProd = Long.parseLong(idtipoProd);
 					cat = Long.parseLong(categoria);
-					itemPed = Long.parseLong(idItemPedido);
 				} catch (Exception e) {
 
 				}
-				VOProducto producto = superAndes.adicionarProducto(idProducto, nombreProd, marcaProd, precio, presentacionProd, cantidadP, unidadMedProd, precioUnM, esp, excl, itemPed, tipoProd, cat);
+				VOProducto producto = superAndes.adicionarProducto(idProducto, nombreProd, marcaProd, precio, presentacionProd, cantidadP, unidadMedProd, precioUnM, esp, excl, tipoProd, cat);
 
 				System.out.println(producto.toString());
 				break;
@@ -458,7 +454,7 @@ public class View
 					break;
 
 				}
-
+				
 				break;
 
 			case 8:
@@ -470,14 +466,111 @@ public class View
 			case 11:
 
 			case 12:
+				System.out.println("Ingrese el id del cliente");
+				String idCliente = sc.next();
+				long idCliente1 = 0;
+				System.out.println("Ingrese el id de la sucursal");
+				String idSucur = sc.next();
+				long idSucu = 0;
+				
+				try {
+					idCliente1 = Long.parseLong(idCliente);
+					idSucu = Long.parseLong(idSucur);
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				VOCarrito carrito = superAndes.solicitarCarrito(idSucu, idCliente1);
+				if(carrito!=null) System.out.println(carrito.toString());
+				else System.out.println("Información incorrecta");
+				
+				break;
 
 			case 13:
+				System.out.println("Ingrese el id del carrito");
+				String idCarrito = sc.next();
+				long idCarro = 0;
+				System.out.println("Ingrese el id del producto a agregar");
+				idProducto = sc.next();
+				System.out.println("Ingrese las unidades que se llevaran del producto");
+				String unidades = sc.next();
+				long un = 0;
+				BigDecimal n = null;
+				try {
+					idCarro = Long.parseLong(idCarrito);
+					un = Long.parseLong(unidades);
+					n = BigDecimal.valueOf(un);
+				} catch (Exception e) {
+
+				}
+				
+				VOItemCarrito itemCarrito = superAndes.aniadirProductoAlCarrito(idCarro, idProducto, n);
+				if( itemCarrito != null ) System.out.println(itemCarrito.toString());
+				else  System.out.println("Información incorrecta");		
+				break;
 
 			case 14:
+				//En la devolución del producto pueden devolverse todos lo que se habían agregado o solo una parte de ellos
+				//Para el primer caso se debe eliminar la tupla, para el segundo es necesario disminuir el atributo cantidad
+				
+				System.out.println("Ingrese el id del carrito");
+				idCarrito = sc.next();
+				idCarro = 0;
+				System.out.println("Ingrese el id del producto a devolver");
+				idProducto = sc.next();
+				System.out.println("¿Desea devolver todas la unidades de ese producto?");
+				System.out.println("1. Si");
+				System.out.println("2. No");
+				int devolucion = sc.nextInt();
+				switch (devolucion) {
+				case 1:
+					// Este es el caso en el que se debe eliminar la tupla
+					try {
+						idCarro = Long.parseLong(idCarrito);
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+					superAndes.eliminarItemCarrito(idCarro, idProducto);
+					
+					
+					break;
+				case 2:
+					// Este es el caso en el que se debe disminuir el atributo cantidad
+					System.out.println("¿Cuantas unidades desea devolver?");
+					String uADevolver = sc.next();
+					long algo = 0;
+					BigDecimal aDevolver = null;
+					try {
+						idCarro = Long.parseLong(idCarrito);
+						algo = Long.parseLong(uADevolver);
+						aDevolver = BigDecimal.valueOf(algo);
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+					superAndes.actualizarCantidadItemCarrito(idCarro, idProducto, aDevolver);
+					break;
+				}
+				
+				break;
 
 			case 15:
-
+				
+				System.out.println("Ingrese el id del carrito");
+				idCarrito = sc.next();
+				idCarro = 0;
+				
+				try {
+					
+					idCarro = Long.parseLong(idCarrito);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				superAndes.abandonarCarrito(idCarro);
+				break;
+				
 			case 16:
+
+			case 17:
 				fin=true;
 				sc.close();
 				break;
@@ -499,15 +592,18 @@ public class View
 		System.out.println("9. Registrar pedido");
 		System.out.println("10. Registrar llegada de pedido");
 		System.out.println("11. Registrar venta");
-		System.out.println("12. dinero recolectado");
-		System.out.println("13. 20 promociones mas populares ");
-		System.out.println("14. indice ocupacion bodegas y estantes");
-		System.out.println("15. productos que cumplen cierta caracteristica");
-		System.out.println("16. Salir");
+		System.out.println("---------ISIS SISTEMAS TRANSACCIONALES----------");
+		System.out.println("--------------------- ITERACION 2--------------------");
+		System.out.println("12. Solicitar carrito de compras");
+		System.out.println("13. Adicionar productos");
+		System.out.println("14. Devolver productos");
+		System.out.println("15. Abandonar carrito");
+		System.out.println("16. Pagar");
+		System.out.println("17. Salir");
 		System.out.println("Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):");
 
 	}
-
+	
 	private static JsonObject openConfig (String tipo, String archConfig)
 	{
 		JsonObject config = null;

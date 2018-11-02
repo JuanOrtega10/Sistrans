@@ -14,6 +14,7 @@
 
 package uniandes.isis2304.superandes.negocio;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
@@ -152,9 +153,9 @@ public class SuperAndes {
 	 */
 	public Proveedor adicionarProveedor (long nit, String nombre, double calificacion, int numCalificaciones)
 	{
-		log.info ("Adicionando Proveedor: " + nombre);
+		System.out.println("Adicionando Proveedor: " + nombre);
 		Proveedor proveedor = ps.adicionarProveedor (nit,nombre, calificacion, numCalificaciones);
-		log.info ("Adicionando Proveedor: " + proveedor);
+		System.out.println("Adicionando Proveedor: " + proveedor);
 		return proveedor;
 	}
 
@@ -556,10 +557,10 @@ public class SuperAndes {
 	 * @param nombre
 	 * @return El objeto Producto adicionado. null si ocurre alguna Excepción
 	 */
-	public Producto adicionarProducto (String id, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo,Long idItemPedido, long idTipoProducto, long idCategoria)
+	public Producto adicionarProducto (String id, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria)
 	{
 		System.out.println("Adicionando Producto: ");
-		Producto producto = ps.adicionarProducto(id, nombre, marca, precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo, idItemPedido, idTipoProducto, idCategoria);
+		Producto producto = ps.adicionarProducto(id, nombre, marca, precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo, idTipoProducto, idCategoria);
 		System.out.println ("Adicionando Producto: ");
 		return producto;
 	}
@@ -700,6 +701,56 @@ public class SuperAndes {
 		else return null;
 	}
 	
+	/* ****************************************************************
+	 * 			Métodos para manejar LOS CARRITOS
+	 *****************************************************************/
+	
+	public Carrito solicitarCarrito( long idSucursal, long idCliente ) 
+	{
+		
+		System.out.println(" Solicitando carrito ");
+		Carrito carrito = ps.solicitarCarritoDeCompras(idSucursal, idCliente);
+		System.out.println ("Adicionando Carrito: " + carrito );
+		return carrito;
+	}
+	
+	public long abandonarCarrito ( long idCarrito )
+	{
+		System.out.println ("Eliminando Carrito");
+        long resp = ps.abandonarCarrito(idCarrito);
+        System.out.println ("Eliminando Carrito: " + resp + " tuplas eliminadas");
+        return resp;
+	}
+	
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar LOS ITEMCARRITO
+	 *****************************************************************/
+
+	public ItemCarrito aniadirProductoAlCarrito(long idCarrito, String idProducto, BigDecimal n)
+	{
+		System.out.println(" Aniadiendo producto al carrito ");
+		ItemCarrito itemCarrito = ps.aniadirProductoAlCarrito(idCarrito, idProducto, n);
+		System.out.println ("Adicionando producto al carrito: " + idCarrito );
+		return itemCarrito;
+	}
+	
+	public long eliminarItemCarrito (long idCarrito, String idProducto)
+	{
+		System.out.println ("Eliminando ItemCarrito");
+        long resp = ps.eliminarItemCarrito(idCarrito, idProducto);
+        System.out.println ("Eliminando ItemCarrito: " + resp + " tuplas eliminadas");
+        return resp;
+	}
+	
+	public long actualizarCantidadItemCarrito(long idCarrito, String idProducto, BigDecimal aDevolver)
+	{
+		
+		System.out.println ("Actualizando ItemCarrito");
+        long resp = ps.actualizarCantidadItemCarrito(idCarrito, idProducto, aDevolver);
+        System.out.println ("Actualizando ItemCarrito: " + resp + " tuplas actualizadas");
+        return resp;
+	}
 }
 
 

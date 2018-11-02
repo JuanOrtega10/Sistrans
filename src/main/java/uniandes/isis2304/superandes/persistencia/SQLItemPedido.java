@@ -62,10 +62,10 @@ class SQLItemPedido
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar una Bodega a la base de datos de SuperAndes
 	 */
-	public long adicionarItemPedido (PersistenceManager pm, long id, int cantidad , Timestamp fechaVencimiento, long idPedido) 
+	public long adicionarItemPedido (PersistenceManager pm, long id, int cantidad , Timestamp fechaVencimiento, long idPedido, String idProducto) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaItemPedido() + "( id, cantidad, fechavencimiento, idpedido ) values (?, ?, ?, ?)");
-        q.setParameters(id, cantidad, fechaVencimiento, idPedido);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaItemPedido() + "( id, cantidad, fechavencimiento, idpedido, idProducto ) values (?, ?, ?, ?, ?)");
+        q.setParameters(id, cantidad, fechaVencimiento, idPedido, idProducto);
         return (long) q.executeUnique();
 	}
 

@@ -96,11 +96,6 @@ public class Producto implements VOProducto
 	private long idCategoria;
 	
 	
-	/**
-	 * El id del itemProducto
-	 */
-	private Long idItemPedido;
-	
 	/* ****************************************************************
 	 * 			Métodos 
 	 *****************************************************************/
@@ -120,7 +115,6 @@ public class Producto implements VOProducto
     	this.unidadMedida = "";
     	this.especificacionEmpaque = 0;
     	this.exclusivo = 0;
-    	this.idItemPedido = null;
     	this.idCategoria = 0;
     	this.idTipoProducto = 0;
     	
@@ -142,7 +136,7 @@ public class Producto implements VOProducto
 	 */
 	
 	
-    public Producto(String codigo, String nombre, String marca, double precioUnitario, String presentacion, double precioUnidadMedida, double cantidad, String unidadMedida, double especificacionEmpaque, int exclusivo, Long idItemPedido, long idCategoria, long idTipoProducto) 
+    public Producto(String codigo, String nombre, String marca, double precioUnitario, String presentacion, double precioUnidadMedida, double cantidad, String unidadMedida, double especificacionEmpaque, int exclusivo, long idCategoria, long idTipoProducto) 
     {
     	this.id = codigo;
     	this.nombre = nombre;
@@ -154,7 +148,6 @@ public class Producto implements VOProducto
     	this.unidadMedida = unidadMedida;
     	this.especificacionEmpaque = especificacionEmpaque;
     	this.exclusivo = exclusivo;
-    	this.idItemPedido = idItemPedido;
     	this.idCategoria = idCategoria;
     	this.idTipoProducto = idTipoProducto;
 	}
@@ -302,20 +295,6 @@ public class Producto implements VOProducto
 	}
 
 	/**
-	 * @return the fechaVencimiento
-	 */
-	public long getIdItemPedido() {
-		return idItemPedido;
-	}
-
-	/**
-	 * @param fechaVencimiento the fechaVencimiento to set
-	 */
-	public void setIdItemPedido(long idIdItemPedido) {
-		this.idItemPedido = idIdItemPedido;
-	}
-
-	/**
 	 * @return the idTipoProducto
 	 */
 	public long getIdTipoProducto() {
@@ -351,8 +330,7 @@ public class Producto implements VOProducto
 		return "Producto [id=" + id + ", nombre=" + nombre + ", marca=" + marca + ", precioUnitario=" + precioUnitario
 				+ ", presentacion=" + presentacion + ", precioUnidadMedida=" + precioUnidadMedida + ", cantidad="
 				+ cantidad + ", unidadMedida=" + unidadMedida + ", especificacionEmpaque=" + especificacionEmpaque
-				+ ", exclusivo=" + exclusivo + ", idTipoProducto=" + idTipoProducto + ", idCategoria=" + idCategoria
-				+ ", idItemPedido=" + idItemPedido + "]";
+				+ ", exclusivo=" + exclusivo + ", idTipoProducto=" + idTipoProducto + ", idCategoria=" + idCategoria + "]";
 	}
 
 	/* (non-Javadoc)

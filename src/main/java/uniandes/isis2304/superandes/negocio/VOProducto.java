@@ -86,8 +86,6 @@ public interface VOProducto
 	 */
 	public long getIdCategoria();
 	
-	
-	public long getIdItemPedido();
 
 	/** 
 	 * @return Una cadena con la información básica

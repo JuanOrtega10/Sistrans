@@ -1424,7 +1424,7 @@ public class PersistenciaSuperAndes {
 	//se debe disminuir la cantidad de productos del estante.
 	
 
-	public ItemCarrito aniadirProductoAlCarrito(long idCarrito, String idProducto, BigDecimal n) 
+	public ItemCarrito aniadirProductoAlCarrito(long idCarrito, String idProducto, BigDecimal n, long idEstante) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -1432,7 +1432,7 @@ public class PersistenciaSuperAndes {
         {
         	tx.begin();
         	long id = nextval ();
-            long tuplasInsertadas = sqlItemCarrito.adicionarItemCarrito(pm, id, idCarrito, idProducto, n);
+            long tuplasInsertadas = sqlItemCarrito.adicionarItemCarrito(pm, id, idCarrito, idProducto, n, idEstante);
             tx.commit();
             
             System.out.println("Adicionando producto al carrito: " + idCarrito + ": " + tuplasInsertadas + " tuplas insertadas");

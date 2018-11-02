@@ -496,15 +496,20 @@ public class View
 				String unidades = sc.next();
 				long un = 0;
 				BigDecimal n = null;
+				
+				System.out.println("Ingrese el id del estante del que tomó el producto");
+				String estante1 = sc.next();
+				long idEstante = 0;
 				try {
 					idCarro = Long.parseLong(idCarrito);
 					un = Long.parseLong(unidades);
+					idEstante = Long.parseLong(estante1);
 					n = BigDecimal.valueOf(un);
 				} catch (Exception e) {
 
 				}
 				
-				VOItemCarrito itemCarrito = superAndes.aniadirProductoAlCarrito(idCarro, idProducto, n);
+				VOItemCarrito itemCarrito = superAndes.aniadirProductoAlCarrito(idCarro, idProducto, n, idEstante);
 				if( itemCarrito != null ) System.out.println(itemCarrito.toString());
 				else  System.out.println("Información incorrecta");		
 				break;

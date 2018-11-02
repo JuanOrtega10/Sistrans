@@ -64,7 +64,7 @@ class SQLItemCarrito
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar un ALMACENAMIENTO a la base de datos de SuperAndes
 	 */
-	public long adicionarItemCarrito (PersistenceManager pm, long id, long idCarrito, String idProducto, BigDecimal cantidad) 
+	public long adicionarItemCarrito (PersistenceManager pm, long id, long idCarrito, String idProducto, BigDecimal cantidad, long idEstante) 
 	{	
 		
         Query sucursal = pm.newQuery(SQL, "SELECT idSucursal FROM " + ps.darTablaCarrito() + " WHERE id = ?");
@@ -73,8 +73,8 @@ class SQLItemCarrito
         System.out.println("La sucursal es : " +idsucursal);
         
         
-        Query volumen = pm.newQuery(SQL, "SELECT IDVOLUMENPRODUCTO FROM (" + ps.darTablaEstante()+ " INNER JOIN " + ps.darTablaAlmacenamiento()+ " ON "+ps.darTablaEstante()+".IDALMACENAMIENTO = "+ps.darTablaAlmacenamiento()+".ID ) WHERE idSucursal = ?");
-        volumen.setParameters(idsucursal);
+        Query volumen = pm.newQuery(SQL, "SELECT IDVOLUMENPRODUCTO FROM (" + ps.darTablaEstante()+ " INNER JOIN " + ps.darTablaAlmacenamiento()+ " ON "+ps.darTablaEstante()+".IDALMACENAMIENTO = "+ps.darTablaAlmacenamiento()+".ID ) WHERE id = ? ");
+        volumen.setParameters(idEstante);
         BigDecimal idVolumen = (BigDecimal) volumen.executeUnique();
         System.out.println("El id del volProd es : " + idVolumen);
         

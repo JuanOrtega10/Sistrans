@@ -727,10 +727,10 @@ public class SuperAndes {
 	 * 			Métodos para manejar LOS ITEMCARRITO
 	 *****************************************************************/
 
-	public ItemCarrito aniadirProductoAlCarrito(long idCarrito, String idProducto, BigDecimal n)
+	public ItemCarrito aniadirProductoAlCarrito(long idCarrito, String idProducto, BigDecimal n, long idEstante)
 	{
 		System.out.println(" Aniadiendo producto al carrito ");
-		ItemCarrito itemCarrito = ps.aniadirProductoAlCarrito(idCarrito, idProducto, n);
+		ItemCarrito itemCarrito = ps.aniadirProductoAlCarrito(idCarrito, idProducto, n, idEstante);
 		System.out.println ("Adicionando producto al carrito: " + idCarrito );
 		return itemCarrito;
 	}

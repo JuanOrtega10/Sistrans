@@ -16,6 +16,7 @@
 package uniandes.isis2304.superandes.persistencia;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -103,39 +104,47 @@ class SQLCarrito
         System.out.println("La sucursal es : " +idsucursal);
         
         
-        Query volumen = pm.newQuery(SQL, "SELECT IDVOLUMENPRODUCTO FROM (" + ps.darTablaEstante()+ " INNER JOIN " + ps.darTablaAlmacenamiento()+ " ON "+ps.darTablaEstante()+".IDALMACENAMIENTO = "+ps.darTablaAlmacenamiento()+".ID ) WHERE idSucursal = ?");
+        Query volumen = pm.newQuery(SQL, "SELECT IDVOLUMENPRODUCTO "
+        		+ "FROM (" + ps.darTablaEstante()+ " INNER JOIN " +
+        		ps.darTablaAlmacenamiento()+ " ON "+ps.darTablaEstante()+".IDALMACENAMIENTO ="
+        				+ " "+ps.darTablaAlmacenamiento()+".ID ) WHERE idSucursal = ?");
         volumen.setParameters(idsucursal);
-        BigDecimal idVolumen = (BigDecimal) volumen.executeUnique();
+        List<BigDecimal> idVolumen = new ArrayList();
+        idVolumen = volumen.executeList();
         System.out.println("El id del volProd es : " + idVolumen);
         
+        for (BigDecimal bigDecimal : idVolumen) {
+			System.out.println(bigDecimal.doubleValue());
+		}
         
+//        Query cantidadActual = pm.newQuery(SQL,"SELECT CANTIDAD FROM "+ ps.darTablaVolumenProducto()+ " WHERE id = ?");
+//        cantidadActual.setParameters(idVolumen);
+//        BigDecimal cActual = (BigDecimal) cantidadActual.executeUnique();
+//        System.out.println("la cantidad Actual es "+ cActual);
+//        
+//        Query cantidad = pm.newQuery(SQL,"SELECT CANTIDAD FROM "+ ps.darTablaItemCarrito()+ " WHERE idCarrito = ? AND idProducto = ?");
+//        cantidad.setParameters(idCarrito);
+//        BigDecimal cDevolver = (BigDecimal) cantidad.executeUnique();
+//        
+//        BigDecimal cNueva = cActual.add(cDevolver);
+//        System.out.println("la cantidad nueva es "+ cNueva);
+//        
+//        
+//        Query actualizar = pm.newQuery(SQL, "UPDATE " + ps.darTablaVolumenProducto() + " SET cantidad = ? WHERE id  = ?");
+//	    actualizar.setParameters(cNueva,idVolumen);
+//	    
+//	   
+//	    actualizar.executeUnique();
+//		
+//        Query i = pm.newQuery(SQL, "DELETE FROM " +ps.darTablaItemCarrito() + " WHERE idCarrito  = ?");
+//        i.setParameters(idCarrito);
+//        i.executeUnique();
+//        Query q = pm.newQuery(SQL, "DELETE FROM " +ps.darTablaCarrito() + " WHERE id  = ?");
+//        q.setParameters(idCarrito);
+//        long ret =(long) q.executeUnique();
+//        System.out.println("voy a retornar esto en SQL "+ ret );
+//        return ret;
         
-        Query cantidadActual = pm.newQuery(SQL,"SELECT CANTIDAD FROM "+ ps.darTablaVolumenProducto()+ " WHERE id = ?");
-        cantidadActual.setParameters(idVolumen);
-        BigDecimal cActual = (BigDecimal) cantidadActual.executeUnique();
-        System.out.println("la cantidad Actual es "+ cActual);
-        
-        Query cantidad = pm.newQuery(SQL,"SELECT CANTIDAD FROM "+ ps.darTablaItemCarrito()+ " WHERE idCarrito = ? AND idProducto = ?");
-        cantidad.setParameters(idCarrito);
-        BigDecimal cDevolver = (BigDecimal) cantidad.executeUnique();
-        
-        BigDecimal cNueva = cActual.add(cDevolver);
-        System.out.println("la cantidad nueva es "+ cNueva);
-        
-        
-        Query actualizar = pm.newQuery(SQL, "UPDATE " + ps.darTablaVolumenProducto() + " SET cantidad = ? WHERE id  = ?");
-	    actualizar.setParameters(cNueva,idVolumen);
-	    
-	   
-	    actualizar.executeUnique();
-		
-        Query i = pm.newQuery(SQL, "DELETE FROM " +ps.darTablaItemCarrito() + " WHERE idCarrito  = ?");
-        i.setParameters(idCarrito);
-        i.executeUnique();
-        Query q = pm.newQuery(SQL, "DELETE FROM " +ps.darTablaCarrito() + " WHERE id  = ?");
-        q.setParameters(idCarrito);
-        long ret =(long) q.executeUnique();
-        System.out.println("voy a retornar esto en SQL "+ ret );
-        return ret;
+        return 0;
 	}
 }

@@ -173,6 +173,8 @@ public class View
 					long idC = 0;
 					System.out.println("Ingrese el nombre del cliente");
 					String nombreCliente = sc.next();
+					System.out.println("Ingrese la contraseña del cliente");
+					String password = sc.next();
 					System.out.println("Ingrese el correo del cliente");
 					String correo = sc.next();
 					
@@ -185,7 +187,7 @@ public class View
 						break;
 					}
 
-					VOClienteNatural cliente = superAndes.adicionarClienteNatural(idC, nombreCliente, correo);
+					VOClienteNatural cliente = superAndes.adicionarClienteNatural(idC, nombreCliente, correo, password);
 					if (cliente!= null) System.out.println(cliente.toString());
 					else System.out.println("No fue posible añadir al cliente cliente");
 					break;
@@ -201,6 +203,8 @@ public class View
 					String correo2 = sc.next();
 					System.out.println("Ingrese la dirección del cliente");
 					String direccion2 = sc.next();
+					System.out.println("Ingrese la contraseña del cliente");
+					password = sc.next();
 
 					try {
 						idC2 = Long.parseLong(id2);
@@ -211,7 +215,7 @@ public class View
 						break;
 					}
 
-					VOClienteEmpresa cliente2 = superAndes.adicionarClienteEmpresa(idC2, nombreCliente2, correo2, direccion2);
+					VOClienteEmpresa cliente2 = superAndes.adicionarClienteEmpresa(idC2, nombreCliente2, correo2, direccion2, password);
 					if (cliente2!= null) System.out.println(cliente2.toString());
 					else System.out.println("No fue posible añadir al cliente empresa");
 					break;
@@ -579,7 +583,7 @@ public class View
 				break;
 				
 			case 16:
-
+				
 				
 			case 17:
 				fin=true;

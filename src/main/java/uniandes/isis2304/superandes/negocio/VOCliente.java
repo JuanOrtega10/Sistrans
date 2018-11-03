@@ -41,6 +41,11 @@ public interface VOCliente
 	 */
 	public String getCorreo();
 	
+	/**
+	 * @return El correo del Cliente
+	 */
+	public String getPassword();
+	
 	
 
 }

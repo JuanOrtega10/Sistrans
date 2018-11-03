@@ -54,9 +54,9 @@ public class ClienteEmpresa extends Cliente implements VOClienteEmpresa
 	 * @param nombre - El volumen máximo soportado por el almacenamiento
 	 * @param correo - El peso máximo soportado por el almacenamiento
 	 */
-    public ClienteEmpresa(long id, String nombre, String correo, String direccion)
+    public ClienteEmpresa(long id, String nombre, String correo, String direccion, String password)
     {
-    	super(id, nombre, correo);
+    	super(id, nombre, correo, password);
     	this.direccion = direccion;
 	}
     

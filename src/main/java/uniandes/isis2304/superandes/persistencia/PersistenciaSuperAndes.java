@@ -966,16 +966,16 @@ public class PersistenciaSuperAndes {
 	 * @param idVolumenProducto
 	 * @return El id del almacenamiento. null si ocurre alguna Excepción
 	 */
-	public Long adicionarCliente(long id, String nombre, String correo) 
+	public Long adicionarCliente(long id, String nombre, String correo, String password) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx = pm.currentTransaction();
         try
         {
         	tx.begin();
-        	System.out.println("Llega");
-            long tuplasInsertadas = sqlCliente.adicionarCliente(pm, id, nombre, correo);
-            System.out.println("Llega2");
+        
+            long tuplasInsertadas = sqlCliente.adicionarCliente(pm, id, nombre, correo, password);
+          
             tx.commit();
             
            	System.out.println("Inserción Cliente: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
@@ -1027,7 +1027,7 @@ public class PersistenciaSuperAndes {
 	 * @param direccion
 	 * @return El objeto Bodega adicionado. null si ocurre alguna Excepción
 	 */
-	public ClienteNatural adicionarClienteNatural(long id, String nombre, String correo) 
+	public ClienteNatural adicionarClienteNatural(long id, String nombre, String correo, String password) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -1038,7 +1038,7 @@ public class PersistenciaSuperAndes {
             tx.commit();
             
             System.out.println("Inserción Cliente Natural: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
-            return new ClienteNatural(id, nombre, correo);
+            return new ClienteNatural(id, nombre, correo, password);
         }
         catch (Exception e)
         {
@@ -1067,7 +1067,7 @@ public class PersistenciaSuperAndes {
 	 * @param direccion
 	 * @return El objeto Bodega adicionado. null si ocurre alguna Excepción
 	 */
-	public ClienteEmpresa adicionarClienteEmpresa(long id, String nombre, String correo, String direccion) 
+	public ClienteEmpresa adicionarClienteEmpresa(long id, String nombre, String correo, String direccion, String password) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -1078,7 +1078,7 @@ public class PersistenciaSuperAndes {
             tx.commit();
             
             System.out.println("Inserción Cliente Empresa: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
-            return new ClienteEmpresa(id, nombre, correo, direccion);
+            return new ClienteEmpresa(id, nombre, correo, direccion, password);
         }
         catch (Exception e)
         {

@@ -45,9 +45,9 @@ public class ClienteNatural extends Cliente implements VOClienteNatural
 	 * @param nombre - El volumen máximo soportado por el almacenamiento
 	 * @param correo - El peso máximo soportado por el almacenamiento
 	 */
-    public ClienteNatural(long id, String nombre, String correo)
+    public ClienteNatural(long id, String nombre, String correo, String password)
     {
-    	super(id, nombre, correo);
+    	super(id, nombre, correo, password);
 	}
     
     /** 

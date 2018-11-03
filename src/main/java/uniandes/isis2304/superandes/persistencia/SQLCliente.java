@@ -61,10 +61,10 @@ class SQLCliente
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar una SUCURSAL a la base de datos de SuperAndes
 	 */
-	public long adicionarCliente (PersistenceManager pm, long id, String nombre, String correo) 
+	public long adicionarCliente (PersistenceManager pm, long id, String nombre, String correo, String password) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaCliente() + "(id, nombre, correo) values (?, ?, ?)");
-        q.setParameters(id, nombre, correo);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaCliente() + "(id, nombre, correo, password) values (?, ?, ?, ?)");
+        q.setParameters(id, nombre, correo, password);
         return (long) q.executeUnique();
 	}
 

@@ -43,6 +43,11 @@ public abstract class Cliente implements VOCliente
 	 */
 	private String correo;
 	
+	/**
+	 * @return El correo del Cliente
+	 */
+	private String password;
+	
 	
 	/* ****************************************************************
 	 * 			Métodos 
@@ -55,6 +60,7 @@ public abstract class Cliente implements VOCliente
     	this.id = 0;
 		this.nombre = "";
 		this.correo = "";
+		this.password = "";
 	}
 	
 	/**
@@ -63,11 +69,12 @@ public abstract class Cliente implements VOCliente
 	 * @param nombre - El nombre del cliente
 	 * @param correo - El correo del cliente
 	 */
-    public Cliente(long id, String nombre, String correo)
+    public Cliente(long id, String nombre, String correo, String password)
     {
     	this.id = id;
 		this.nombre = nombre;
 		this.correo = correo;
+		this.password = password;
 		
 	}
 
@@ -113,6 +120,21 @@ public abstract class Cliente implements VOCliente
 		this.correo = correo;
 	}
 
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	
 	
 	
 }

@@ -349,16 +349,16 @@ public class SuperAndes {
 	 * Adiciona entradas al log de la aplicación
 	 * @return El objeto ClienteNaturaladicionado. null si ocurre alguna Excepción
 	 */
-	public ClienteNatural adicionarClienteNatural(long id,String nombre, String correo) 
+	public ClienteNatural adicionarClienteNatural(long id,String nombre, String correo, String password) 
 	{
 		System.out.println("Adicionando Cliente: " + id);
-		Long cliente = ps.adicionarCliente( id ,nombre, correo) ;
+		Long cliente = ps.adicionarCliente( id ,nombre, correo, password) ;
 		System.out.println("Adicionando Cliente: " + id);
 		if(cliente != null)
 		{
 
 			System.out.println("Adicionando ClienteNatural : ");
-			ClienteNatural clienteNatural= ps.adicionarClienteNatural(id, nombre, correo) ;
+			ClienteNatural clienteNatural= ps.adicionarClienteNatural(id, nombre, correo, password) ;
 			System.out.println("Adicionando ClienteNatural: ");
 			return clienteNatural;
 
@@ -422,17 +422,17 @@ public class SuperAndes {
 	//	 * @param direccion
 	//	 * @return El objeto ClienteEmpresaadicionado. null si ocurre alguna Excepción
 	//	 */
-	public ClienteEmpresa adicionarClienteEmpresa( long id ,String nombre, String correo,String direccion)  
+	public ClienteEmpresa adicionarClienteEmpresa( long id ,String nombre, String correo,String direccion, String password)  
 	{
 
 		log.info ("Adicionando Cliente: " + id);
-		Long cliente = ps.adicionarCliente( id ,nombre, correo);
+		Long cliente = ps.adicionarCliente( id ,nombre, correo, password);
 		log.info ("Adicionando Cliente: " + id);
 		if(cliente != null)
 		{
 			{
 				System.out.println("Adicionando ClienteEmpresa : ");
-				ClienteEmpresa clienteEmpresa= ps.adicionarClienteEmpresa( id , nombre, correo, direccion)  ;
+				ClienteEmpresa clienteEmpresa= ps.adicionarClienteEmpresa( id , nombre, correo, direccion, password)  ;
 				System.out.println("Adicionando ClienteEmpresa: ");
 				return clienteEmpresa;
 			}

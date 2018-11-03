@@ -46,6 +46,11 @@ public class ItemCarrito implements VOItemCarrito
 	 */
 	private long idCarrito;
 	
+	/**
+	 * La id del producto que contienen.
+	 */
+	private long idEstante;
+	
 	
 	/* ****************************************************************
 	 * 			Métodos 
@@ -59,6 +64,7 @@ public class ItemCarrito implements VOItemCarrito
     	this.cantidad = null;
     	this.idProducto = "";
     	this.idCarrito = 0;
+    	this.idEstante = 0;
 	}
 
 
@@ -67,11 +73,12 @@ public class ItemCarrito implements VOItemCarrito
 	 * @param cantidad
 	 * @param fechaVencimiento
 	 */
-	public ItemCarrito(long id, BigDecimal cantidad, String idProducto, long idCarrito) {
+	public ItemCarrito(long id, BigDecimal cantidad, String idProducto, long idCarrito, long idEstante) {
 		this.id = id;
 		this.cantidad = cantidad;
 		this.idProducto = idProducto;
 		this.idCarrito = idCarrito;
+		this.idEstante = idEstante;
 	}
 
 
@@ -140,6 +147,23 @@ public class ItemCarrito implements VOItemCarrito
 		this.idCarrito = idCarrito;
 	}
 
+	
+
+	/**
+	 * @return the idEstante
+	 */
+	public long getIdEstante() {
+		return idEstante;
+	}
+
+
+	/**
+	 * @param idEstante the idEstante to set
+	 */
+	public void setIdEstante(long idEstante) {
+		this.idEstante = idEstante;
+	}
+
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -147,7 +171,7 @@ public class ItemCarrito implements VOItemCarrito
 	@Override
 	public String toString() {
 		return "ItemCarrito [id=" + id + ", cantidad=" + cantidad + ", idProducto=" + idProducto + ", idCarrito="
-				+ idCarrito + "]";
+				+ idCarrito + "idEstante=" + idEstante +"]";
 	}		
 	
 	

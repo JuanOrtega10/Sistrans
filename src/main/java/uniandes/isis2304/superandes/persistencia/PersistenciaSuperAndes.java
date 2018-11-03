@@ -1401,8 +1401,8 @@ public class PersistenciaSuperAndes {
         }
         catch (Exception e)
         {
-//        	e.printStackTrace();
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	e.printStackTrace();
+        	System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
             return -1;
         }
         finally
@@ -1437,11 +1437,11 @@ public class PersistenciaSuperAndes {
             
             System.out.println("Adicionando producto al carrito: " + idCarrito + ": " + tuplasInsertadas + " tuplas insertadas");
             
-            return new ItemCarrito(id, n, idProducto, idCarrito);
+            return new ItemCarrito(id, n, idProducto, idCarrito, idEstante);
         }
         catch (Exception e)
         {
-        	System.out.println("Exception : "+ e + e.getMessage() + "\n" + darDetalleException(e));
+        	System.out.println("Exception : "+ e.getMessage() + "\n" + darDetalleException(e));
         	return null;
         }
         finally
@@ -1454,14 +1454,14 @@ public class PersistenciaSuperAndes {
         }
 	}
 	
-	public long eliminarItemCarrito ( long idCarrito , String idProducto ) 
+	public long eliminarItemCarrito ( long idCarrito , String idProducto, long idEstante ) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try
         {
             tx.begin();
-            long resp = sqlItemCarrito.eliminarItemCarrito(pm, idCarrito, idProducto);
+            long resp = sqlItemCarrito.eliminarItemCarrito(pm, idCarrito, idProducto, idEstante);
             //Se debe devolver la cantidad de productos al estante
             tx.commit();
 
@@ -1483,7 +1483,7 @@ public class PersistenciaSuperAndes {
         }
 	}
 	
-	public long actualizarCantidadItemCarrito(long idCarrito, String idProducto, BigDecimal aDevolver)
+	public long actualizarCantidadItemCarrito(long idCarrito, String idProducto, BigDecimal aDevolver, long idEstante)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -1491,7 +1491,7 @@ public class PersistenciaSuperAndes {
         {
             tx.begin();
             System.out.println(tx.getIsolationLevel());
-            long resp = sqlItemCarrito.actualizarCantidadItemCarrito(pm, idCarrito, idProducto, aDevolver);
+            long resp = sqlItemCarrito.actualizarCantidadItemCarrito(pm, idCarrito, idProducto, aDevolver, idEstante);
             tx.commit();
             return resp;
         }

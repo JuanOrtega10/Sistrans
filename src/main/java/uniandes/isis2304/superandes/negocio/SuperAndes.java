@@ -735,19 +735,19 @@ public class SuperAndes {
 		return itemCarrito;
 	}
 	
-	public long eliminarItemCarrito (long idCarrito, String idProducto)
+	public long eliminarItemCarrito (long idCarrito, String idProducto, long idEstante)
 	{
 		System.out.println ("Eliminando ItemCarrito");
-        long resp = ps.eliminarItemCarrito(idCarrito, idProducto);
+        long resp = ps.eliminarItemCarrito(idCarrito, idProducto, idEstante);
         System.out.println ("Eliminando ItemCarrito: " + resp + " tuplas eliminadas");
         return resp;
 	}
 	
-	public long actualizarCantidadItemCarrito(long idCarrito, String idProducto, BigDecimal aDevolver)
+	public long actualizarCantidadItemCarrito(long idCarrito, String idProducto, BigDecimal aDevolver, long idEstante)
 	{
 		
 		System.out.println ("Actualizando ItemCarrito");
-        long resp = ps.actualizarCantidadItemCarrito(idCarrito, idProducto, aDevolver);
+        long resp = ps.actualizarCantidadItemCarrito(idCarrito, idProducto, aDevolver, idEstante);
         System.out.println ("Actualizando ItemCarrito: " + resp + " tuplas actualizadas");
         return resp;
 	}

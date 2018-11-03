@@ -523,6 +523,9 @@ public class View
 				idCarro = 0;
 				System.out.println("Ingrese el id del producto a devolver");
 				idProducto = sc.next();
+				System.out.println("Ingrese el id del estate del que cogió el producto");
+				estante1 = sc.next();
+				idEstante = 0;
 				System.out.println("¿Desea devolver todas la unidades de ese producto?");
 				System.out.println("1. Si");
 				System.out.println("2. No");
@@ -532,10 +535,11 @@ public class View
 					// Este es el caso en el que se debe eliminar la tupla
 					try {
 						idCarro = Long.parseLong(idCarrito);
+						idEstante = Long.parseLong(estante1);
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
-					superAndes.eliminarItemCarrito(idCarro, idProducto);
+					superAndes.eliminarItemCarrito(idCarro, idProducto, idEstante);
 					
 					
 					break;
@@ -549,10 +553,11 @@ public class View
 						idCarro = Long.parseLong(idCarrito);
 						algo = Long.parseLong(uADevolver);
 						aDevolver = BigDecimal.valueOf(algo);
+						idEstante = Long.parseLong(estante1);
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
-					superAndes.actualizarCantidadItemCarrito(idCarro, idProducto, aDevolver);
+					superAndes.actualizarCantidadItemCarrito(idCarro, idProducto, aDevolver, idEstante);
 					break;
 				}
 				
@@ -575,6 +580,7 @@ public class View
 				
 			case 16:
 
+				
 			case 17:
 				fin=true;
 				sc.close();
@@ -624,7 +630,7 @@ public class View
 		{
 			//			e.printStackTrace ();
 			log.info ("NO se encontró un archivo de configuración válido");			
-			JOptionPane.showMessageDialog(null, "No se encontró un archivo de configuración de interfaz válido: " + tipo, "Parranderos App", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "No se encontró un archivo de configuración de interfaz válido: " + tipo, "SuperAndes App", JOptionPane.ERROR_MESSAGE);
 		}	
 		return config;
 	}

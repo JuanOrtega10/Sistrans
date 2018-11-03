@@ -29,5 +29,6 @@ public interface VOItemCarrito
 	public BigDecimal getCantidad();
 	public long getIdCarrito();
 	public String getIdProducto();
+	public long getIdEstante();
 
 }

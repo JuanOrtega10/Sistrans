@@ -60,45 +60,48 @@ class SQLItemCarrito
 	{
 		this.ps = ps;
 	}
-	
+
+
+
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar un ALMACENAMIENTO a la base de datos de SuperAndes
+	 * @throws Exception 
 	 */
-	public long adicionarItemCarrito (PersistenceManager pm, long id, long idCarrito, String idProducto, BigDecimal cantidad, long idEstante) 
+	public long adicionarItemCarrito (PersistenceManager pm, long id, long idCarrito, String idProducto, BigDecimal cantidad, long idEstante) throws Exception 
 	{	
+
+		//Verificar que es un nuevo producto el que está añadiendo, sino, se debe añadir a un itemCarrito existente.
+		Query verificar = pm.newQuery(SQL, "SELECT count(*) FROM " + ps.darTablaItemCarrito() + " WHERE idProducto = ? AND idCarrito = ? ");
+		verificar.setParameters(idProducto, idCarrito);
+		BigDecimal hay = (BigDecimal) verificar.executeUnique();
+
 		
-        Query sucursal = pm.newQuery(SQL, "SELECT idSucursal FROM " + ps.darTablaCarrito() + " WHERE id = ?");
-        sucursal.setParameters(idCarrito);
-        BigDecimal idsucursal = (BigDecimal) sucursal.executeUnique();
-        System.out.println("La sucursal es : " +idsucursal);
-        
-        
-        Query volumen = pm.newQuery(SQL, "SELECT IDVOLUMENPRODUCTO FROM (" + ps.darTablaEstante()+ " INNER JOIN " + ps.darTablaAlmacenamiento()+ " ON "+ps.darTablaEstante()+".IDALMACENAMIENTO = "+ps.darTablaAlmacenamiento()+".ID ) WHERE id = ? ");
-        volumen.setParameters(idEstante);
-        BigDecimal idVolumen = (BigDecimal) volumen.executeUnique();
-        System.out.println("El id del volProd es : " + idVolumen);
-        
-        
-//        
-//        Query cantidadActual = pm.newQuery(SQL,"SELECT CANTIDAD FROM "+ ps.darTablaVolumenProducto()+ " WHERE id = ?");
-//        cantidadActual.setParameters(idVolumen);
-//        BigDecimal cActual = (BigDecimal) cantidadActual.executeUnique();
-//        System.out.println("la cantidad Actual es "+ cActual);
-//        
-//        BigDecimal cNueva = cActual.subtract(cantidad);
-//        System.out.println("la cantidad nueva es "+ cNueva);
-        
-        
-        Query actualizar = pm.newQuery(SQL, "UPDATE " + ps.darTablaVolumenProducto() + " SET cantidad = cantidad - ? WHERE id  = ?");
-	    actualizar.setParameters(cantidad,idVolumen);
-	    
-	   
-	    actualizar.executeUnique();
-	  
-        System.out.println(" voy a insertar el itemCarrito");
-        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaItemCarrito() + "(id, idCarrito, idProducto, cantidad) values (?, ?, ?, ?)");
-        q.setParameters(id,idCarrito, idProducto,cantidad);
-        return (long) q.executeUnique();
+		Query volumen = pm.newQuery(SQL, "SELECT IDVOLUMENPRODUCTO FROM (" + ps.darTablaEstante()+ " INNER JOIN " + ps.darTablaAlmacenamiento()+ " ON "+ps.darTablaEstante()+".IDALMACENAMIENTO = "+ps.darTablaAlmacenamiento()+".ID ) WHERE id = ? ");
+		volumen.setParameters(idEstante);
+		BigDecimal idVolumen = (BigDecimal) volumen.executeUnique();
+		System.out.println("El id del volProd es : " + idVolumen);
+
+
+		Query actualizar = pm.newQuery(SQL, "UPDATE " + ps.darTablaVolumenProducto() + " SET cantidad = cantidad - ? WHERE id  = ? and idProducto = ?");
+		actualizar.setParameters(cantidad,idVolumen, idProducto);
+		long actualizadas = (long) actualizar.executeUnique();
+		
+		if(actualizadas == 0) throw new Exception("El estante seleccionado no tiene ese producto");
+
+
+		if(hay.intValue() == 1) {
+			//Debo solo actualizar la cantidad del item ya creado
+			Query q = pm.newQuery(SQL, "UPDATE " + ps.darTablaItemCarrito() + " SET cantidad = cantidad + ?");
+			q.setParameters(cantidad);
+			return (long) q.executeUnique();
+
+		}
+
+		else {
+			Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaItemCarrito() + "(id, idCarrito, idProducto, cantidad, idEstante) values (?, ?, ?, ?, ?)");
+			q.setParameters(id,idCarrito, idProducto,cantidad, idEstante);
+			return (long) q.executeUnique();
+		}
 	}
 
 	/**
@@ -117,86 +120,59 @@ class SQLItemCarrito
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS ALMACENAMIENTO de la 
 	 * base de datos de SuperAndes
 	 */
-	public List<Factura> darItemCarritos (PersistenceManager pm)
+	public List<ItemCarrito> darItemCarritos (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaItemCarrito());
 		q.setResultClass(Factura.class);
-		return (List<Factura>) q.executeList();
+		return (List<ItemCarrito>) q.executeList();
 	}
-	
-	public long eliminarItemCarrito (PersistenceManager pm, long idCarrito, String idProducto )
+
+	public long eliminarItemCarrito (PersistenceManager pm, long idCarrito, String idProducto, long idEstante )
 	{
-		Query sucursal = pm.newQuery(SQL, "SELECT idSucursal FROM " + ps.darTablaCarrito() + " WHERE id = ?");
-        sucursal.setParameters(idCarrito);
-        BigDecimal idsucursal = (BigDecimal) sucursal.executeUnique();
-        System.out.println("La sucursal es : " +idsucursal);
-        
-        
-        Query volumen = pm.newQuery(SQL, "SELECT IDVOLUMENPRODUCTO FROM (" + ps.darTablaEstante()+ " INNER JOIN " + ps.darTablaAlmacenamiento()+ " ON "+ps.darTablaEstante()+".IDALMACENAMIENTO = "+ps.darTablaAlmacenamiento()+".ID ) WHERE idSucursal = ?");
-        volumen.setParameters(idsucursal);
-        BigDecimal idVolumen = (BigDecimal) volumen.executeUnique();
-        System.out.println("El id del volProd es : " + idVolumen);
-        
-        
-        
-        Query cantidadActual = pm.newQuery(SQL,"SELECT CANTIDAD FROM "+ ps.darTablaVolumenProducto()+ " WHERE id = ?");
-        cantidadActual.setParameters(idVolumen);
-        BigDecimal cActual = (BigDecimal) cantidadActual.executeUnique();
-        System.out.println("la cantidad Actual es "+ cActual);
-        
-        Query cantidad = pm.newQuery(SQL,"SELECT CANTIDAD FROM "+ ps.darTablaItemCarrito()+ " WHERE idCarrito = ? AND idProducto = ?");
-        cantidad.setParameters(idCarrito,idProducto);
-        BigDecimal cDevolver = (BigDecimal) cantidad.executeUnique();
-        
-        BigDecimal cNueva = cActual.add(cDevolver);
-        System.out.println("la cantidad nueva es "+ cNueva);
-        
-        
-        Query actualizar = pm.newQuery(SQL, "UPDATE " + ps.darTablaVolumenProducto() + " SET cantidad = ? WHERE id  = ?");
-	    actualizar.setParameters(cNueva,idVolumen);
-	    
-	   
-	    actualizar.executeUnique();
-	  
-		
-        Query q = pm.newQuery(SQL, "DELETE FROM " +ps.darTablaItemCarrito() + " WHERE idCarrito  = ? AND idProducto = ?");
-        q.setParameters(idCarrito, idProducto);
-        return (long) q.executeUnique();            
+
+
+		Query volumen = pm.newQuery(SQL, "SELECT IDVOLUMENPRODUCTO FROM " + ps.darTablaAlmacenamiento() + " WHERE id = ?");
+		volumen.setParameters(idEstante);
+
+		BigDecimal idVolumen = (BigDecimal) volumen.executeUnique();
+		System.out.println("El id del volProd es : " + idVolumen);
+
+
+		Query items = pm.newQuery(SQL, "SELECT * "
+				+ "FROM " + ps.darTablaItemCarrito() + " WHERE idProducto = ? AND idCarrito = ?");
+		items.setParameters(idProducto, idCarrito);
+		items.setResultClass(ItemCarrito.class);
+
+		ItemCarrito itemCarrito = (ItemCarrito) items.executeUnique();
+
+
+		Query actualizar = pm.newQuery(SQL, "UPDATE " + ps.darTablaVolumenProducto() + " SET cantidad = cantidad + ? WHERE id  = ?");
+		actualizar.setParameters(itemCarrito.getCantidad(),idVolumen);
+
+
+		actualizar.executeUnique();
+
+
+		Query q = pm.newQuery(SQL, "DELETE FROM " +ps.darTablaItemCarrito() + " WHERE idCarrito  = ? AND idProducto = ?");
+		q.setParameters(idCarrito, idProducto);
+		return (long) q.executeUnique();            
 	}
-	
-	public long actualizarCantidadItemCarrito (PersistenceManager pm, long idCarrito, String idProducto, BigDecimal aDevolver) 
+
+	public long actualizarCantidadItemCarrito (PersistenceManager pm, long idCarrito, String idProducto, BigDecimal aDevolver, long idEstante) 
 	{
-		Query sucursal = pm.newQuery(SQL, "SELECT idSucursal FROM " + ps.darTablaCarrito() + " WHERE id = ?");
-        sucursal.setParameters(idCarrito);
-        BigDecimal idsucursal = (BigDecimal) sucursal.executeUnique();
-        
-        
-        Query volumen = pm.newQuery(SQL, "SELECT IDVOLUMENPRODUCTO FROM (" + ps.darTablaEstante()+ " INNER JOIN " + ps.darTablaAlmacenamiento()+ " ON "+ps.darTablaEstante()+".IDALMACENAMIENTO = "+ps.darTablaAlmacenamiento()+".ID ) WHERE idSucursal = ?");
-        volumen.setParameters(idsucursal);
-        BigDecimal idVolumen = (BigDecimal) volumen.executeUnique();
-        
-        
-        
-        Query cantidadActual = pm.newQuery(SQL,"SELECT CANTIDAD FROM "+ ps.darTablaVolumenProducto()+ " WHERE id = ?");
-        cantidadActual.setParameters(idVolumen);
-        BigDecimal cActual = (BigDecimal) cantidadActual.executeUnique();
-		
-		 Query x = pm.newQuery(SQL, "SELECT CANTIDAD FROM " + ps.darTablaItemCarrito() + " WHERE idCarrito  = ? AND idProducto = ?");
-		 x.setParameters(idCarrito,idProducto);
-		 BigDecimal cantidadOriginal = (BigDecimal) x.executeUnique();
-		 
-		 
-		 BigDecimal cantidadNueva = cantidadOriginal.subtract(aDevolver);
-		 BigDecimal act = cActual.add(aDevolver);
-		 
-		 Query actualizar = pm.newQuery(SQL, "UPDATE " + ps.darTablaVolumenProducto() + " SET cantidad = ? WHERE id  = ?");
-		 actualizar.setParameters(act,idVolumen);
-		    
-		   
-		 actualizar.executeUnique();
-		 
-		 Query q = pm.newQuery(SQL, "UPDATE " + ps.darTablaItemCarrito() + " SET cantidad = ? WHERE idCarrito  = ? AND idProducto = ?");
-	     q.setParameters(cantidadNueva, idCarrito,idProducto);
-	     return (long) q.executeUnique();            
+		Query volumen = pm.newQuery(SQL, "SELECT IDVOLUMENPRODUCTO FROM " + ps.darTablaAlmacenamiento() + " WHERE id = ?");
+		volumen.setParameters(idEstante);
+		BigDecimal idVolumen = (BigDecimal) volumen.executeUnique();	
+
+		System.out.println("El id del volProd es : " + idVolumen);
+
+
+		Query actualizar = pm.newQuery(SQL, "UPDATE " + ps.darTablaVolumenProducto() + " SET cantidad = cantidad + ? WHERE id  = ?");
+		actualizar.setParameters(aDevolver,idVolumen);
+		actualizar.executeUnique();
+
+		Query q = pm.newQuery(SQL, "UPDATE " + ps.darTablaItemCarrito() + " SET cantidad = cantidad - ? WHERE idCarrito  = ? AND idProducto = ?");
+		q.setParameters(aDevolver, idCarrito,idProducto);
+		return (long) q.executeUnique();            
 	}
 }

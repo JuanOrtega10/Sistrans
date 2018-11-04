@@ -95,4 +95,13 @@ class SQLCliente
 		q.setResultClass(Cliente.class);
 		return (List<Cliente>) q.executeList();
 	}
+
+	public Cliente login(PersistenceManager pm, long usuario, String password) {
+	
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaCliente( ) + " WHERE id = ? and password = ?");
+		q.setResultClass(Cliente.class);
+		q.setParameters(usuario, password);
+		
+		return (Cliente) q.executeUnique();
+	}
 }

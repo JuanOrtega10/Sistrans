@@ -61,10 +61,10 @@ class SQLSucursal
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar una SUCURSAL a la base de datos de SuperAndes
 	 */
-	public long adicionarSucursal (PersistenceManager pm, long idSucursal, String nombre, String direccion, String ciudad) 
+	public long adicionarSucursal (PersistenceManager pm, long idSucursal, String nombre, String direccion, String ciudad, String codigoAcceso) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaSucursal() + "(id, nombre, direccion, ciudad) values (?, ?, ?, ?)");
-        q.setParameters(idSucursal, nombre, direccion, ciudad);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaSucursal() + "(id, nombre, direccion, ciudad, codigoAcceso) values (?, ?, ?, ?, ?)");
+        q.setParameters(idSucursal, nombre, direccion, ciudad, codigoAcceso);
         return (long) q.executeUnique();
 	}
 
@@ -94,5 +94,14 @@ class SQLSucursal
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaSucursal());
 		q.setResultClass(Sucursal.class);
 		return (List<Sucursal>) q.executeList();
+	}
+	
+	public Sucursal login(PersistenceManager pm, long usuario, String password) {
+		
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaSucursal( ) + " WHERE id = ? and password = ?");
+		q.setResultClass(Sucursal.class);
+		q.setParameters(usuario, password);
+		
+		return (Sucursal) q.executeUnique();
 	}
 }

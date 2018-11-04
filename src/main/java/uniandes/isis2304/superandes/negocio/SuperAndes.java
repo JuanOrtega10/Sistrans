@@ -87,10 +87,10 @@ public class SuperAndes {
 	 * @param ciudad - La ciudad de la sucursal
 	 * @return El objeto Sucursal adicionado. null si ocurre alguna Excepción
 	 */
-	public Sucursal adicionarSucursal (String nombre, String direccion, String ciudad)
+	public Sucursal adicionarSucursal (String nombre, String direccion, String ciudad, String codigoAcceso)
 	{
 		System.out.println("Adicionando Sucursal: " + nombre);
-		Sucursal sucursal = ps.adicionarSucursal (nombre, direccion, ciudad);
+		Sucursal sucursal = ps.adicionarSucursal (nombre, direccion, ciudad,  codigoAcceso);
 		System.out.println ("Adicionando Sucursal: " + sucursal);
 		return sucursal;
 	}
@@ -750,6 +750,18 @@ public class SuperAndes {
         long resp = ps.actualizarCantidadItemCarrito(idCarrito, idProducto, aDevolver, idEstante);
         System.out.println ("Actualizando ItemCarrito: " + resp + " tuplas actualizadas");
         return resp;
+	}
+
+	public Cliente loginCliente(long id, String password) {
+		
+		// TODO Auto-generated method stub
+		return ps.loginCliente(id, password);
+		
+	}
+
+	public Sucursal loginAdmin(long idSucursal, String password) {
+		// TODO Auto-generated method stub
+		return ps.loginSucursal(idSucursal, password);
 	}
 }
 

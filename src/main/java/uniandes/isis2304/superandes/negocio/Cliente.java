@@ -19,7 +19,7 @@ package uniandes.isis2304.superandes.negocio;
  *
  * @author ja.ortega - dy.quintero.
  */
-public abstract class Cliente implements VOCliente
+public class Cliente implements VOCliente
 {
 	
 	
@@ -33,6 +33,11 @@ public abstract class Cliente implements VOCliente
 	private long id;
 	
 	/**
+	 * @return El correo del Cliente
+	 */
+	private String password;
+	
+	/**
 	 * @return El nombre del Cliente
 	 */
 	private String nombre;
@@ -43,10 +48,7 @@ public abstract class Cliente implements VOCliente
 	 */
 	private String correo;
 	
-	/**
-	 * @return El correo del Cliente
-	 */
-	private String password;
+
 	
 	
 	/* ****************************************************************
@@ -62,7 +64,8 @@ public abstract class Cliente implements VOCliente
 		this.correo = "";
 		this.password = "";
 	}
-	
+
+
 	/**
 	 * Constructor con valores
 	 * @param id - El id del almacenamiento
@@ -93,6 +96,20 @@ public abstract class Cliente implements VOCliente
 	}
 
 	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
 	 * @return the nombre
 	 */
 	public String getNombre() {
@@ -120,19 +137,14 @@ public abstract class Cliente implements VOCliente
 		this.correo = correo;
 	}
 
-	/**
-	 * @return the password
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
 	 */
-	public String getPassword() {
-		return password;
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", password=" + password + ", nombre=" + nombre + ", correo=" + correo + "]";
 	}
 
-	/**
-	 * @param password the password to set
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 	
 	

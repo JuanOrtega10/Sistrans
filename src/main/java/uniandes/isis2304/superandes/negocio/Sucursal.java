@@ -46,6 +46,8 @@ public class Sucursal implements VOSucursal
 	 */
 	private String ciudad;
 	
+	private String password;
+	
 	/* ****************************************************************
 	 * 			Métodos 
 	 *****************************************************************/
@@ -130,14 +132,31 @@ public class Sucursal implements VOSucursal
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
 	}
+	
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	/**
+	 * @param ciudad the ciudad to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Sucursal [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", ciudad=" + ciudad + "]";
+		return "Sucursal [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", ciudad=" + ciudad
+				+ ", password=" + password + "]";
 	}
+
+
+
+	
 	
 	
 

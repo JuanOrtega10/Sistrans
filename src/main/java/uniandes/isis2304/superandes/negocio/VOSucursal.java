@@ -39,6 +39,11 @@ public interface VOSucursal
 	 * @return the ciudad
 	 */
 	public String getCiudad();
+	
+	/**
+	 * @return the password
+	 */
+	public String getPassword();
 		
 	/** 
 	 * @return Una cadena con la información básica

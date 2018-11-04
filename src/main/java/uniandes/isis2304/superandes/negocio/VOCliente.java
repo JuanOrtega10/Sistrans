@@ -46,6 +46,5 @@ public interface VOCliente
 	 */
 	public String getPassword();
 	
-	
 
 }

@@ -651,7 +651,7 @@ public class PersistenciaSuperAndes {
 	 * @param ciudad - La ciudad de la sucursal.
 	 * @return El objeto Sucursal adicionado. null si ocurre alguna Excepción
 	 */
-	public Sucursal adicionarSucursal(String nombre, String direccion, String ciudad)
+	public Sucursal adicionarSucursal(String nombre, String direccion, String ciudad, String codigoAcceso)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -659,7 +659,7 @@ public class PersistenciaSuperAndes {
         {
             tx.begin();
             long id = nextval();
-            long tuplasInsertadas = sqlSucursal.adicionarSucursal(pm, id, nombre, direccion, ciudad );
+            long tuplasInsertadas = sqlSucursal.adicionarSucursal(pm, id, nombre, direccion, ciudad, codigoAcceso );
             tx.commit();
             
             System.out.println("Inserción de tipo de Sucursal: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
@@ -1510,5 +1510,63 @@ public class PersistenciaSuperAndes {
             pm.close();
         }
 	}
+
+	public Cliente loginCliente(long usuario, String password) {
+
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            Cliente resp = sqlCliente.login(pm, usuario, password);
+            tx.commit();
+            return resp;
+           
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	System.out.println ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+
+	
+	public Sucursal loginSucursal(long usuario, String password) {
+
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            Sucursal resp = sqlSucursal.login(pm, usuario, password);
+            tx.commit();
+            return resp;
+           
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	System.out.println ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
 	
 }
+

@@ -710,6 +710,7 @@ public class SuperAndes {
 		
 		System.out.println(" Solicitando carrito ");
 		Carrito carrito = ps.solicitarCarritoDeCompras(idSucursal, idCliente);
+		if(carrito!=null)
 		System.out.println ("Adicionando Carrito: " + carrito );
 		return carrito;
 	}
@@ -727,11 +728,10 @@ public class SuperAndes {
 	 * 			Métodos para manejar LOS ITEMCARRITO
 	 *****************************************************************/
 
-	public ItemCarrito aniadirProductoAlCarrito(long idCarrito, String idProducto, BigDecimal n, long idEstante)
+	public ItemCarrito aniadirProductoAlCarrito(long idCliente, String idProducto, BigDecimal n, long idEstante)
 	{
 		System.out.println(" Aniadiendo producto al carrito ");
-		ItemCarrito itemCarrito = ps.aniadirProductoAlCarrito(idCarrito, idProducto, n, idEstante);
-		System.out.println ("Adicionando producto al carrito: " + idCarrito );
+		ItemCarrito itemCarrito = ps.aniadirProductoAlCarrito(idCliente, idProducto, n, idEstante);
 		return itemCarrito;
 	}
 	
@@ -762,6 +762,12 @@ public class SuperAndes {
 	public Sucursal loginAdmin(long idSucursal, String password) {
 		// TODO Auto-generated method stub
 		return ps.loginSucursal(idSucursal, password);
+	}
+
+	public List<ItemFactura> pagarItemsCarrito(long idCarro) {
+		// TODO Auto-generated method stub
+		return ps.pagarItemsCarrito(idCarro);
+		
 	}
 }
 

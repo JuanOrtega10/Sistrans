@@ -46,7 +46,7 @@ public class Sucursal implements VOSucursal
 	 */
 	private String ciudad;
 	
-	private String password;
+	private String codigoAcceso;
 	
 	/* ****************************************************************
 	 * 			Métodos 
@@ -60,6 +60,7 @@ public class Sucursal implements VOSucursal
 		this.nombre = "";
 		this.direccion = "";
 		this.ciudad = "";
+		this.codigoAcceso = "";
 	}
 
 	/**
@@ -69,12 +70,13 @@ public class Sucursal implements VOSucursal
 	 * @param direccion
 	 * @param ciudad
 	 */
-	public Sucursal(long id, String nombre, String direccion, String ciudad) {
+	public Sucursal(long id, String nombre, String direccion, String ciudad, String codigoAcceso) {
 		
 		this.id = id;
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.ciudad = ciudad;
+		this.codigoAcceso = codigoAcceso;
 	}
 
 	/**
@@ -132,17 +134,20 @@ public class Sucursal implements VOSucursal
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
 	}
-	
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	
 	/**
-	 * @param ciudad the ciudad to set
+	 * @return the codigoAcceso
 	 */
-	public void setPassword(String password) {
-		this.password = password;
+	public String getCodigoAcceso() {
+		return codigoAcceso;
+	}
+
+	/**
+	 * @param codigoAcceso the codigoAcceso to set
+	 */
+	public void setCodigoAcceso(String codigoAcceso) {
+		this.codigoAcceso = codigoAcceso;
 	}
 
 	/* (non-Javadoc)
@@ -151,8 +156,12 @@ public class Sucursal implements VOSucursal
 	@Override
 	public String toString() {
 		return "Sucursal [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", ciudad=" + ciudad
-				+ ", password=" + password + "]";
+				+ ", codigoAcceso=" + codigoAcceso + "]";
 	}
+	
+
+
+	
 
 
 

@@ -68,7 +68,6 @@ class SQLCarrito
 	 */
 	public long solicitarCarrito (PersistenceManager pm, long id, long idSucursal, long idCliente, String estado) 
 	{
-		System.out.println(ps.darTablaCarrito());
 		Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaCarrito() + "(id, idSucursal, idCliente, estado) values (?, ?, ?, ?)");
 		q.setParameters(id,idSucursal, idCliente,estado);
 		return (long) q.executeUnique();

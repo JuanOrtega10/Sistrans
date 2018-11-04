@@ -98,7 +98,7 @@ class SQLSucursal
 	
 	public Sucursal login(PersistenceManager pm, long usuario, String password) {
 		
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaSucursal( ) + " WHERE id = ? and password = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaSucursal( ) + " WHERE id = ? and codigoAcceso = ?");
 		q.setResultClass(Sucursal.class);
 		q.setParameters(usuario, password);
 		

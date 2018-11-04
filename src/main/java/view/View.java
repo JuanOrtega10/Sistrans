@@ -104,23 +104,21 @@ public class View
 					switch(optionCliente)
 					{
 					case 1:
-						System.out.println("Ingrese el id del cliente");
-						String idCliente = sc.next();
-						long idCliente1 = 0;
+						
 						System.out.println("Ingrese el id de la sucursal");
 						String idSucur = sc.next();
 						long idSucu = 0;
 
 						try {
-							idCliente1 = Long.parseLong(idCliente);
+						
 							idSucu = Long.parseLong(idSucur);
 
 						} catch (Exception e) {
 							// TODO: handle exception
 						}
-						VOCarrito carrito = superAndes.solicitarCarrito(idSucu, idCliente1);
+						VOCarrito carrito = superAndes.solicitarCarrito(idSucu, cliente.getId());
 						if(carrito!=null) System.out.println(carrito.toString());
-						else System.out.println("Información incorrecta");
+						else System.out.println("Información incorrecta o ya se tiene un carrito asignado");
 
 						break;
 
@@ -217,16 +215,31 @@ public class View
 						break;
 
 					case 5:
+						System.out.println("Ingrese el id del carrito");
+						idCarrito = sc.next();
+						idCarro = 0;
+						superAndes.pagarItemsCarrito(idCarro);
 						break;
-
+						
 					case 6:
-						fin=true;
-						sc.close();
+						
+						System.out.println("Ingrese el id del carrito");
+						idCarrito = sc.next();
+						idCarro = 0;
+
+						try {
+
+							idCarro = Long.parseLong(idCarrito);
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+						superAndes.abandonarCarrito(idCarro);
+						finSesionCliente=true;
 						break;
 
 					}
 
-					break;
+					
 				}
 
 				break;
@@ -253,7 +266,7 @@ public class View
 				boolean finSesionAdmin=false;
 				while(!finSesionAdmin)
 				{
-					printMenuAdmin();
+					printMenuAdmin(sucursal.getId());
 					int option = sc.nextInt();
 
 					switch(option)
@@ -530,7 +543,7 @@ public class View
 
 
 
-						System.out.println("Ingrese la fecha de vencimiento de la promoción en (YYYY/MM/DD)");
+						System.out.println("Ingrese la fecha de vencimiento de la promoción en (YYYY-MM-DD)");
 						String fecha = sc.next();
 						String pattern2 = "yyyy-MM-dd";
 						SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(pattern2);
@@ -657,7 +670,7 @@ public class View
 
 					case 12:
 						finSesionAdmin=true;
-						sc.close();
+					
 						break;
 					}
 				}
@@ -683,20 +696,21 @@ public class View
 		System.out.println("---------ISIS SISTEMAS TRANSACCIONALES----------");
 		System.out.println("------------ ¡Hola, " +usuario + "!" + "-------------");
 		System.out.println("--------------------- ITERACION 2--------------------");
-		System.out.println("12. Solicitar carrito de compras");
-		System.out.println("13. Adicionar productos");
-		System.out.println("14. Devolver productos");
-		System.out.println("15. Abandonar carrito");
-		System.out.println("16. Pagar");
-		System.out.println("17. Salir");
+		System.out.println("1. Solicitar carrito de compras");
+		System.out.println("2. Adicionar productos");
+		System.out.println("3. Devolver productos");
+		System.out.println("4. Abandonar carrito");
+		System.out.println("5. Pagar");
+		System.out.println("6. Salir");
 		System.out.println("Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):");
 
 	}
 
-	private static void printMenuAdmin( ) {
-		System.out.println("---------ISIS SISTEMAS TRANSACCIONALES----------");
+	private static void printMenuAdmin(long id ) {
+		System.out.println("-----------ISIS SISTEMAS TRANSACCIONALES-------------");
 		System.out.println("--------------------- ITERACION 1--------------------");
-		System.out.println("---------------------Sesión de Administrador --------------------");
+		System.out.println("---Sesión de Administrador de la sucursal numero " + id + "--- \n");
+		
 		System.out.println("1. Registrar proveedores");
 		System.out.println("2. Registrar productos");
 		System.out.println("3. Registrar clientes");
@@ -708,6 +722,7 @@ public class View
 		System.out.println("9. Registrar pedido");
 		System.out.println("10. Registrar llegada de pedido");
 		System.out.println("11. Registrar venta");
+		System.out.println("12. Salir");
 		System.out.println("Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):");
 	}
 
@@ -717,6 +732,7 @@ public class View
 		System.out.println("--------------------- ITERACION 2--------------------");
 		System.out.println("1. Ingresar como cliente");
 		System.out.println("2. Ingresar como administrador de una sucursal");
+		System.out.println("3. Salir");
 		System.out.println("Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):");
 
 	}

@@ -43,7 +43,7 @@ public interface VOSucursal
 	/**
 	 * @return the password
 	 */
-	public String getPassword();
+	public String getCodigoAcceso();
 		
 	/** 
 	 * @return Una cadena con la información básica

@@ -82,6 +82,9 @@ public class ItemCarrito implements VOItemCarrito
 	}
 
 
+	
+
+
 	/**
 	 * @return the id
 	 */
@@ -115,7 +118,7 @@ public class ItemCarrito implements VOItemCarrito
 
 
 	/**
-	 * @return the fechaVencimiento
+	 * @return the idProducto
 	 */
 	public String getIdProducto() {
 		return idProducto;
@@ -123,13 +126,11 @@ public class ItemCarrito implements VOItemCarrito
 
 
 	/**
-	 * @param idProducto the fechaVencimiento to set
+	 * @param idProducto the idProducto to set
 	 */
 	public void setIdProducto(String idProducto) {
 		this.idProducto = idProducto;
 	}
-	
-	
 
 
 	/**
@@ -147,7 +148,6 @@ public class ItemCarrito implements VOItemCarrito
 		this.idCarrito = idCarrito;
 	}
 
-	
 
 	/**
 	 * @return the idEstante
@@ -171,7 +171,7 @@ public class ItemCarrito implements VOItemCarrito
 	@Override
 	public String toString() {
 		return "ItemCarrito [id=" + id + ", cantidad=" + cantidad + ", idProducto=" + idProducto + ", idCarrito="
-				+ idCarrito + "idEstante=" + idEstante +"]";
+				+ idCarrito + ", idEstante=" + idEstante +"]";
 	}		
 	
 	

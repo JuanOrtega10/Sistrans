@@ -15,6 +15,7 @@
 
 package uniandes.isis2304.superandes.persistencia;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +23,8 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import uniandes.isis2304.superandes.negocio.Factura;
+import uniandes.isis2304.superandes.negocio.ItemCarrito;
+import uniandes.isis2304.superandes.negocio.ItemFactura;
 
 /**
  * Clase que encapsula los métodos que hacen acceso a la base de datos para el concepto Facturas de SuperAndes
@@ -91,5 +94,14 @@ class SQLFactura
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaFactura());
 		q.setResultClass(Factura.class);
 		return (List<Factura>) q.executeList();
+	}
+
+	public ArrayList<ItemFactura> generarFactura(PersistenceManager pm, List<ItemCarrito> items) {
+		
+		
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaFactura());
+		q.setResultClass(Factura.class);
+		return (ArrayList<ItemFactura>) q.executeList();
+		
 	}
 }

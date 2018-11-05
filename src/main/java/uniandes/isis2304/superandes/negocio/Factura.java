@@ -13,6 +13,8 @@ SQLFactura.java * Universidad	de	los	Andes	(Bogotá	- Colombia)
  */
 package uniandes.isis2304.superandes.negocio;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -46,7 +48,7 @@ public class Factura implements VOFactura
 	/**
 	 * La fecha en la cual se crea la factura.
 	 */
-	private Date fecha;
+	private Timestamp fecha;
 	
 
 	/* ****************************************************************
@@ -60,7 +62,7 @@ public class Factura implements VOFactura
 		this.id = 0;
 		this.idSucursal = 0;
 		this.idCliente = 0;
-		this.fecha = new Date();
+		this.fecha = new Timestamp(0);
 	}
 	
 	/**
@@ -70,7 +72,7 @@ public class Factura implements VOFactura
 	 * @param idCliente - El id del cliente
 	 * @param fecha - La fecha en la que se genera la factura
 	 */
-	public Factura(long id, long idSucursal, long idCliente, Date fecha) 
+	public Factura(long id, long idSucursal, long idCliente, Timestamp fecha) 
 	{
 		this.id = id;
 		this.idSucursal = idSucursal;
@@ -130,7 +132,7 @@ public class Factura implements VOFactura
 	/**
 	 * @param fecha the fecha to set
 	 */
-	public void setFecha(Date fecha) {
+	public void setFecha(Timestamp fecha) {
 		this.fecha = fecha;
 	}
 

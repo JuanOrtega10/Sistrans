@@ -61,11 +61,11 @@ class SQLProducto
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar un Producto a la base de datos de SuperAndes
 	 */
-	public long adicionarProducto (PersistenceManager pm, String idProducto, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria) 
+	public long adicionarProducto (PersistenceManager pm, String idProducto, String nombre, String marca, String presentacion, double cantidad, String unidadMedida, double especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria) 
 	{
 		
-        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaProducto() + "(id,nombre,marca,precioUnitario, presentacion, cantidad, unidadMedida,precioUnidadMedida, especificacionEmpaque, exclusivo, idTipoProducto,idCategoria, fechaVencimiento) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        q.setParameters(idProducto, nombre, marca , precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo,idTipoProducto, idCategoria);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaProducto() + "(id,nombre,marca,precioUnitario, presentacion, cantidad, unidadMedida, especificacionEmpaque, exclusivo, idTipoProducto,idCategoria, fechaVencimiento, precioCompra, precioVenta) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        q.setParameters(idProducto, nombre, marca , presentacion, cantidad, unidadMedida, especificacionEmpaque, exclusivo,idTipoProducto, idCategoria);
         return (long) q.executeUnique();
 	}
 

@@ -43,13 +43,7 @@ public class Producto implements VOProducto
 	 * La marca del producto.
 	 */
 	private String marca;
-	
-
-	/**
-	 * El precio por unidad del producto
-	 */
-	private double precioUnitario;
-	
+		
 
 	/**
 	 * La presentación del producto.
@@ -108,7 +102,6 @@ public class Producto implements VOProducto
     	this.id = "";
     	this.nombre = "";
     	this.marca = "";
-    	this.precioUnitario = 0;
     	this.presentacion = "";
     	this.precioUnidadMedida = 0;
     	this.cantidad = 0;
@@ -136,14 +129,12 @@ public class Producto implements VOProducto
 	 */
 	
 	
-    public Producto(String codigo, String nombre, String marca, double precioUnitario, String presentacion, double precioUnidadMedida, double cantidad, String unidadMedida, double especificacionEmpaque, int exclusivo, long idCategoria, long idTipoProducto) 
+    public Producto(String codigo, String nombre, String marca, String presentacion, double cantidad, String unidadMedida, double especificacionEmpaque, int exclusivo, long idCategoria, long idTipoProducto) 
     {
     	this.id = codigo;
     	this.nombre = nombre;
     	this.marca = marca;
-    	this.precioUnitario = precioUnitario;
     	this.presentacion = presentacion;
-    	this.precioUnidadMedida = precioUnidadMedida;
     	this.cantidad = cantidad;
     	this.unidadMedida = unidadMedida;
     	this.especificacionEmpaque = especificacionEmpaque;
@@ -152,7 +143,6 @@ public class Producto implements VOProducto
     	this.idTipoProducto = idTipoProducto;
 	}
 
-	
 
 	/**
 	 * @return the codigo
@@ -196,19 +186,7 @@ public class Producto implements VOProducto
 		this.marca = marca;
 	}
 
-	/**
-	 * @return the precioUnitario
-	 */
-	public double getPrecioUnitario() {
-		return precioUnitario;
-	}
 
-	/**
-	 * @param precioUnitario the precioUnitario to set
-	 */
-	public void setPrecioUnitario(double precioUnitario) {
-		this.precioUnitario = precioUnitario;
-	}
 
 	/**
 	 * @return the presentacion
@@ -327,8 +305,8 @@ public class Producto implements VOProducto
 	 */
 	@Override
 	public String toString() {
-		return "Producto [id=" + id + ", nombre=" + nombre + ", marca=" + marca + ", precioUnitario=" + precioUnitario
-				+ ", presentacion=" + presentacion + ", precioUnidadMedida=" + precioUnidadMedida + ", cantidad="
+		return "Producto [id=" + id + ", nombre=" + nombre + ", marca=" + marca + ", precioUnitario=" + 
+				", presentacion=" + presentacion + ", precioUnidadMedida=" + precioUnidadMedida + ", cantidad="
 				+ cantidad + ", unidadMedida=" + unidadMedida + ", especificacionEmpaque=" + especificacionEmpaque
 				+ ", exclusivo=" + exclusivo + ", idTipoProducto=" + idTipoProducto + ", idCategoria=" + idCategoria + "]";
 	}

@@ -62,10 +62,10 @@ class SQLVolumenProdcuto
 	/**
 	 * Crea y ejecuta la sentencia SQL para adicionar un VOLUMENPRODUCTO a la base de datos de SuperAndes
 	 */
-	public long adicionarVolumenProducto (PersistenceManager pm, long id, int cantidad, double peso, double volumen,long idProducto) 
+	public long adicionarVolumenProducto (PersistenceManager pm, long id, int cantidad, double peso, double volumen,long idProducto, long idItemPedido) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaVolumenProducto() + "(id, cantidad, peso, volumen, idProducto) values (?, ?, ?, ?, ?)");
-        q.setParameters(id, cantidad, peso, volumen, idProducto);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaVolumenProducto() + "(id, cantidad, peso, volumen, idProducto, idItemPedido) values (?, ?, ?, ?, ?, ?)");
+        q.setParameters(id, cantidad, peso, volumen, idProducto, idItemPedido);
         return (long) q.executeUnique();
 	}
 

@@ -22,7 +22,7 @@ package uniandes.isis2304.superandes.negocio;
  * @author ja.ortega - dy.quintero.
  */
 
-public abstract class Almacenamiento implements VOAlmacenamiento
+public class Almacenamiento implements VOAlmacenamiento
 {
 	/* ****************************************************************
 	 * 			Atributos

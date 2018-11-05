@@ -19,7 +19,7 @@ package uniandes.isis2304.superandes.negocio;
  *
  * @author ja.ortega - dy.quintero.
  */
-public class Estante extends Almacenamiento implements VOEstante
+public class Estante implements VOEstante
 {
 	/* ****************************************************************
 	 * 			Atributos
@@ -30,7 +30,7 @@ public class Estante extends Almacenamiento implements VOEstante
 	 */
 	private int nivelAbastecimiento;
 	
-	
+	private long idAlmacenamiento;
 
 	/* ****************************************************************
 	 * 			Métodos 
@@ -41,8 +41,9 @@ public class Estante extends Almacenamiento implements VOEstante
      */
 	public Estante() 
     {
-    	super();
+   
 		this.nivelAbastecimiento = 0;
+		this.idAlmacenamiento = 0;
 		
 	}
 	
@@ -54,37 +55,54 @@ public class Estante extends Almacenamiento implements VOEstante
 	 * @param pesoMax - El peso máximo soportado por el almacenamiento
 	 * @param cantidadMax - La cantidad máxima de productos soportada por el almacenamiento
 	 */
-    public Estante(long id, double volumenMax, double pesoMax, int cantidadMax, int nivelAbastecimiento,long idSuc, long idTipoProd, long idVolProd) 
+    public Estante(long id, int nivelAbastecimiento) 
     {
-    	super(id, volumenMax, pesoMax, cantidadMax,idSuc,idTipoProd,idVolProd);
+    	
 		this.nivelAbastecimiento = nivelAbastecimiento;
+		this.idAlmacenamiento = id;
 	}
-    
-    /**
-   	 * @return La dirección de la bodega en la sucursal
-   	 */
+
+
+	/**
+	 * @return the nivelAbastecimiento
+	 */
 	public int getNivelAbastecimiento() {
 		return nivelAbastecimiento;
 	}
 
+
 	/**
-	 * @param id - La nueva dirección de la bodega.
+	 * @param nivelAbastecimiento the nivelAbastecimiento to set
 	 */
-	public void setnivelAbastecimiento(int nivelAbastecimiento) {
+	public void setNivelAbastecimiento(int nivelAbastecimiento) {
 		this.nivelAbastecimiento = nivelAbastecimiento;
 	}
-	
-	/** 
-	 * @return Una cadena con la información básica
+
+
+	/**
+	 * @return the idAlmacenamiento
 	 */
-	@Override
-	public String toString() 
-	{
-		return "Bodega [Volumen Máximo =" + super.getVolumenMax()
-				+ ", Peso Máximo ="  + super.getPesoMax()
-				+ ", Cantidad Máxima =" + super.getCantidadMax()
-				+ ", Nivel Abastecimiento = " + nivelAbastecimiento + "]";
+	public long getIdAlmacenamiento() {
+		return idAlmacenamiento;
 	}
 
+
+	/**
+	 * @param idAlmacenamiento the idAlmacenamiento to set
+	 */
+	public void setIdAlmacenamiento(long idAlmacenamiento) {
+		this.idAlmacenamiento = idAlmacenamiento;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Estante [nivelAbastecimiento=" + nivelAbastecimiento + ", idAlmacenamiento=" + idAlmacenamiento + "]";
+	}
+
+    
 }
 

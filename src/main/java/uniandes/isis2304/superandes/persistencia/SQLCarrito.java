@@ -137,7 +137,23 @@ class SQLCarrito
 		Query q = pm.newQuery(SQL, "DELETE FROM " +ps.darTablaCarrito() + " WHERE id  = ?");
 		q.setParameters(idCarrito);
 		long ret =(long) q.executeUnique();
-		System.out.println("voy a retornar esto en SQL "+ ret );
+		return ret;
+
+	}
+	
+	public long eliminarCarritoPagado (PersistenceManager pm, long idCarrito)
+	{
+		
+
+		Query i = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaItemCarrito() + " WHERE idCarrito  = ?");
+		i.setParameters(idCarrito);
+		i.executeUnique();
+		
+
+		Query q = pm.newQuery(SQL, "DELETE FROM " +ps.darTablaCarrito() + " WHERE id  = ?");
+		q.setParameters(idCarrito);
+		long ret =(long) q.executeUnique();
+		
 		return ret;
 
 	}

@@ -33,7 +33,7 @@ public interface VOProvee
 	/**
 	 * @return the idProducto
 	 */
-	public long getIdProducto();
+	public String getIdProducto();
 
 	/** 
 	 * @return Una cadena con la información básica

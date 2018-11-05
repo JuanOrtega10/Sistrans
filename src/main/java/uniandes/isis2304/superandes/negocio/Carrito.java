@@ -131,10 +131,17 @@ public class Carrito implements VOCarrito
 	}
 
 	/**
-	 * @param fecha the fecha to set
+	 * @param estado the estado to set
 	 */
-	public void setFecha(String estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	/**
+	 * @return the enUso
+	 */
+	public static String getEnUso() {
+		return EN_USO;
 	}
 
 	/* (non-Javadoc)
@@ -147,5 +154,6 @@ public class Carrito implements VOCarrito
 	}
 
 	
+
 }
 

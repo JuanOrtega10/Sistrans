@@ -557,10 +557,10 @@ public class SuperAndes {
 	 * @param nombre
 	 * @return El objeto Producto adicionado. null si ocurre alguna Excepción
 	 */
-	public Producto adicionarProducto (String id, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria)
+	public Producto adicionarProducto (String id, String nombre, String marca,  String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria)
 	{
 		System.out.println("Adicionando Producto: ");
-		Producto producto = ps.adicionarProducto(id, nombre, marca, precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo, idTipoProducto, idCategoria);
+		Producto producto = ps.adicionarProducto(id, nombre, marca,presentacion, cantidad, unidadMedida,especificacionEmpaque, exclusivo, idTipoProducto, idCategoria);
 		System.out.println ("Adicionando Producto: ");
 		return producto;
 	}
@@ -735,19 +735,19 @@ public class SuperAndes {
 		return itemCarrito;
 	}
 	
-	public long eliminarItemCarrito (long idCarrito, String idProducto, long idEstante)
+	public long eliminarItemCarrito (long idCarrito, String idProducto)
 	{
 		System.out.println ("Eliminando ItemCarrito");
-        long resp = ps.eliminarItemCarrito(idCarrito, idProducto, idEstante);
+        long resp = ps.eliminarItemCarrito(idCarrito, idProducto);
         System.out.println ("Eliminando ItemCarrito: " + resp + " tuplas eliminadas");
         return resp;
 	}
 	
-	public long actualizarCantidadItemCarrito(long idCarrito, String idProducto, BigDecimal aDevolver, long idEstante)
+	public long actualizarCantidadItemCarrito(long idCarrito, String idProducto, BigDecimal aDevolver)
 	{
 		
 		System.out.println ("Actualizando ItemCarrito");
-        long resp = ps.actualizarCantidadItemCarrito(idCarrito, idProducto, aDevolver, idEstante);
+        long resp = ps.actualizarCantidadItemCarrito(idCarrito, idProducto, aDevolver);
         System.out.println ("Actualizando ItemCarrito: " + resp + " tuplas actualizadas");
         return resp;
 	}

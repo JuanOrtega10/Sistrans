@@ -44,6 +44,13 @@ public class ItemFactura implements VOItemFactura
 	 */
 	private String idProducto;
 	
+	/**
+	 * El precio de venta del produto
+	 */
+	private double precio;
+	
+	
+	
 	/* ****************************************************************
 	 * 			Métodos 
 	 *****************************************************************/
@@ -56,6 +63,7 @@ public class ItemFactura implements VOItemFactura
     	this.cantidad = 0;
     	this.idFactura = 0;
     	this.idProducto ="";
+    	this.precio = 0;
 	}
 
 
@@ -64,11 +72,12 @@ public class ItemFactura implements VOItemFactura
 	 * @param cantidad
 	 * @param IdFactura
 	 */
-	public ItemFactura(long id, int cantidad, long idFactura, String idProducto) {
+	public ItemFactura(long id, int cantidad, long idFactura, String idProducto, double precio) {
 		this.id = id;
 		this.cantidad = cantidad;
 		this.idFactura = idFactura;
 		this.idProducto = idProducto;
+		this.precio = precio;
 	}
 
 
@@ -136,16 +145,33 @@ public class ItemFactura implements VOItemFactura
 	}
 
 
+	/**
+	 * @return the precio
+	 */
+	public double getPrecio() {
+		return precio;
+	}
+
+
+	/**
+	 * @param precio the precio to set
+	 */
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "ItemPedido [id=" + id + ", cantidad=" + cantidad + ", IdFactura=" + idFactura
-				+ ", idProducto=" + idProducto + "]";
+		return "ItemFactura [id=" + id + ", cantidad=" + cantidad + ", idFactura=" + idFactura + ", idProducto="
+				+ idProducto + ", precio=" + precio + "]";
 	}
 
 
+	
 	
 
 	

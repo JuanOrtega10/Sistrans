@@ -30,12 +30,18 @@ public interface VOVolumenProducto
 	 * @return the id
 	 */
 	public long getId();
+	
+
+	/**
+	 * @return the id
+	 */
+	public long getIdItemPedido();
 
 	
 	/**
 	 * @return the idTipoProducto
 	 */
-	public long getIdTipoProducto();
+	public String getIdProducto();
 
 
 

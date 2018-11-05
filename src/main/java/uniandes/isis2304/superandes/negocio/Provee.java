@@ -35,7 +35,11 @@ public class Provee implements VOProvee
 	/**
 	 * El identificador ÚNICO del prodcuto.
 	 */
-	private long idProducto;
+	private String idProducto;
+	
+	private double precioCompra;
+	
+	private double precioVenta;
 	
 	/* ****************************************************************
 	 * 			Métodos
@@ -45,9 +49,10 @@ public class Provee implements VOProvee
 	 */
 	public Provee() 
 	{
-		this.idProducto = 0;
+		this.idProducto = "";
 		this.idProveedor = 0;
-
+		this.precioCompra = 0;
+		this.precioVenta = 0;
 	}
 
 	/**
@@ -55,9 +60,11 @@ public class Provee implements VOProvee
 	 * @param idProveedor
 	 * @param idProducto
 	 */
-	public Provee(long idProveedor, long idProducto) {
+	public Provee(long idProveedor, String idProducto, double precioCompra, double precioVenta) {
 		this.idProveedor = idProveedor;
 		this.idProducto = idProducto;
+		this.precioCompra = precioCompra;
+		this.precioVenta = precioVenta;
 	}
 
 	/**
@@ -77,15 +84,44 @@ public class Provee implements VOProvee
 	/**
 	 * @return the idProducto
 	 */
-	public long getIdProducto() {
+	public String getIdProducto() {
 		return idProducto;
 	}
 
 	/**
 	 * @param idProducto the idProducto to set
 	 */
-	public void setIdProducto(long idProducto) {
+	public void setIdProducto(String idProducto) {
 		this.idProducto = idProducto;
+	}
+
+	
+	/**
+	 * @return the precioCompra
+	 */
+	public double getPrecioCompra() {
+		return precioCompra;
+	}
+
+	/**
+	 * @param precioCompra the precioCompra to set
+	 */
+	public void setPrecioCompra(double precioCompra) {
+		this.precioCompra = precioCompra;
+	}
+
+	/**
+	 * @return the precioVenta
+	 */
+	public double getPrecioVenta() {
+		return precioVenta;
+	}
+
+	/**
+	 * @param precioVenta the precioVenta to set
+	 */
+	public void setPrecioVenta(double precioVenta) {
+		this.precioVenta = precioVenta;
 	}
 
 	/* (non-Javadoc)
@@ -93,9 +129,11 @@ public class Provee implements VOProvee
 	 */
 	@Override
 	public String toString() {
-		return "Provee [idProveedor=" + idProveedor + ", idProducto=" + idProducto + "]";
+		return "Provee [idProveedor=" + idProveedor + ", idProducto=" + idProducto + ", precioCompra=" + precioCompra
+				+ ", precioVenta=" + precioVenta + "]";
 	}
-	
+
+
 	
 	
 }

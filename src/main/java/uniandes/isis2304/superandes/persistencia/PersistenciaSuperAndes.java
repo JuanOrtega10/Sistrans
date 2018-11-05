@@ -918,7 +918,7 @@ public class PersistenciaSuperAndes {
 			tx.commit();
 
 			System.out.println("Inserción Estante: " + idAlmacenamiento + ": " + tuplasInsertadas + " tuplas insertadas");
-			return new Estante(idAlmacenamiento, volumenMax, pesoMax, cantidadMax, nivelAbastecimiento, idSucursal, idTipoProducto, idVolumenProducto);
+			return new Estante(idAlmacenamiento, nivelAbastecimiento);
 		}
 		catch (Exception e)
 		{
@@ -1110,18 +1110,18 @@ public class PersistenciaSuperAndes {
 	 * @param direccion
 	 * @return El objeto Bodega adicionado. null si ocurre alguna Excepción
 	 */
-	public Producto adicionarProducto(String id, String nombre, String marca, double precioUnitario, String presentacion, double cantidad, String unidadMedida, double precioUnidadMedida, double especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria)
+	public Producto adicionarProducto(String id, String nombre, String marca, String presentacion, double cantidad, String unidadMedida, double especificacionEmpaque, int exclusivo, long idTipoProducto, long idCategoria)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			long tuplasInsertadas = sqlProducto.adicionarProducto(pm, id, nombre, marca, precioUnitario, presentacion, cantidad, unidadMedida, precioUnidadMedida, especificacionEmpaque, exclusivo, idTipoProducto, idCategoria);
+			long tuplasInsertadas = sqlProducto.adicionarProducto(pm, id, nombre, marca,presentacion, cantidad, unidadMedida, especificacionEmpaque, exclusivo, idTipoProducto, idCategoria);
 			tx.commit();
 
 			System.out.println("Inserción Producto: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
-			return new Producto(id, nombre, marca, precioUnitario, presentacion, precioUnidadMedida, cantidad, unidadMedida, especificacionEmpaque, exclusivo, idCategoria, idTipoProducto);
+			return new Producto(id, nombre, marca, presentacion, cantidad, unidadMedida, especificacionEmpaque, exclusivo, idCategoria, idTipoProducto);
 		}
 		catch (Exception e)
 		{
@@ -1332,7 +1332,7 @@ public class PersistenciaSuperAndes {
 			Producto p1 = darProductoPorId(idProducto);
 			Producto p2 = darProductoPorId(idProducto2);
 
-			adicionarProducto(p1.getId()+p2.getId(), p1.getNombre()+p2.getNombre(), p1.getMarca()+p2.getMarca(), p1.getPrecioUnitario()+p2.getPrecioUnitario(), p1.getPresentacion()+p2.getPresentacion(), p1.getCantidad() + p2.getCantidad(), p1.getUnidadMedida(), p1.getPrecioUnidadMedida()+p2.getPrecioUnidadMedida(), p1.getEspecificacionEmpaque()+p2.getEspecificacionEmpaque(), p1.getExclusivo(), p1.getIdTipoProducto(), p1.getIdCategoria());
+			adicionarProducto(p1.getId()+p2.getId(), p1.getNombre()+p2.getNombre(), p1.getMarca()+p2.getMarca(), p1.getPresentacion()+p2.getPresentacion(), p1.getCantidad() + p2.getCantidad(), p1.getUnidadMedida(), p1.getEspecificacionEmpaque()+p2.getEspecificacionEmpaque(), p1.getExclusivo(), p1.getIdTipoProducto(), p1.getIdCategoria());
 
 			long tuplasInsertadas = sqlMenorALaSuma.adicionarPromocionMenorALaSuma(pm, id);
 			tx.commit();
@@ -1395,6 +1395,8 @@ public class PersistenciaSuperAndes {
 		Transaction tx=pm.currentTransaction();
 		try
 		{
+			
+			tx.setIsolationLevel("serializable");
 			tx.begin();
 			long resp = sqlCarrito.eliminarCarrito(pm, idCarrito);
 			//Se debe devolver la cantidad de productos al estante
@@ -1433,6 +1435,8 @@ public class PersistenciaSuperAndes {
 		Transaction tx=pm.currentTransaction();
 		try
 		{
+			
+			tx.setIsolationLevel("serializable");
 			tx.begin();
 			long id = nextval ();
 			ItemCarrito item = sqlItemCarrito.adicionarItemCarrito(pm, id, idCarrito, idProducto, n, idEstante);
@@ -1457,14 +1461,16 @@ public class PersistenciaSuperAndes {
 		}
 	}
 
-	public long eliminarItemCarrito ( long idCarrito , String idProducto, long idEstante ) 
+	public long eliminarItemCarrito ( long idCarrito , String idProducto) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
+			
+			tx.setIsolationLevel("serializable");
 			tx.begin();
-			long resp = sqlItemCarrito.eliminarItemCarrito(pm, idCarrito, idProducto, idEstante);
+			long resp = sqlItemCarrito.eliminarItemCarrito(pm, idCarrito, idProducto);
 			//Se debe devolver la cantidad de productos al estante
 			tx.commit();
 
@@ -1486,15 +1492,18 @@ public class PersistenciaSuperAndes {
 		}
 	}
 
-	public long actualizarCantidadItemCarrito(long idCarrito, String idProducto, BigDecimal aDevolver, long idEstante)
+	public long actualizarCantidadItemCarrito(long idCarrito, String idProducto, BigDecimal aDevolver)
 	{
+		
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
+			
+			tx.setIsolationLevel("serializable");
 			tx.begin();
 			System.out.println(tx.getIsolationLevel());
-			long resp = sqlItemCarrito.actualizarCantidadItemCarrito(pm, idCarrito, idProducto, aDevolver, idEstante);
+			long resp = sqlItemCarrito.actualizarCantidadItemCarrito(pm, idCarrito, idProducto, aDevolver);
 			tx.commit();
 			return resp;
 		}
@@ -1577,17 +1586,28 @@ public class PersistenciaSuperAndes {
 		Transaction tx=pm.currentTransaction();
 		try
 		{
-			tx.begin();
-			List<ItemCarrito> items = sqlItemCarrito.darItemCarritosPorIdCarrito(pm, idCarro);
-			ArrayList<ItemFactura> resp = sqlFactura.generarFactura(pm, items);
 			
+			tx.setIsolationLevel("serializable");
+			tx.begin();
+		
+			List<ItemCarrito> items = sqlItemCarrito.darItemCarritosPorIdCarrito(pm, idCarro);
+			
+			ArrayList<ItemFactura> resp = sqlFactura.generarFactura(pm, items, sqlUtil2, idCarro);
+			sqlCarrito.eliminarCarritoPagado(pm, idCarro);
+	
+			//Debería crear un Pedido cada vez que encuentre 
 			tx.commit();
-			return new ArrayList<ItemFactura>();
+			
+			
+			for (ItemFactura itemFactura : resp) {
+				System.out.println(itemFactura.toString());
+			}
+			return resp;
 
 		}
 		catch (Exception e)
 		{
-			//        	e.printStackTrace();
+			        	e.printStackTrace();
 			System.out.println ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 			return null;
 		}

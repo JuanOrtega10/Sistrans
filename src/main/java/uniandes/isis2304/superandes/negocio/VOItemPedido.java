@@ -29,5 +29,9 @@ public interface VOItemPedido
 	public int getCantidad();
 	public Timestamp getFechaVencimiento();
 	public String getIdProducto();
+	public double getPrecioCompra();
+	public double getPrecioVenta();
+	public long getIdPedido();
+	
 
 }

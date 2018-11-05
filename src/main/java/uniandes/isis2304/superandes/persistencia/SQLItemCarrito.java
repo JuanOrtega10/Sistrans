@@ -99,7 +99,6 @@ class SQLItemCarrito
 			}
 			
 		}
-		System.out.println("sdasd");
 		Query volumen = pm.newQuery(SQL, "SELECT IDVOLUMENPRODUCTO FROM (" + ps.darTablaEstante()+ " INNER JOIN " + ps.darTablaAlmacenamiento()+ " ON "+ps.darTablaEstante()+".IDALMACENAMIENTO = "+ps.darTablaAlmacenamiento()+".ID ) WHERE id = ? ");
 		volumen.setParameters(idEstante);
 		BigDecimal idVolumen = (BigDecimal) volumen.executeUnique();
@@ -156,9 +155,12 @@ class SQLItemCarrito
 		return (List<ItemCarrito>) q.executeList();
 	}
 
-	public long eliminarItemCarrito (PersistenceManager pm, long idCarrito, String idProducto, long idEstante )
+	public long eliminarItemCarrito (PersistenceManager pm, long idCarrito, String idProducto )
 	{
 
+		Query estante = pm.newQuery(SQL, "SELECT idEstante FROM " + ps.darTablaItemCarrito() + " WHERE idCarrito = ? AND idProducto = ?" );
+		estante.setParameters(idCarrito, idProducto);
+		BigDecimal idEstante = (BigDecimal) estante.executeUnique();
 
 		Query volumen = pm.newQuery(SQL, "SELECT IDVOLUMENPRODUCTO FROM " + ps.darTablaAlmacenamiento() + " WHERE id = ?");
 		volumen.setParameters(idEstante);
@@ -187,8 +189,12 @@ class SQLItemCarrito
 		return (long) q.executeUnique();            
 	}
 
-	public long actualizarCantidadItemCarrito (PersistenceManager pm, long idCarrito, String idProducto, BigDecimal aDevolver, long idEstante) 
+	public long actualizarCantidadItemCarrito (PersistenceManager pm, long idCarrito, String idProducto, BigDecimal aDevolver) 
 	{
+		Query estante = pm.newQuery(SQL, "SELECT idEstante FROM " + ps.darTablaItemCarrito() + " WHERE idCarrito = ? AND idProducto = ?" );
+		estante.setParameters(idCarrito, idProducto);
+		BigDecimal idEstante = (BigDecimal) estante.executeUnique();
+
 		Query volumen = pm.newQuery(SQL, "SELECT IDVOLUMENPRODUCTO FROM " + ps.darTablaAlmacenamiento() + " WHERE id = ?");
 		volumen.setParameters(idEstante);
 		BigDecimal idVolumen = (BigDecimal) volumen.executeUnique();	
@@ -215,6 +221,7 @@ class SQLItemCarrito
 		List<ItemCarrito> items = new ArrayList<ItemCarrito>();
 		items = (List<ItemCarrito>) q.executeList();
 		if(items.isEmpty()) throw new Exception("No existen productos por pagar o no tiene un carrito");
+	
 		return items;
 	}
 }

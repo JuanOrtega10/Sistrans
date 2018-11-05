@@ -159,9 +159,7 @@ public class View
 						idCarro = 0;
 						System.out.println("Ingrese el id del producto a devolver");
 						idProducto = sc.next();
-						System.out.println("Ingrese el id del estate del que cogió el producto");
-						estante1 = sc.next();
-						idEstante = 0;
+					
 						System.out.println("¿Desea devolver todas la unidades de ese producto?");
 						System.out.println("1. Si");
 						System.out.println("2. No");
@@ -171,11 +169,11 @@ public class View
 							// Este es el caso en el que se debe eliminar la tupla
 							try {
 								idCarro = Long.parseLong(idCarrito);
-								idEstante = Long.parseLong(estante1);
+								
 							} catch (Exception e) {
 								// TODO: handle exception
 							}
-							superAndes.eliminarItemCarrito(idCarro, idProducto, idEstante);
+							superAndes.eliminarItemCarrito(idCarro, idProducto);
 
 
 							break;
@@ -189,11 +187,11 @@ public class View
 								idCarro = Long.parseLong(idCarrito);
 								algo = Long.parseLong(uADevolver);
 								aDevolver = BigDecimal.valueOf(algo);
-								idEstante = Long.parseLong(estante1);
+								
 							} catch (Exception e) {
 								// TODO: handle exception
 							}
-							superAndes.actualizarCantidadItemCarrito(idCarro, idProducto, aDevolver, idEstante);
+							superAndes.actualizarCantidadItemCarrito(idCarro, idProducto, aDevolver);
 							break;
 						}
 
@@ -218,6 +216,12 @@ public class View
 						System.out.println("Ingrese el id del carrito");
 						idCarrito = sc.next();
 						idCarro = 0;
+						try {
+
+							idCarro = Long.parseLong(idCarrito);
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
 						superAndes.pagarItemsCarrito(idCarro);
 						break;
 						
@@ -313,8 +317,7 @@ public class View
 						String nombreProd = sc.next(); 
 						System.out.println("Ingrese la marca del producto");
 						String marcaProd = sc.next();
-						System.out.println("Ingrese el precio unitario del producto");
-						String precioUnitProd = sc.next();
+					
 						double precio = 0;
 						System.out.println("Ingrese la presentacion del producto");
 						String presentacionProd = sc.next();
@@ -340,7 +343,7 @@ public class View
 						long cat = 0;
 
 						try {				
-							precio = Double.parseDouble(precioUnitProd);
+						
 							cantidadP = Double.parseDouble(cantidadProd);
 							precioUnM = Double.parseDouble(precioUnMProd);
 							esp = Double.parseDouble(espProd);
@@ -350,7 +353,7 @@ public class View
 						} catch (Exception e) {
 
 						}
-						VOProducto producto = superAndes.adicionarProducto(idProducto, nombreProd, marcaProd, precio, presentacionProd, cantidadP, unidadMedProd, precioUnM, esp, excl, tipoProd, cat);
+						VOProducto producto = superAndes.adicionarProducto(idProducto, nombreProd, marcaProd, presentacionProd, cantidadP, unidadMedProd, precioUnM, esp, excl, tipoProd, cat);
 
 						System.out.println(producto.toString());
 						break;

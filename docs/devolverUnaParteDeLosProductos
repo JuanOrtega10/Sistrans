@@ -1,0 +1,11 @@
+--Buscar el estante
+SELECT idEstante FROM A_ITEMCARRITO WHERE idCarrito = idCarrito AND idProducto = idProducto);
+
+-- Obtener el id del volumenProducto del estante
+SELECT IDVOLUMENPRODUCTO FROM A_ALMACENAMIENTO  WHERE id =idEstante;
+
+-- Actualizar la cantidad del volumenProducto
+UPDATE A_VOLUMENPRODUCTO SET cantidad = cantidad + aDevolver WHERE id  = idVolumen;
+
+--Actualizar la cantidad del ItemCarrito
+UPDATE  A_ITEMCARRITO SET cantidad = cantidad - aDevolver WHERE idCarrito  = idCarrito AND idProducto = idProducto;

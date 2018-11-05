@@ -37,7 +37,7 @@ public class Reorden implements VOReorden
 	/**
 	 * El identificador ÚNICO del producto.
 	 */
-	private long idProducto;
+	private String idProducto;
 	
 	/**
 	 * El nivel de reorden para un producto en una sucursal.
@@ -55,7 +55,7 @@ public class Reorden implements VOReorden
     {
     	this.id = 0;
 		this.idSucursal = 0;
-		this.idProducto = 0;
+		this.idProducto = "";
 		this.nivelReorden = 0;
 	}
 	
@@ -66,7 +66,7 @@ public class Reorden implements VOReorden
 	 * @param idProducto - El id del producto.
 	 * @param nivelReorden - El nivel de reorden.
 	 */
-    public Reorden(long id, long idSucursal, long idProducto, int nivelReorden)
+    public Reorden(long id, long idSucursal, String idProducto, int nivelReorden)
     {
     	this.id = id;
 		this.idSucursal = idSucursal;
@@ -106,14 +106,14 @@ public class Reorden implements VOReorden
 	/**
 	 * @return the idProducto
 	 */
-	public long getIdProducto() {
+	public String getIdProducto() {
 		return idProducto;
 	}
 
 	/**
 	 * @param idProducto the idProducto to set
 	 */
-	public void setIdProducto(long idProducto) {
+	public void setIdProducto(String idProducto) {
 		this.idProducto = idProducto;
 	}
 

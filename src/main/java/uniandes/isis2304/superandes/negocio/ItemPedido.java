@@ -28,6 +28,12 @@ public class ItemPedido implements VOItemPedido
 	 * El identificador ÚNICO del ItemPedido.
 	 */
 	private long id;
+	
+	/**
+	 * El identificador ÚNICO del pedido al que pertenece.
+	 */
+	private long idPedido;
+
 
 	
 	/**
@@ -42,9 +48,21 @@ public class ItemPedido implements VOItemPedido
 	private Timestamp fechaVencimiento;
 	
 	/**
-	 * El id del produto
+	 * El id del producto
 	 */
 	private String idProducto;
+	
+	/**
+	 * El precio de venta del producto
+	 */
+	private double precioCompra;
+	
+	/**
+	 * El precio de venta del producto
+	 */
+	private double precioVenta;
+	
+	
 	
 	/* ****************************************************************
 	 * 			Métodos 
@@ -58,6 +76,8 @@ public class ItemPedido implements VOItemPedido
     	this.cantidad = 0;
     	this.fechaVencimiento = null;
     	this.idProducto ="";
+    	this.precioCompra = 0;
+    	this.precioVenta = 0;
 	}
 
 
@@ -66,12 +86,16 @@ public class ItemPedido implements VOItemPedido
 	 * @param cantidad
 	 * @param fechaVencimiento
 	 */
-	public ItemPedido(long id, int cantidad, Timestamp fechaVencimiento, String idProducto) {
+	public ItemPedido(long id, int cantidad, Timestamp fechaVencimiento, String idProducto, double precioCompra, double precioVenta) {
 		this.id = id;
 		this.cantidad = cantidad;
 		this.fechaVencimiento = fechaVencimiento;
 		this.idProducto = idProducto;
+		this.precioCompra = precioCompra;
+		this.precioVenta = precioVenta;
 	}
+
+
 
 
 	/**
@@ -138,15 +162,65 @@ public class ItemPedido implements VOItemPedido
 	}
 
 
+	/**
+	 * @return the precioCompra
+	 */
+	public double getPrecioCompra() {
+		return precioCompra;
+	}
+
+
+	/**
+	 * @param precioCompra the precioCompra to set
+	 */
+	public void setPrecioCompra(double precioCompra) {
+		this.precioCompra = precioCompra;
+	}
+
+
+	/**
+	 * @return the precioVenta
+	 */
+	public double getPrecioVenta() {
+		return precioVenta;
+	}
+
+
+	/**
+	 * @param precioVenta the precioVenta to set
+	 */
+	public void setPrecioVenta(double precioVenta) {
+		this.precioVenta = precioVenta;
+	}
+
+	/**
+	 * @return the idPedido
+	 */
+	public long getIdPedido() {
+		return idPedido;
+	}
+
+
+	/**
+	 * @param idItemPedido the idItemPedido to set
+	 */
+	public void setIdPedido(long idPedido) {
+		this.idPedido = idPedido;
+	}
+
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "ItemPedido [id=" + id + ", cantidad=" + cantidad + ", fechaVencimiento=" + fechaVencimiento
-				+ ", idProducto=" + idProducto + "]";
+		return "ItemPedido [id=" + id + ", idPedido=" + idPedido + ", cantidad=" + cantidad
+				+ ", fechaVencimiento=" + fechaVencimiento + ", idProducto=" + idProducto + ", precioCompra="
+				+ precioCompra + ", precioVenta=" + precioVenta + "]";
 	}
 
+
+	
 
 	
 

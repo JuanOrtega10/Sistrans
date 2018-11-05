@@ -32,16 +32,18 @@ public class VolumenProducto implements VOVolumenProducto
 	private long id;
 	
 
-	/**
-	 * El identificador ÚNICO del tipoProducto.
-	 */
-	private long idTipoProducto;
 	
 	
 	/**
 	 * La cantidad de productos.
 	 */
 	private int cantidad;
+	
+	
+	/**
+	 * La cantidad de productos.
+	 */
+	private String idProducto;
 	
 	/**
 	 * El peso de los productos.
@@ -54,14 +56,19 @@ public class VolumenProducto implements VOVolumenProducto
 	 */
 	private double volumen;
 	
+	/**
+	 * El volumen de los productos.
+	 */
+	private long idItemPedido;
 	
 	
 	public VolumenProducto(){
 		this.id = 0;
-		this.idTipoProducto = 0;
+		this.idProducto = "";
 		this.cantidad = 0;
 		this.peso = 0;
 		this.volumen = 0;
+		this.idItemPedido = 0;
 	}
 
 
@@ -73,13 +80,14 @@ public class VolumenProducto implements VOVolumenProducto
 	 * @param peso
 	 * @param volumen
 	 */
-	public VolumenProducto(long id,long idTipoProducto,
-			int cantidad, double peso, double volumen) {
+	public VolumenProducto(long id,String idProducto,
+			int cantidad, double peso, double volumen, long idItemPedido) {
 		this.id = id;
-		this.idTipoProducto = idTipoProducto;
+		this.idProducto = idProducto;
 		this.cantidad = cantidad;
 		this.peso = peso;
 		this.volumen = volumen;
+		this.idItemPedido = idItemPedido;
 	}
 
 
@@ -92,12 +100,6 @@ public class VolumenProducto implements VOVolumenProducto
 	}
 
 
-	/**
-	 * @return the idTipoProducto
-	 */
-	public long getIdTipoProducto() {
-		return idTipoProducto;
-	}
 
 
 
@@ -134,12 +136,6 @@ public class VolumenProducto implements VOVolumenProducto
 		this.id = id;
 	}
 
-	/**
-	 * @param idTipoProducto the idTipoProducto to set
-	 */
-	public void setIdTipoProducto(long idTipoProducto) {
-		this.idTipoProducto = idTipoProducto;
-	}
 
 
 
@@ -168,16 +164,58 @@ public class VolumenProducto implements VOVolumenProducto
 		this.volumen = volumen;
 	}
 
+	
+
+	/**
+	 * @return the idItemPedido
+	 */
+	public long getIdItemPedido() {
+		return idItemPedido;
+	}
+
+
+
+	/**
+	 * @param idItemPedido the idItemPedido to set
+	 */
+	public void setIdItemPedido(long idItemPedido) {
+		this.idItemPedido = idItemPedido;
+	}
+
+
+
+	/**
+	 * @return the idProducto
+	 */
+	public String getIdProducto() {
+		return idProducto;
+	}
+
+
+
+	/**
+	 * @param idProducto the idProducto to set
+	 */
+	public void setIdProducto(String idProducto) {
+		this.idProducto = idProducto;
+	}
+
+
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "VolumenProducto [id=" + id + ", idTipoProducto=" + idTipoProducto + ", cantidad=" + cantidad + ", peso="
-				+ peso + ", volumen=" + volumen + "]";
+		return "VolumenProducto [id=" + id + ", cantidad=" + cantidad + ", idProducto=" + idProducto + ", peso=" + peso
+				+ ", volumen=" + volumen + ", idItemPedido=" + idItemPedido + "]";
 	}
-	
+
+
+
+
+
+
 	
 
 	

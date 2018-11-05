@@ -39,7 +39,7 @@ public interface VOReorden
 	/**
 	 * @return the idProducto
 	 */
-	public long getIdProducto();
+	public String getIdProducto();
 	
 	/**
 	 * @return the nivelReorden

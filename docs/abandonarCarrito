@@ -1,0 +1,16 @@
+
+--Obtener una lista con los itemCarrito de un carrito
+SELECT * FROM A_ITEMCARRITO WHERE idCarrito = idCarrito;
+
+--Para cada item carrito se hace lo siguiente:
+			--Obtener el id del volumenProducto
+			SELECT IDVOLUMENPRODUCTO FROM A_ALMACENAMIENTO WHERE id = itemCarrito.getIdEstante();
+			--actualizar la cantidad del volumenProducto
+			UPDATE A_VOLUMENPRODUCTO + SET cantidad = cantidad + itemCarrito.getCantidad() WHERE id = idVolumen;
+
+
+--Eliminar los itemCarrito
+DELETE FROM A_ITEMCARRITO WHERE idCarrito  = idCarrito;
+
+--Eliminar el carrito
+DELETE FROM A_CARRITO WHERE id  = idCarrito;

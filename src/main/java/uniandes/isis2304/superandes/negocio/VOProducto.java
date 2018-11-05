@@ -43,10 +43,7 @@ public interface VOProducto
 	 */
 	public String getMarca();
 
-	/**
-	 * @return the precioUnitario
-	 */
-	public double getPrecioUnitario();
+
 	/**
 	 * @return the presentacion
 	 */

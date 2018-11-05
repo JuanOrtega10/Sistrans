@@ -28,5 +28,6 @@ public interface VOItemFactura
 	public int getCantidad();
 	public long getIdFactura();
 	public String getIdProducto();
+	
 
 }
